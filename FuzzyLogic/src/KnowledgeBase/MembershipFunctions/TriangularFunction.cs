@@ -8,8 +8,6 @@ namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
     {
         public TriangularFunction(double left, double center, double right)
         {
-            if(left > center || center > right)
-                throw new ArgumentException("Wrong parameters for triangular function");
             this.left = left;
             this.center = center;
             this.right = right;
