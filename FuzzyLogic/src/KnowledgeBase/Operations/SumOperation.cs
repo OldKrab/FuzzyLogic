@@ -10,5 +10,10 @@ namespace FuzzyLogic.src.KnowledgeBase.Operations
         {
             return x + y;
         }
+
+        public override string ToString()
+        {
+            return "Sum Operation";
+        }
     }
 }

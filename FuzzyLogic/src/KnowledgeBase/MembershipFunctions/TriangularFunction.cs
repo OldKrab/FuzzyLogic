@@ -13,6 +13,11 @@ namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
             this.right = right;
         }
 
+        public override string ToString()
+        {
+            return string.Format("Triangular Function with left={0}, center={1], right={2}", left, center, right);
+        }
+
         public double GetValue(double x)
         {
             if(x < left || x > right)

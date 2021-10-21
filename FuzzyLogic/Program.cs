@@ -1,51 +1,23 @@
 ﻿using FuzzyLogic.src.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.src.KnowledgeBase.Operations;
 using System;
+using FuzzyLogic.KnowledgeBase.KnowledgeBaseManager;
 
 namespace FuzzyLogic
 {
     class Program
     {
-        static void PrintFunction(IMembershipFunction function, double start, double end, double stepCount)
-        {
-            for (int step = 0; step < stepCount; step++)
-            {
-                double x = start + (end - start) * (step / (stepCount - 1));
-                Console.Write("{0:N3} ", function.GetValue(x));
-            }
-            Console.WriteLine();
-        }
-
         static void Main(string[] args)
         {
-            double start = 0, center = 10, end = 20;
-            int stepCount = 20;
-
-            Console.WriteLine("# Test 1: Create right triangular function proxy");
-            var triangularFunction = new TriangularFunctionProxy(start, center, end);
-            Console.WriteLine("proxy function values:");
-            PrintFunction(triangularFunction, start, end, stepCount);
-
-            Console.WriteLine("\n# Test 2: Calculate function value in NaN point");
-            try
-            {
-                triangularFunction.GetValue(double.NaN);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            Console.WriteLine("\n# Test 3: Create triangular function proxy with wrong parameters");
-            try
-            {
-                center = 30;
-                triangularFunction = new TriangularFunctionProxy(start, center, end);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            var manager = new KnowledgeBaseManagerLogger(new KnowledgeBaseManager());
+            var inVar = manager.AddVariable("Speed", true);
+            var outVar = manager.AddVariable("Acceleration", false);
+            manager.AddTerm("Slow", new TriangularFunction(20, 40, 60));
+            var term1 = manager.AddTerm("Medium", new TriangularFunction(40, 60, 80));
+            var term2 = manager.AddTerm("Fast", new TriangularFunction(60, 90, 120));
+            manager.AddTerm("Very fast", new TriangularFunction(90, 150, 150));
+            manager.AddSingleCondition(inVar.Id, term1.Id);
+            manager.AddConclusion(outVar.Id, term2.Id);
         }
     }
 }

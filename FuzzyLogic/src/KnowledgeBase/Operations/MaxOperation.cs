@@ -10,5 +10,9 @@ namespace FuzzyLogic.src.KnowledgeBase.Operations
         {
             return Math.Max(x, y);
         }
+        public override string ToString()
+        {
+            return "Max Operation";
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace FuzzyLogic.src.KnowledgeBase.Operations
         {
             return Math.Min(x, y);
         }
+
+        public override string ToString()
+        {
+            return "Min Operation";
+        }
     }
 }
