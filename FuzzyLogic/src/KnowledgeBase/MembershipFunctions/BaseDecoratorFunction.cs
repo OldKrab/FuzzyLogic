@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
+﻿
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
    abstract class BaseDecoratorFunction : IMembershipFunction
     {

@@ -1,9 +1,6 @@
-﻿using FuzzyLogic.src.KnowledgeBase.Operations;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FuzzyLogic.KnowledgeBase.Operations;
 
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
     class ActivatedFunction : BaseDecoratorFunction
     {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class TriangularFunction:IMembershipFunction
+    class TriangularFunction : IMembershipFunction
     {
         public TriangularFunction(double left, double center, double right)
         {
@@ -15,17 +13,17 @@ namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return string.Format("Triangular Function with left={0}, center={1], right={2}", left, center, right);
+            return $"Triangular Function with left={left}, center={center}, right={right}";
         }
 
         public double GetValue(double x)
         {
-            if(x < left || x > right)
+            if (x < left || x > right)
                 return 0;
-            if(x == center)
+            if (Math.Abs(x - center) < 1e-6)
                 return 1;
-            if(x < center)
-                return (x - left) / (center-left);
+            if (x < center)
+                return (x - left) / (center - left);
             return (right - x) / (right - center);
         }
 

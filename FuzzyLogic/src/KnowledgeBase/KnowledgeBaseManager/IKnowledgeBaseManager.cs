@@ -1,6 +1,5 @@
-﻿using FuzzyLogic.src.KnowledgeBase;
-using FuzzyLogic.src.KnowledgeBase.MembershipFunctions;
-using FuzzyLogic.src.KnowledgeBase.Statements;
+﻿using FuzzyLogic.KnowledgeBase.MembershipFunctions;
+using FuzzyLogic.KnowledgeBase.Statements;
 
 namespace FuzzyLogic.KnowledgeBase.KnowledgeBaseManager
 {

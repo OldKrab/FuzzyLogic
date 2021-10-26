@@ -1,4 +1,4 @@
-﻿namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions.Integrator
+﻿namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
 {
     interface IFunctionIntegrator
     {

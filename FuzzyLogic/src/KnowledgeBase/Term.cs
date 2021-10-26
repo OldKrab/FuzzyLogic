@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FuzzyLogic.src.KnowledgeBase.MembershipFunctions;
+﻿using FuzzyLogic.KnowledgeBase.Helpers;
+using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
-namespace FuzzyLogic.src.KnowledgeBase
+namespace FuzzyLogic.KnowledgeBase
 {
     class Term: NamedObject
     {

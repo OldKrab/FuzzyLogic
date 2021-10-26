@@ -1,6 +1,6 @@
 ﻿using CenterSpace.NMath.Core;
 
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions.Integrator
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
 {
     class FunctionIntegrator : IFunctionIntegrator
     {

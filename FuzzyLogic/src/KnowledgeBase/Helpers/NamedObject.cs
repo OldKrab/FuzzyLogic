@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FuzzyLogic.src.KnowledgeBase
+﻿namespace FuzzyLogic.KnowledgeBase.Helpers
 {
     abstract class NamedObject
     {
@@ -22,6 +18,6 @@ namespace FuzzyLogic.src.KnowledgeBase
         public string Name { get; }
 
 
-        private static uint _nextId = 0;
+        private static uint _nextId = 1;
     }
 }

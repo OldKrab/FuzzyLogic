@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
     class TriangularFunctionProxy : IMembershipFunction
     {
@@ -10,9 +8,9 @@ namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
         {
             if (left > center || center > right)
                 throw new ArgumentException(
-                    string.Format("Can't create triangular function! Wrong parameters order: {0}, {1}, {2}", left, center, right));
+                    $"Can't create triangular function! Wrong parameters order: {left}, {center}, {right}");
             triangularFunction = new TriangularFunction(left, center, right);
-            System.Console.WriteLine("Created triangular function with parameters: {0}, {1}, {2}", left, center, right);
+            Console.WriteLine("Created triangular function with parameters: {0}, {1}, {2}", left, center, right);
         }
 
         public double GetValue(double x)

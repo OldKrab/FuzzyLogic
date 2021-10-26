@@ -1,4 +1,4 @@
-﻿namespace FuzzyLogic.src.KnowledgeBase.Statements
+﻿namespace FuzzyLogic.KnowledgeBase.Statements
 {
      class Conclusion : Statement
     {

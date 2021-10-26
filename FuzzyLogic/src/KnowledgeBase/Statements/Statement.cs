@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FuzzyLogic.src.KnowledgeBase.Statements
+﻿namespace FuzzyLogic.KnowledgeBase.Statements
 {
     abstract class Statement
     {
-        public Statement(Variable variable, Term term)
+        protected Statement(Variable variable, Term term)
         {
             Term = term;
             Variable = variable;

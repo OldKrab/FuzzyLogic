@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FuzzyLogic.src.KnowledgeBase.MembershipFunctions
+﻿namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
     interface IMembershipFunction
     {

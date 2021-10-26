@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using FuzzyLogic.KnowledgeBase.Helpers;
 
-namespace FuzzyLogic.src.KnowledgeBase
+namespace FuzzyLogic.KnowledgeBase
 {
     class Variable:NamedObject
     {
