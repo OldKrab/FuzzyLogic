@@ -37,9 +37,10 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         public override string ToString()
         {
             var str = new StringBuilder();
-            str.Append($"Combined Function with operation \"{combination}\" and functions:\n");
-            foreach (var func in functions)
-                str.Append($"{func}\n");
+            str.Append($"Combined function with operation [{combination}] and functions:\n[\n");
+            for (int i = 0; i < functions.Count; i++)
+                str.Append($"{i + 1}) {functions[i]}\n");
+            str.Append("]");
             return str.ToString();
         }
 

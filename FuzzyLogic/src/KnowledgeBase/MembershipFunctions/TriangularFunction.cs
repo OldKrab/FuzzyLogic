@@ -13,7 +13,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return $"Triangular Function with left={left}, center={center}, right={right}";
+            return $"Triangular function with left={left}, center={center}, right={right}";
         }
 
         public double GetValue(double x)
