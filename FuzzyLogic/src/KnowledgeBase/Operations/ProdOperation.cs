@@ -8,7 +8,7 @@
         }
         public override string ToString()
         {
-            return "Prod Operation";
+            return "Prod";
         }
     }
 }

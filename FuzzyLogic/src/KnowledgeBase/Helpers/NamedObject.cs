@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            return $"{{Id: {Id}, Name: {Name}}}";
+            return Name;
         }
 
         public uint Id { get; }

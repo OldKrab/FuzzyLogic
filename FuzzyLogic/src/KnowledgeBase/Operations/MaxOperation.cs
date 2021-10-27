@@ -10,7 +10,7 @@ namespace FuzzyLogic.KnowledgeBase.Operations
         }
         public override string ToString()
         {
-            return "Max Operation";
+            return "Max";
         }
     }
 }

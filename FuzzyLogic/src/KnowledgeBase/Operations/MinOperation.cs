@@ -11,7 +11,7 @@ namespace FuzzyLogic.KnowledgeBase.Operations
 
         public override string ToString()
         {
-            return "Min Operation";
+            return "Min";
         }
     }
 }

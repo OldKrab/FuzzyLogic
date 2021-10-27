@@ -3,5 +3,7 @@
     interface IMembershipFunction
     {
         double GetValue(double x);
+
+
     }
 }

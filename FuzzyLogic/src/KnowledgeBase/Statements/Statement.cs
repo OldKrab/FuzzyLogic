@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"{{Variable: {Variable}, Term: {Term}}}";
+            return $"{Variable} is {Term}";
         }
     }
 }
