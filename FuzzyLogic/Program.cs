@@ -23,55 +23,15 @@ namespace FuzzyLogic
 
         private static void Main()
         {
-            var variable = new Variable("Speed");
-
-            var terms = new List<Term>
-    {
-        new Term("Slow", new TrapezoidFunction(0, 0, 20, 40)),
-        new Term("Medium", new TriangularFunction(20, 40, 60)),
-        new Term("Fast", new TrapezoidFunction(40, 60, 180, 180)),
-    };
-
-            var singleConds = new List<SingleCondition>
-    {
-        new SingleCondition(variable, terms[0]),
-        new SingleCondition(variable, terms[1]),
-        new SingleCondition(variable, terms[2])
-    };
-
-            var condList = new ConditionList
-            (
-                new ConditionList(
-                    new List<ICondition>
-                    {
-                singleConds[0],
-                singleConds[2]
-                    },
-                    new List<IOperation>
-                    {
-                new MaxOperation()
-                    })
-            );
-            condList.AddCondition(singleConds[1], new MinOperation());
-
-            Console.WriteLine($"Current variable: {variable}");
-
-            Console.WriteLine("\nCurrent terms:");
-            foreach (var term in terms)
-                Console.WriteLine($"{term}, {term.MembershipFunction}");
-
-            Console.WriteLine("\nCurrent conditions:");
-            foreach (var cond in singleConds)
-                Console.WriteLine(cond + ",");
-            Console.WriteLine(condList);
-
-            Console.Write($"\nInput value for variable {variable}: ");
-            var input = new Dictionary<Variable, double> { { variable, Convert.ToInt32(Console.ReadLine()) } };
-
-            Console.WriteLine("\nFuzzification for current conditions:");
-            foreach (var cond in singleConds)
-                Console.WriteLine(cond.Fuzzify(input));
-            Console.WriteLine(condList.Fuzzify(input));
+            IMembershipFunction triangularFunc = new TriangularFunction(0, 1, 2);
+            Console.Write($"Created {triangularFunc}\nHis values: ");
+            PrintFunction(triangularFunc, 0, 2, 8);
+            var activatedFunc = new ActivatedFunction(triangularFunc, new MinOperation(), 0.5);
+            Console.Write($"\nCreated {activatedFunc}\nHis values: ");
+            PrintFunction(activatedFunc, 0, 2, 8);
+            var activatedFunc2 = new ActivatedFunction(activatedFunc, new ProdOperation(), 0.5);
+            Console.Write($"\nCreated {activatedFunc2}\nHis values: ");
+            PrintFunction(activatedFunc2, 0, 2, 8);
         }
     }
 }
