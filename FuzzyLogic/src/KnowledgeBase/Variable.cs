@@ -10,8 +10,6 @@ namespace FuzzyLogic.KnowledgeBase
             _terms = new HashSet<Term>();
         }
 
-
         private HashSet<Term> _terms;
-
     }
 }

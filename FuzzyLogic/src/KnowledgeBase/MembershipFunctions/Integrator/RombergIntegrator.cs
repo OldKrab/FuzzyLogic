@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
 {
-    class FunctionIntegrator : IFunctionIntegrator
+    class RombergIntegrator : IFunctionIntegrator
     {
         public double Integrate(IMembershipFunction func, double lowerLimit, double upperLimit)
         {
