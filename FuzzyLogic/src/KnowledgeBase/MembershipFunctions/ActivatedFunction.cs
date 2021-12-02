@@ -4,7 +4,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
     class ActivatedFunction : BaseDecoratorFunction
     {
-        public ActivatedFunction(IMembershipFunction wrappedFunction, IOperation activation, double activatingValue)
+        public ActivatedFunction(IFunction wrappedFunction, IOperation activation, double activatingValue)
             : base(wrappedFunction)
         {
             this.activation = activation;
@@ -13,6 +13,16 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         public override double GetValue(double x)
         {
             return activation.Evaluate(wrappedFunction.GetValue(x), activatingValue);
+        }
+
+        public override double GetMinValue()
+        {
+            return wrappedFunction.GetMinValue();
+        }
+
+        public override double GetMaxValue()
+        {
+            return wrappedFunction.GetMaxValue();
         }
 
         public override string ToString()

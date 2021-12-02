@@ -8,9 +8,11 @@ namespace FuzzyLogic.KnowledgeBase.Statements
         public SingleCondition(Variable variable, Term term)
             : base(variable, term) { }
 
+
+
         public double Fuzzify(Dictionary<Variable, double> inputValues)
         {
-            return Term.MembershipFunction.GetValue(inputValues[this.Variable]);
+            return Term.Function.GetValue(inputValues[this.Variable]);
         }
     }
 }

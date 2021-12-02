@@ -5,11 +5,11 @@ namespace FuzzyLogic.KnowledgeBase
 {
     class Term: NamedObject
     {
-        public Term(string name, IMembershipFunction function) : base(name)
+        public Term(string name, IFunction function) : base(name)
         {
-            MembershipFunction = function;  
+            Function = function;  
         }
 
-        public IMembershipFunction MembershipFunction { get; }
+        public IFunction Function { get; }
     }
 }

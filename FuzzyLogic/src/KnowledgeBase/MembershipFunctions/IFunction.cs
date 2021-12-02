@@ -1,9 +1,11 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    interface IMembershipFunction
+    interface IFunction
     {
         double GetValue(double x);
 
+        double GetMinValue();
+        double GetMaxValue();
 
     }
 }

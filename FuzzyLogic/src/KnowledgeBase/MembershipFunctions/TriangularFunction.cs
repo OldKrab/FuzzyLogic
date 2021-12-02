@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class TriangularFunction : IMembershipFunction
+    class TriangularFunction : IFunction
     {
         public TriangularFunction(double left, double center, double right)
         {
@@ -25,6 +25,16 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             if (x < center)
                 return (x - left) / (center - left);
             return (right - x) / (right - center);
+        }
+
+        public double GetMinValue()
+        {
+            return left;
+        }
+
+        public double GetMaxValue()
+        {
+            return right;
         }
 
 

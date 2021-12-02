@@ -2,7 +2,7 @@
 {
     class MediumTriangleIntergrator : IFunctionIntegrator
     {
-        public double Integrate(IMembershipFunction func, double lowerLimit, double upperLimit)
+        public double Integrate(IFunction func, double lowerLimit, double upperLimit)
         {
             double interval = upperLimit - lowerLimit;
             double xPrev = lowerLimit;

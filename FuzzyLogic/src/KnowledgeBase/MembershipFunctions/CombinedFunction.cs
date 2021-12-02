@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FuzzyLogic.KnowledgeBase.Operations;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class CombinedFunction : IMembershipFunction
+    class CombinedFunction : IFunction
     {
-        public CombinedFunction(IOperation combination, List<IMembershipFunction> functions)
+        public CombinedFunction(IOperation combination, List<IFunction> functions)
         {
             this.combination = combination;
             this.functions = functions;
         }
 
-        public CombinedFunction(IOperation combination, IMembershipFunction function)
+        public CombinedFunction(IOperation combination, IFunction function)
         {
             this.combination = combination;
-            this.functions = new List<IMembershipFunction>();
+            this.functions = new List<IFunction>();
             AddFunction(function);
         }
 
-        public void AddFunction(IMembershipFunction function)
+        public void AddFunction(IFunction function)
         {
             functions.Add(function);
         }
@@ -34,6 +35,16 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             return result;
         }
 
+        public double GetMinValue()
+        {
+            return functions.Min(f => f.GetMinValue());
+        }
+
+        public double GetMaxValue()
+        {
+            return functions.Max(f => f.GetMaxValue());
+        }
+
         public override string ToString()
         {
             var str = new StringBuilder();
@@ -45,6 +56,6 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         }
 
         private IOperation combination;
-        private List<IMembershipFunction> functions;
+        private List<IFunction> functions;
     }
 }

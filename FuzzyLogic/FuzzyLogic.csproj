@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CenterSpace.NMath.Standard.Windows.X64" Version="7.2.0.85" />
+    <PackageReference Include="CenterSpace.NMath.Standard.Windows.X64" Version="7.3.0.5" />
   </ItemGroup>
 
 </Project>

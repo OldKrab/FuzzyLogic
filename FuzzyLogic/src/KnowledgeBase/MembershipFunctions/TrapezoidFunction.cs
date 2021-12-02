@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-     class TrapezoidFunction:IMembershipFunction
+     class TrapezoidFunction:IFunction
     {
         public TrapezoidFunction(double left, double leftCenter, double rightCenter, double right)
         {
@@ -26,6 +26,16 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             if (x < leftCenter)
                 return (x - left) / (leftCenter - left);
             return (right - x) / (right - rightCenter);
+        }
+
+        public double GetMinValue()
+        {
+            return left;
+        }
+
+        public double GetMaxValue()
+        {
+            return right;
         }
 
 

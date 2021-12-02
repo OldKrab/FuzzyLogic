@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FuzzyLogic.KnowledgeBase;
 
 namespace FuzzyLogic.FuzzyAlgorithm
@@ -8,7 +9,8 @@ namespace FuzzyLogic.FuzzyAlgorithm
     {
         public Dictionary<Rule, double> Fuzzify(Dictionary<Variable, double> inputValues, List<Rule> rules)
         {
-            throw new NotImplementedException();
+            return rules.Select(rule => new { rule, value = rule.Condition.Fuzzify(inputValues) })
+                .ToDictionary(it => it.rule, it => it.value);
         }
     }
 }
