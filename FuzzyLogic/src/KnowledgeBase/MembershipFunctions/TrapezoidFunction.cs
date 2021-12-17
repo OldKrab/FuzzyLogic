@@ -6,39 +6,39 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
     {
         public TrapezoidFunction(double left, double leftCenter, double rightCenter, double right)
         {
-            this.left = left;
-            this.leftCenter = leftCenter;
-            this.rightCenter = rightCenter;
-            this.right = right;
+            this._left = left;
+            this._leftCenter = leftCenter;
+            this._rightCenter = rightCenter;
+            this._right = right;
         }
 
         public override string ToString()
         {
-            return $"Trapezoid function with left={left}, leftCenter={leftCenter}, rightCenter={rightCenter}, right={right}";
+            return $"Trapezoid function with left={_left}, leftCenter={_leftCenter}, rightCenter={_rightCenter}, right={_right}";
         }
 
         public double GetValue(double x)
         {
-            if (x < left || x > right)
+            if (x < _left || x > _right)
                 return 0;
-            if (Math.Abs(x - leftCenter) < 1e-6 || Math.Abs(x - rightCenter) < 1e-6 || leftCenter < x && x < rightCenter)
+            if (Math.Abs(x - _leftCenter) < 1e-6 || Math.Abs(x - _rightCenter) < 1e-6 || _leftCenter < x && x < _rightCenter)
                 return 1;
-            if (x < leftCenter)
-                return (x - left) / (leftCenter - left);
-            return (right - x) / (right - rightCenter);
+            if (x < _leftCenter)
+                return (x - _left) / (_leftCenter - _left);
+            return (_right - x) / (_right - _rightCenter);
         }
 
         public double GetMinValue()
         {
-            return left;
+            return _left;
         }
 
         public double GetMaxValue()
         {
-            return right;
+            return _right;
         }
 
 
-        private double left, leftCenter, rightCenter, right;
+        private double _left, _leftCenter, _rightCenter, _right;
     }
 }

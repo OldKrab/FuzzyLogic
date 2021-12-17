@@ -6,27 +6,28 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
     {
         public Function(Func<double, double> func, double min, double max)
         {
-            this.func = func;
-            this.max = max;
-            this.min = min;
+            this._func = func;
+            this._max = max;
+            this._min = min;
         }
 
         public double GetValue(double x)
         {
-            return func(x);
+            return _func(x);
         }
 
         public double GetMinValue()
         {
-            return min;
+            return _min;
         }
 
         public double GetMaxValue()
         {
-            return max;
+            return _max;
         }
 
-        private Func<double, double> func;
-        private double min, max;
+        private readonly Func<double, double> _func;
+        private readonly double _min;
+        private readonly double _max;
     }
 }

@@ -12,22 +12,22 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         }
         public override double GetValue(double x)
         {
-            return activation.Evaluate(wrappedFunction.GetValue(x), activatingValue);
+            return activation.Evaluate(WrappedFunction.GetValue(x), activatingValue);
         }
 
         public override double GetMinValue()
         {
-            return wrappedFunction.GetMinValue();
+            return WrappedFunction.GetMinValue();
         }
 
         public override double GetMaxValue()
         {
-            return wrappedFunction.GetMaxValue();
+            return WrappedFunction.GetMaxValue();
         }
 
         public override string ToString()
         {
-            return $"Activated function with activating value = {activatingValue} by operation [{activation}] and wrapped function:\n\t[{wrappedFunction}]";
+            return $"Activated function with activating value = {activatingValue} by operation [{activation}] and wrapped function:\n\t[{WrappedFunction}]";
         }
 
         private IOperation activation;

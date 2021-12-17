@@ -5,13 +5,13 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
     {
         protected BaseDecoratorFunction(IFunction wrappedFunction)
         {
-            this.wrappedFunction = wrappedFunction;
+            this.WrappedFunction = wrappedFunction;
         }
         public abstract double GetValue(double x);
         public abstract double GetMinValue();
 
         public abstract double GetMaxValue();
 
-        protected IFunction wrappedFunction;
+        protected IFunction WrappedFunction;
     }
 }

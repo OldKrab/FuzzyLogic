@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
 {
-    class MediumTriangleIntergrator : IFunctionIntegrator
+    class MediumTriangleIntegrator : IFunctionIntegrator
     {
         public double Integrate(IFunction func, double lowerLimit, double upperLimit)
         {

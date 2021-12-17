@@ -6,10 +6,13 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
     {
         public double Integrate(IFunction func, double lowerLimit, double upperLimit)
         {
-            serviceFunction = new OneVariableFunction(func.GetValue);
-            return serviceFunction.Integrate(lowerLimit, upperLimit);
+            _serviceFunction = new OneVariableFunction(func.GetValue)
+            {
+                Integrator = new GaussKronrodIntegrator()
+            };
+            return _serviceFunction.Integrate(lowerLimit, upperLimit);
         }
 
-        private OneVariableFunction serviceFunction;
+        private OneVariableFunction _serviceFunction;
     }
 }

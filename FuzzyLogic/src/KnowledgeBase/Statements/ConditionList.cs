@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,8 +12,8 @@ namespace FuzzyLogic.KnowledgeBase.Statements
         public ConditionList(List<ICondition> conditions, List<IOperation> operations)
         {
             Debug.Assert(conditions.Count == operations.Count + 1, "Conditions count do not match operations count");
-            this.conditions = conditions;
-            this.operations = operations;
+            this._conditions = conditions;
+            this._operations = operations;
         }
 
         public ConditionList(ICondition condition)
@@ -22,23 +21,23 @@ namespace FuzzyLogic.KnowledgeBase.Statements
 
         public void AddCondition(ICondition condition, IOperation operation)
         {
-            conditions.Add(condition);
-            operations.Add(operation);
+            _conditions.Add(condition);
+            _operations.Add(operation);
         }
 
         public double Fuzzify(Dictionary<Variable, double> inputValues)
         {
-            var res = conditions[0].Fuzzify(inputValues);
-            for (var i = 1; i < conditions.Count; i++)
-                res = operations[i - 1].Evaluate(res, conditions[i].Fuzzify(inputValues));
+            var res = _conditions[0].Fuzzify(inputValues);
+            for (var i = 1; i < _conditions.Count; i++)
+                res = _operations[i - 1].Evaluate(res, _conditions[i].Fuzzify(inputValues));
             return res;
         }
 
         public override string ToString()
         {
-            var str = new StringBuilder($"({conditions[0]})");
-            for (var i = 1; i < conditions.Count; i++)
-                str.Append($" {operations[i - 1]} ({conditions[i]})");
+            var str = new StringBuilder($"({_conditions[0]})");
+            for (var i = 1; i < _conditions.Count; i++)
+                str.Append($" {_operations[i - 1]} ({_conditions[i]})");
             str.Append(")");
             return str.ToString();
         }
@@ -46,12 +45,12 @@ namespace FuzzyLogic.KnowledgeBase.Statements
         public IPrototype Clone()
         {
             var clone = (ConditionList)MemberwiseClone();
-            clone.conditions = conditions.Select(c => (ICondition)c.Clone()).ToList();
-            clone.operations = new List<IOperation>(operations);
+            clone._conditions = _conditions.Select(c => (ICondition)c.Clone()).ToList();
+            clone._operations = new List<IOperation>(_operations);
             return clone;
         }
 
-        private List<ICondition> conditions;
-        private List<IOperation> operations;
+        private List<ICondition> _conditions;
+        private List<IOperation> _operations;
     }
 }
