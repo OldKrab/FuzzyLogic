@@ -1,21 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using FuzzyLogic.Algorithm;
 using FuzzyLogic.KnowledgeBase;
+using FuzzyLogic.KnowledgeBase.MembershipFunctions;
+using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.KnowledgeBase.Statements;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic
 {
     class Program
     {
-   
         private static void Main()
         {
-            FuzzyAlgorithm algorithm = new MamdaniAlgorithm();
-            Console.WriteLine("Execute Mamdani Algorithm");
-            algorithm.Execute(new Dictionary<Variable, double>(), new List<Rule>());
-             algorithm = new SugenoAlgorithm();
-            Console.WriteLine("\nExecute Sugeno Algorithm");
-            algorithm.Execute(new Dictionary<Variable, double>(), new List<Rule>());
+            var db = KnowledgeBaseManager.GetInstance();
+            var speed = db.AddInputVariable("speed");
+
+            speed.AddTerm("slow", new LinearFunction(10, 30, false));
+            speed.AddTerm("medium", new TriangularFunction(20, 30, 40));
+            speed.AddTerm("fast", new LinearFunction(40, 60, true));
+
+            var condition = new ConditionList();
+            condition.AddCondition(new SingleCondition(speed, speed.GetTerm("slow")), new MinOperation());
+            var subCond = new ConditionList();
+            subCond.AddCondition(new SingleCondition(speed, speed.GetTerm("fast")), new SumOperation());
+            subCond.AddCondition(new SingleCondition(speed, speed.GetTerm("medium")));
+            condition.AddCondition(subCond);
+            var conclusions = new List<Statement>{new Statement(speed, speed.GetTerm("slow"))};
+            db.Rules.Add(new Rule(condition, conclusions));
+
+            var jsonExporter = new JsonExportVisitor();
+            jsonExporter.Parse(db);
+            Console.WriteLine(jsonExporter.Json);
         }
     }
 }

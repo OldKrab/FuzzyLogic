@@ -19,7 +19,7 @@ namespace FuzzyLogic.Algorithm
 
         protected override void Activate()
         {
-            _activatedFunctions = new Dictionary<Conclusion, IFunction>();
+            _activatedFunctions = new Dictionary<Statement, IFunction>();
             foreach (var it in _fuzzifiedValues)
             {
                 var rule = it.Key;
@@ -67,7 +67,7 @@ namespace FuzzyLogic.Algorithm
         }
 
         private Dictionary<Rule, double> _fuzzifiedValues;
-        private Dictionary<Conclusion, IFunction> _activatedFunctions;
+        private Dictionary<Statement, IFunction> _activatedFunctions;
         private Dictionary<Variable, IFunction> _combinedFunctions;
     }
 }

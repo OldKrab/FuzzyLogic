@@ -5,10 +5,11 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Variable:NamedObject
+    class Variable
     {
-        public Variable(string name) : base(name)
+        public Variable(string name)
         {
+            Name = name;
             _terms = new HashSet<Term>();
         }
 
@@ -20,6 +21,8 @@ namespace FuzzyLogic.KnowledgeBase
         {
             return _terms.First(t => t.Name == term);
         }
+
+        public string Name { get; }
 
         private HashSet<Term> _terms;
     }

@@ -1,10 +1,11 @@
 ﻿using FuzzyLogic.KnowledgeBase.Helpers;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
-    abstract class Statement : IPrototype
+     class Statement : IPrototype
     {
-        protected Statement(Variable variable, Term term)
+        public Statement(Variable variable, Term term)
         {
             Term = term;
             Variable = variable;

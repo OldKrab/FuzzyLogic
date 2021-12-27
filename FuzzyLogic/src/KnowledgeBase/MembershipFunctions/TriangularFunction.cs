@@ -1,4 +1,5 @@
 ﻿using System;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
@@ -6,38 +7,45 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
     {
         public TriangularFunction(double left, double center, double right)
         {
-            this._left = left;
-            this._center = center;
-            this._right = right;
+            Left = left;
+            Center = center;
+            Right = right;
         }
 
         public override string ToString()
         {
-            return $"Triangular function with left={_left}, center={_center}, right={_right}";
+            return $"Triangular function with left={Left}, center={Center}, right={Right}";
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         public double GetValue(double x)
         {
-            if (x < _left || x > _right)
+            if (x < Left || x > Right)
                 return 0;
-            if (Math.Abs(x - _center) < 1e-6)
+            if (Math.Abs(x - Center) < 1e-6)
                 return 1;
-            if (x < _center)
-                return (x - _left) / (_center - _left);
-            return (_right - x) / (_right - _center);
+            if (x < Center)
+                return (x - Left) / (Center - Left);
+            return (Right - x) / (Right - Center);
         }
 
         public double GetMinValue()
         {
-            return _left;
+            return Left;
         }
 
         public double GetMaxValue()
         {
-            return _right;
+            return Right;
         }
 
 
-        private double _left, _center, _right;
+        public double Left { get; }
+        public double Center { get; }
+        public double Right { get; }
     }
 }

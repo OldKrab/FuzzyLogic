@@ -1,0 +1,73 @@
+[
+  {
+    "condition": {
+      "type": "ConditionList",
+      "value": {
+        "conditions": [
+          {
+            "type": "SingleCondition",
+            "value": {
+              "variable": "speed",
+              "function": {
+                "type": "LinearFunction",
+                "value": {
+                  "Left": "10",
+                  "Right": "30",
+                  "IsIncrease": "False"
+                }
+              }
+            }
+          },
+          {
+            "type": "ConditionList",
+            "value": {
+              "conditions": [
+                {
+                  "type": "SingleCondition",
+                  "value": {
+                    "variable": "speed",
+                    "function": {
+                      "type": "LinearFunction",
+                      "value": {
+                        "Left": "40",
+                        "Right": "60",
+                        "IsIncrease": "True"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "SingleCondition",
+                  "value": {
+                    "variable": "speed",
+                    "function": {
+                      "type": "TriangularFunction",
+                      "value": {
+                        "Left": "20",
+                        "Center": "30",
+                        "Right": "40"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "conclusions": [
+      {
+        "variable": "speed",
+        "function": {
+          "type": "LinearFunction",
+          "value": {
+            "Left": "10",
+            "Right": "30",
+            "IsIncrease": "False"
+          }
+        }
+      }
+    ]
+  }
+]

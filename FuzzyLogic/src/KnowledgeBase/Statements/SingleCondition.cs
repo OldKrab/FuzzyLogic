@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
@@ -12,6 +13,11 @@ namespace FuzzyLogic.KnowledgeBase.Statements
         public double Fuzzify(Dictionary<Variable, double> inputValues)
         {
             return Term.Function.GetValue(inputValues[this.Variable]);
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

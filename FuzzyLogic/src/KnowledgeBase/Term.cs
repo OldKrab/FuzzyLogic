@@ -3,13 +3,15 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Term: NamedObject
+    class Term
     {
-        public Term(string name, IFunction function) : base(name)
+        public Term(string name, IFunction function)
         {
+            Name = name;
             Function = function;  
         }
 
+        public string Name { get; }
         public IFunction Function { get; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
@@ -53,6 +54,11 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
                 str.Append($"{i + 1}) {_functions[i]}\n");
             str.Append("]");
             return str.ToString();
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            throw new System.NotImplementedException();
         }
 
         private IOperation _combination;

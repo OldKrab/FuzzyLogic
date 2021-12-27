@@ -1,44 +1,53 @@
 ﻿using System;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-     class TrapezoidFunction:IFunction
+    class TrapezoidFunction : IFunction
     {
         public TrapezoidFunction(double left, double leftCenter, double rightCenter, double right)
         {
-            this._left = left;
-            this._leftCenter = leftCenter;
-            this._rightCenter = rightCenter;
-            this._right = right;
+            Left = left;
+            LeftCenter = leftCenter;
+            RightCenter = rightCenter;
+            Right = right;
         }
 
         public override string ToString()
         {
-            return $"Trapezoid function with left={_left}, leftCenter={_leftCenter}, rightCenter={_rightCenter}, right={_right}";
+            return $"Trapezoid function with left={Left}, leftCenter={LeftCenter}, rightCenter={RightCenter}, right={Right}";
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         public double GetValue(double x)
         {
-            if (x < _left || x > _right)
+            if (x < Left || x > Right)
                 return 0;
-            if (Math.Abs(x - _leftCenter) < 1e-6 || Math.Abs(x - _rightCenter) < 1e-6 || _leftCenter < x && x < _rightCenter)
+            if (Math.Abs(x - LeftCenter) < 1e-6 || Math.Abs(x - RightCenter) < 1e-6 || LeftCenter < x && x < RightCenter)
                 return 1;
-            if (x < _leftCenter)
-                return (x - _left) / (_leftCenter - _left);
-            return (_right - x) / (_right - _rightCenter);
+            if (x < LeftCenter)
+                return (x - Left) / (LeftCenter - Left);
+            return (Right - x) / (Right - RightCenter);
         }
 
         public double GetMinValue()
         {
-            return _left;
+            return Left;
         }
 
         public double GetMaxValue()
         {
-            return _right;
+            return Right;
         }
 
 
-        private double _left, _leftCenter, _rightCenter, _right;
+        public double Left { get; }
+        public double LeftCenter { get; }
+        public double RightCenter { get; }
+        public double Right { get; }
     }
 }

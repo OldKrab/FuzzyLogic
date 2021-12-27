@@ -1,6 +1,8 @@
-﻿namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
+﻿using FuzzyLogic.KnowledgeBase.Visitor;
+
+namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    interface IFunction
+    interface IFunction: IVisitableElement
     {
         double GetValue(double x);
 

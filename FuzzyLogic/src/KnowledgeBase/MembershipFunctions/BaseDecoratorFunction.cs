@@ -1,4 +1,6 @@
 ﻿
+using FuzzyLogic.KnowledgeBase.Visitor;
+
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
    abstract class BaseDecoratorFunction : IFunction
@@ -13,5 +15,10 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         public abstract double GetMaxValue();
 
         protected IFunction WrappedFunction;
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
