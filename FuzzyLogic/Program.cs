@@ -28,9 +28,9 @@ namespace FuzzyLogic
             var conclusions = new List<Statement>{new Statement(speed, speed.GetTerm("slow"))};
             db.Rules.Add(new Rule(condition, conclusions));
 
-            var jsonExporter = new JsonExportVisitor();
-            jsonExporter.Parse(db);
-            Console.WriteLine(jsonExporter.Json);
+            var xmlExporter = new XmlExportVisitor();
+            xmlExporter.Parse(db);
+            Console.WriteLine(xmlExporter.Xml);
         }
     }
 }
