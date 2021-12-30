@@ -32,7 +32,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             foreach (var conclusion in rule.Conclusions)
             {
                 _xml.Append("<Conclusion>");
-                ParseStatement(conclusion);
+                Parse(conclusion);
                 _xml.Append("</Conclusion>");
             }
 
@@ -45,7 +45,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         public void Visit(SingleCondition condition)
         {
             _xml.Append("<SingleCondition>");
-            ParseStatement(condition);
+            Parse(condition);
             _xml.Append("</SingleCondition>");
         }
 
@@ -88,7 +88,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             _xml.Append("</LinearFunction>");
         }
 
-        public void ParseStatement(Statement statement)
+        public void Parse(Statement statement)
         {
             _xml.Append($"<Name>{statement.Variable.Name}</Name><Function>");
             statement.Term.Function.Accept(this);

@@ -11,6 +11,11 @@ namespace FuzzyLogic.KnowledgeBase
             Function = function;  
         }
 
+        public override string ToString()
+        {
+            return $"Term {Name} with function \"{Function}\"";
+        }
+
         public string Name { get; }
         public IFunction Function { get; }
     }

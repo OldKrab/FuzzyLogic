@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-     class LinearFunction : IFunction
+    class LinearFunction : IFunction
     {
         public LinearFunction(float a, float b, bool isIncrease)
         {
@@ -29,6 +29,11 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
                     return (Right - x) / (Right - Left);
                 return 0;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Linear function with left={Left}, right={Right}, " + (IsIncrease ? "increase" : "decrease");
         }
 
         public double GetMinValue()
