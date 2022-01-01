@@ -13,7 +13,7 @@ namespace FuzzyLogic.KnowledgeBase
 
         public override string ToString()
         {
-            return $"Term {Name} with function \"{Function}\"";
+            return $"Term \"{Name}\" with function \"{Function}\"";
         }
 
         public string Name { get; }

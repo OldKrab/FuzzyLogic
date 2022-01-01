@@ -7,7 +7,7 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Variable
+    class Variable:IPrototype
     {
         public Variable(string name, bool isInput)
         {
@@ -38,6 +38,13 @@ namespace FuzzyLogic.KnowledgeBase
         public override string ToString()
         {
             return (IsInput ? "Input" : "Output") + $" variable \"{Name}\"";
+        }
+
+        public IPrototype Clone()
+        {
+            var clone = new Variable(Name, IsInput);
+            clone.Terms.AddRange(Terms);
+            return clone;
         }
 
         public string Name { get; }

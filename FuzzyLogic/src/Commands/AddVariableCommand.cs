@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.Commands
 {
-     class AddVariableCommand : IUndoableCommand
+    class AddVariableCommand : IUndoableCommand
     {
         public AddVariableCommand(string name, bool isInput)
         {

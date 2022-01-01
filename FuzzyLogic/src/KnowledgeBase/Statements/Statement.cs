@@ -21,7 +21,7 @@ namespace FuzzyLogic.KnowledgeBase.Statements
 
         public IPrototype Clone()
         {
-            return (Statement)MemberwiseClone();
+            return new Statement((Variable)Variable.Clone(), Term);
         }
     }
 }

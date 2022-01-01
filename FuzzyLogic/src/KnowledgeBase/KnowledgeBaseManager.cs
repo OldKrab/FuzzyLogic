@@ -5,17 +5,29 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class KnowledgeBaseManager
+    partial class KnowledgeBaseManager
     {
         public List<Variable> InputVariables => Variables.Where(x => x.IsInput).ToList();
         public List<Variable> OutputVariables => Variables.Where(x => !x.IsInput).ToList();
-        public List<Variable> Variables { get; } = new List<Variable>();
-        public List<Rule> Rules { get; } = new List<Rule>();
-
-
+        public List<Variable> Variables { get; private set; } = new List<Variable>();
+        public List<Rule> Rules { get; private set;  } = new List<Rule>();
         public static KnowledgeBaseManager GetInstance()
         {
             return _instance ??= new KnowledgeBaseManager();
+        }
+
+        public void Restore(ISnapshot snapshot)
+        {
+           var baseSnapshot = (KnowledgeBaseSnapshot)snapshot;
+           Variables = baseSnapshot.Variables;
+           Rules = baseSnapshot.Rules;
+        }
+
+        public ISnapshot MakeSnapshot()
+        {
+            return new KnowledgeBaseSnapshot(
+                Variables.Select(x => (Variable)x.Clone()).ToList(),
+                Rules.Select(r => (Rule)r.Clone()).ToList());
         }
 
         public Variable AddVariable(string name, bool isInput)
@@ -34,7 +46,7 @@ namespace FuzzyLogic.KnowledgeBase
         {
             var variable = GetVariable(varName);
             var term = variable.AddTerm(termName, termFunction);
-            Console.WriteLine($"To \"{variable}\" added term \"{term}\"");
+            Console.WriteLine($"To \"{variable}\" added \"{term}\"");
             return term;
         }
 
@@ -47,7 +59,7 @@ namespace FuzzyLogic.KnowledgeBase
         {
             var variable = GetVariable(varName);
             variable.RemoveTerm(termName);
-            Console.WriteLine($"From \"{variable}\" removed term \"{termName}\"");
+            Console.WriteLine($"From \"{variable}\" removed \"{termName}\"");
         }
 
         public Variable AddInputVariable(string name)

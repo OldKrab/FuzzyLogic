@@ -9,91 +9,159 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
     class XmlExportVisitor : IKnowledgeVisitor
     {
         public String Xml => _xml.ToString();
+        public int _tabsCount = 0;
+
+        public void Clear() => _xml.Clear();
+
 
         public void Parse(KnowledgeBaseManager db)
         {
-            _xml.Append("<Rules>");
+            AppendString("<Variables>");
+            Tab();
+            foreach (var variable in db.Variables)
+            {
+                Parse(variable);
+            }
+            UnTab();
+            AppendString("</Variables>");
+            AppendString("<Rules>");
+            Tab();
             foreach (var rule in db.Rules)
             {
-               Parse(rule);
+                Parse(rule);
             }
-            _xml.Append("</Rules>");
+            UnTab();
+            AppendString("</Rules>");
+        }
+        public void Parse(Variable variable)
+        {
+            AppendString("<Variable>"); 
+            Tab();
+            AppendString($"<Name>{variable.Name}</Name>");
+            AppendString($"<IsInput>{variable.IsInput}</IsInput>");
+
+            AppendString("<Terms>");
+            Tab();
+            foreach (var term in variable.Terms)
+            {
+                Parse(term);
+            }
+            UnTab();
+            AppendString("</Terms>");
+            UnTab(); 
+            AppendString("</Variable>");
+        }
+        public void Parse(Term term)
+        {
+            AppendString("<Term>");
+            Tab();
+            AppendString($"<Name>{term.Name}</Name>");
+
+            AppendString("<Function>");
+            Tab();
+            term.Function.Accept(this);
+            UnTab();
+            AppendString("<Function>");
+            UnTab();
+            AppendString("</Term>");
         }
 
         public void Parse(Rule rule)
         {
-            _xml.Append("<Rule>");
-
-            _xml.Append("<Condition>");
+            AppendString("<Rule>");
+            Tab();
+            AppendString("<Condition>");
+            Tab();
             rule.Condition.Accept(this);
-            _xml.Append("</Condition>");
+            UnTab();
+            AppendString("</Condition>");
 
-            _xml.Append("<Conclusions>");
+            AppendString("<Conclusions>");
+            Tab();
             foreach (var conclusion in rule.Conclusions)
             {
-                _xml.Append("<Conclusion>");
+                AppendString("<Conclusion>");
                 Parse(conclusion);
-                _xml.Append("</Conclusion>");
+                AppendString("</Conclusion>");
             }
-
-            _xml.Append("</Conclusions>");
-
-            _xml.Append("</Rule>");
+            UnTab();
+            AppendString("</Conclusions>");
+            UnTab();
+            AppendString("</Rule>");
         }
-
 
         public void Visit(SingleCondition condition)
         {
-            _xml.Append("<SingleCondition>");
+            AppendString("<SingleCondition>");
+            Tab();
             Parse(condition);
-            _xml.Append("</SingleCondition>");
+            UnTab();
+            AppendString("</SingleCondition>");
         }
 
         public void Visit(ConditionList conditionList)
         {
-            _xml.Append("<ConditionList>");
+            AppendString("<ConditionList>");
+            Tab();
             conditionList.Conditions[0].Accept(this);
             for (int i = 1; i < conditionList.Conditions.Count; i++)
             {
-                _xml.Append($"<Operation>{conditionList.Operations[i-1]}</Operation>");
+                AppendString($"<Operation>{conditionList.Operations[i - 1]}</Operation>");
                 conditionList.Conditions[i].Accept(this);
             }
-            _xml.Append("</ConditionList>");
+            UnTab();
+            AppendString("</ConditionList>");
         }
 
         public void Visit(TrapezoidFunction trapezoidFunc)
         {
-            _xml.Append("<TrapezoidFunction>");
-            _xml.Append($"<Left>{trapezoidFunc.Left}</Left>");
-            _xml.Append($"<LeftCenter>{trapezoidFunc.LeftCenter}</LeftCenter>");
-            _xml.Append($"<RightCenter>{trapezoidFunc.RightCenter}</RightCenter>");
-            _xml.Append($"<Right>{trapezoidFunc.Right}</Right>");
-            _xml.Append("</TrapezoidFunction>");
+            AppendString("<TrapezoidFunction>");
+            Tab();
+            AppendString($"<Left>{trapezoidFunc.Left}</Left>");
+            AppendString($"<LeftCenter>{trapezoidFunc.LeftCenter}</LeftCenter>");
+            AppendString($"<RightCenter>{trapezoidFunc.RightCenter}</RightCenter>");
+            AppendString($"<Right>{trapezoidFunc.Right}</Right>");
+            UnTab();
+            AppendString("</TrapezoidFunction>");
         }
 
         public void Visit(TriangularFunction triangularFunc)
         {
-            _xml.Append("<TriangularFunction>");
-            _xml.Append($"<Left>{triangularFunc.Left}</Left>");
-            _xml.Append($"<Center>{triangularFunc.Center}</Center>");
-            _xml.Append($"<Right>{triangularFunc.Right}</Right>");
-            _xml.Append("</TriangularFunction>");
+            AppendString("<TriangularFunction>");
+            Tab();
+            AppendString($"<Left>{triangularFunc.Left}</Left>");
+            AppendString($"<Center>{triangularFunc.Center}</Center>");
+            AppendString($"<Right>{triangularFunc.Right}</Right>");
+            UnTab();
+            AppendString("</TriangularFunction>");
         }
 
         public void Visit(LinearFunction linearFunc)
         {
-            _xml.Append("<LinearFunction>");
-            _xml.Append($"<Left>{linearFunc.Left}</Left>");
-            _xml.Append($"<Right>{linearFunc.Right}</Right>");
-            _xml.Append("</LinearFunction>");
+            AppendString("<LinearFunction>");
+            Tab();
+            AppendString($"<Left>{linearFunc.Left}</Left>");
+            AppendString($"<Right>{linearFunc.Right}</Right>");
+            AppendString($"<IsIncrease>{linearFunc.IsIncrease}</IsIncrease>");
+            UnTab();
+            AppendString("</LinearFunction>");
         }
 
         public void Parse(Statement statement)
         {
-            _xml.Append($"<Name>{statement.Variable.Name}</Name><Function>");
-            statement.Term.Function.Accept(this);
-            _xml.Append("</Function>");
+            AppendString($"<Name>{statement.Variable.Name}</Name>");
+            AppendString($"<Term>{statement.Term.Name}</Term>");
         }
+
+
+        private void AppendString(string str)
+        {
+            var tab = new string('\t', _tabsCount);
+            _xml.Append(tab + str + "\n");
+        }
+
+        private void Tab() => _tabsCount++;
+        private void UnTab() => _tabsCount--;
 
         private StringBuilder _xml = new StringBuilder();
     }

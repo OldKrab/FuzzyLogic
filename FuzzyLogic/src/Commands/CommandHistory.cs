@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FuzzyLogic.Commands
 {
-     class CommandHistory
+    class CommandHistory
     {
         public void AddCommand(IUndoableCommand command)
         {
