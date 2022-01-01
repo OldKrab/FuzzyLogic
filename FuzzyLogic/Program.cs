@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
-using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.KnowledgeBase.Statements;
+using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Visitor;
-using FuzzyLogic.src;
 
 namespace FuzzyLogic
 {
@@ -16,25 +11,20 @@ namespace FuzzyLogic
         private static void Main()
         {
             var db = KnowledgeBaseManager.GetInstance();
-            var speed = db.AddInputVariable("speed");
+            db.AddInputVariable("speed");
+            db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
+            db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
+            db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
 
-            speed.AddTerm("slow", new LinearFunction(10, 30, false));
-            speed.AddTerm("medium", new TriangularFunction(20, 30, 40));
-            speed.AddTerm("fast", new LinearFunction(40, 60, true));
+            RuleBuilder ruleBuilder = new RuleBuilder();
 
-            var condition = new ConditionList();
-            condition.AddCondition(new SingleCondition(speed, speed.GetTerm("slow")), new MinOperation());
-            var subCond = new ConditionList();
-            subCond.AddCondition(new SingleCondition(speed, speed.GetTerm("fast")), new SumOperation());
-            subCond.AddCondition(new SingleCondition(speed, speed.GetTerm("medium")));
-            condition.AddCondition(subCond);
-            var conclusions = new List<Statement>{new Statement(speed, speed.GetTerm("slow"))};
-            db.Rules.Add(new Rule(condition, conclusions));
+            RuleParser ruleParser = new RuleParser(db);
+            ruleParser.Parse(ruleBuilder, "IF ( speed slow ) AND speed fast OR ( speed medium ) THEN speed fast");
 
-            var xmlExporter = new XmlExportVisitor();
-            xmlExporter.Parse(db);
-            Console.WriteLine(xmlExporter.Xml);
+            var rule = ruleBuilder.GetResult();
+            XmlExportVisitor visitor = new XmlExportVisitor();
+            visitor.Parse(rule);
+            Console.WriteLine(visitor.Xml);
         }
-
     }
 }
