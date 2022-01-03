@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class MaxOperation : IOperation
+    class MaxOperation : OrOperation
     {
         public double Evaluate(double x, double y)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
+using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Visitor;
 
@@ -18,7 +19,7 @@ namespace FuzzyLogic
 
             RuleBuilder ruleBuilder = new RuleBuilder();
 
-            RuleParser ruleParser = new RuleParser(db);
+            RuleParser ruleParser = new RuleParser(db,new SumProdOperationFactory());
             ruleParser.Parse(ruleBuilder, "IF ( speed slow ) AND speed fast OR ( speed medium ) THEN speed fast");
 
             var rule = ruleBuilder.GetResult();

@@ -5,9 +5,10 @@ namespace FuzzyLogic.KnowledgeBase
 {
     class RuleParser
     {
-        public RuleParser(KnowledgeBaseManager db)
+        public RuleParser(KnowledgeBaseManager db, IOperationFactory operationFactory)
         {
             _db = db;
+            _operationFactory = operationFactory;
         }
 
         public void Parse(IRuleBuilder builder, string rule)
@@ -21,9 +22,9 @@ namespace FuzzyLogic.KnowledgeBase
                 else if (words[i] == ")")
                     builder.EndConditionList();
                 else if (words[i] == "AND")
-                    builder.AddOperation(new MinOperation());
+                    builder.AddOperation(_operationFactory.CreateAndOperation());
                 else if (words[i] == "OR")
-                    builder.AddOperation(new MaxOperation());
+                    builder.AddOperation(_operationFactory.CreateOrOperation());
                 else
                 {
                     Variable var = _db.GetVariable(words[i++]);
@@ -42,6 +43,7 @@ namespace FuzzyLogic.KnowledgeBase
         }
 
         private IRuleBuilder builder;
+        private IOperationFactory _operationFactory;
         private KnowledgeBaseManager _db;
     }
 
