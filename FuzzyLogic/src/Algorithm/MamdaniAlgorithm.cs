@@ -6,6 +6,7 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Statements;
+using FuzzyLogic.RuleParser;
 
 namespace FuzzyLogic.Algorithm
 {
@@ -64,6 +65,11 @@ namespace FuzzyLogic.Algorithm
                 var denominator = integrator.Integrate(function, function.GetMinValue(), function.GetMaxValue());
                 OutputValues.Add(variable, numerator / denominator);
             }
+        }
+
+        public override IRuleParser CreateRuleParser()
+        {
+            return new MamdaniRuleParser();
         }
 
         private Dictionary<Rule, double> _fuzzifiedValues;

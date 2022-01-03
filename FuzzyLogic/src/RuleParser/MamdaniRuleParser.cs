@@ -1,18 +1,22 @@
-﻿using FuzzyLogic.KnowledgeBase.Operations;
+﻿using System;
+using FuzzyLogic.KnowledgeBase;
+using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 
-namespace FuzzyLogic.KnowledgeBase
+namespace FuzzyLogic.RuleParser
 {
-    class RuleParser
+    class MamdaniRuleParser:IRuleParser
     {
-        public RuleParser(KnowledgeBaseManager db, IOperationFactory operationFactory)
+        public MamdaniRuleParser()
         {
-            _db = db;
-            _operationFactory = operationFactory;
+            _db = KnowledgeBaseManager.GetInstance();
+            OperationFactory = new MaxMinOperationFactory();
         }
 
         public void Parse(IRuleBuilder builder, string rule)
         {
+            Console.WriteLine("Parsing use Mamdani RuleParser...");
+            
             var words = rule.Split();
             int i = 1;
             while (i < words.Length && words[i] != "THEN")
@@ -22,9 +26,9 @@ namespace FuzzyLogic.KnowledgeBase
                 else if (words[i] == ")")
                     builder.EndConditionList();
                 else if (words[i] == "AND")
-                    builder.AddOperation(_operationFactory.CreateAndOperation());
+                    builder.AddOperation(OperationFactory.CreateAndOperation());
                 else if (words[i] == "OR")
-                    builder.AddOperation(_operationFactory.CreateOrOperation());
+                    builder.AddOperation(OperationFactory.CreateOrOperation());
                 else
                 {
                     Variable var = _db.GetVariable(words[i++]);
@@ -42,8 +46,8 @@ namespace FuzzyLogic.KnowledgeBase
             }
         }
 
-        private IRuleBuilder builder;
-        private IOperationFactory _operationFactory;
+        public IOperationFactory OperationFactory { get; set; }
+
         private KnowledgeBaseManager _db;
     }
 
