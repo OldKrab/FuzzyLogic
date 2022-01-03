@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.RuleParser;
+using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {

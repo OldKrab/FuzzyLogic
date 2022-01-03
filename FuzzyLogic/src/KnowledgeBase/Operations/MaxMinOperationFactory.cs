@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-     class MaxMinOperationFactory:IOperationFactory
+    class MaxMinOperationFactory : IOperationFactory
     {
         public AndOperation CreateAndOperation()
         {

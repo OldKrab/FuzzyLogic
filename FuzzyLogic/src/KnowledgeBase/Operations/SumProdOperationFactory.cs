@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-     class SumProdOperationFactory:IOperationFactory
+    class SumProdOperationFactory : IOperationFactory
     {
         public AndOperation CreateAndOperation()
         {

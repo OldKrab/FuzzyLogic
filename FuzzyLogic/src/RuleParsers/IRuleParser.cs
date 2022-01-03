@@ -1,8 +1,7 @@
-﻿using FuzzyLogic.KnowledgeBase;
-using FuzzyLogic.KnowledgeBase.Operations;
+﻿using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 
-namespace FuzzyLogic.RuleParser
+namespace FuzzyLogic.RuleParsers
 {
     interface IRuleParser
     {

@@ -6,7 +6,7 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Statements;
-using FuzzyLogic.RuleParser;
+using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {
@@ -69,7 +69,7 @@ namespace FuzzyLogic.Algorithm
 
         public override IRuleParser CreateRuleParser()
         {
-            return new MamdaniRuleParser();
+            return new RuleParsers.RuleParser();
         }
 
         private Dictionary<Rule, double> _fuzzifiedValues;

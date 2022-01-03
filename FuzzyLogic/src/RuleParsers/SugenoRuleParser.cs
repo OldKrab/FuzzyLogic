@@ -2,7 +2,7 @@
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 
-namespace FuzzyLogic.RuleParser
+namespace FuzzyLogic.RuleParsers
 {
     class SugenoRuleParser : IRuleParser
     {

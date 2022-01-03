@@ -3,6 +3,6 @@
     interface IOperationFactory
     {
         AndOperation CreateAndOperation();
-       OrOperation CreateOrOperation();
+        OrOperation CreateOrOperation();
     }
 }

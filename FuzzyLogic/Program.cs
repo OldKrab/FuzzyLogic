@@ -1,11 +1,11 @@
 ﻿using System;
-using FuzzyLogic.Algorithm;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Visitor;
-using FuzzyLogic.RuleParser;
+using FuzzyLogic.RuleParsers;
+using Microsoft.VisualBasic;
 
 namespace FuzzyLogic
 {
@@ -19,18 +19,22 @@ namespace FuzzyLogic
             db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
             db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
 
-            string ruleString = "IF ( speed slow ) AND speed fast OR ( speed medium ) THEN speed fast";
+            var ruleString = "IF speed slow AND speed fast OR speed medium THEN speed fast";
+            var ruleParser = new RuleParser();
+            var ruleBuilder = new RuleBuilder();
+            var ruleExporter = new XmlExportVisitor();
 
-            FuzzyAlgorithm algorithm = new MamdaniAlgorithm();
-            RuleBuilder ruleBuilder = new RuleBuilder();
-            IRuleParser ruleParser = algorithm.CreateRuleParser();
+            ruleParser.OperationFactory = new MaxMinOperationFactory();
             ruleParser.Parse(ruleBuilder, ruleString);
+            ruleExporter.Parse(ruleBuilder.GetResult());
+            Console.WriteLine(ruleExporter.Xml);
 
-            algorithm = new SugenoAlgorithm();
+            ruleExporter.Clear();
             ruleBuilder.Clear();
-            ruleParser = algorithm.CreateRuleParser();
+            ruleParser.OperationFactory = new SumProdOperationFactory();
             ruleParser.Parse(ruleBuilder, ruleString);
-
+            ruleExporter.Parse(ruleBuilder.GetResult());
+            Console.WriteLine(ruleExporter.Xml);
         }
     }
 }

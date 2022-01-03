@@ -3,11 +3,11 @@ using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 
-namespace FuzzyLogic.RuleParser
+namespace FuzzyLogic.RuleParsers
 {
-    class MamdaniRuleParser:IRuleParser
+    class RuleParser : IRuleParser
     {
-        public MamdaniRuleParser()
+        public RuleParser()
         {
             _db = KnowledgeBaseManager.GetInstance();
             OperationFactory = new MaxMinOperationFactory();
@@ -15,8 +15,6 @@ namespace FuzzyLogic.RuleParser
 
         public void Parse(IRuleBuilder builder, string rule)
         {
-            Console.WriteLine("Parsing use Mamdani RuleParser...");
-            
             var words = rule.Split();
             int i = 1;
             while (i < words.Length && words[i] != "THEN")

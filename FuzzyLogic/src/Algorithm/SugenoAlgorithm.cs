@@ -1,4 +1,4 @@
-﻿using FuzzyLogic.RuleParser;
+﻿using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {
