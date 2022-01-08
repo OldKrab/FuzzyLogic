@@ -45,7 +45,8 @@ namespace FuzzyLogic.CLI
         {
             parameters = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             var line = ReadCommandLine();
-            var words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            var words = SplitWithQuotas(line);
 
             if (words.Length == 0) return "";
 
@@ -59,6 +60,15 @@ namespace FuzzyLogic.CLI
                 parameters.Add(param, value);
             }
             return command;
+        }
+
+        private static string[] SplitWithQuotas(string line)
+        {
+            return line.Split('"')
+                .Select((element, index) => index % 2 == 0  
+                    ? element.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) 
+                    : new string[] { element }) 
+                .SelectMany(element => element).ToArray();
         }
 
         private string ReadCommandLine()

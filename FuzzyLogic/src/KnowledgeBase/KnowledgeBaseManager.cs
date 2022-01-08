@@ -59,7 +59,7 @@ namespace FuzzyLogic.KnowledgeBase
         {
             var variable = GetVariable(varName);
             variable.RemoveTerm(termName);
-            Console.WriteLine($"Из \"{variable}\" удален \"{termName}\"");
+            Console.WriteLine($"У \"{variable}\" удален \"{termName}\"");
         }
 
         public Variable AddInputVariable(string name)
