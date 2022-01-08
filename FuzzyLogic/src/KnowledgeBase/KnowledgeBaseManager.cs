@@ -10,7 +10,7 @@ namespace FuzzyLogic.KnowledgeBase
         public List<Variable> InputVariables => Variables.Where(x => x.IsInput).ToList();
         public List<Variable> OutputVariables => Variables.Where(x => !x.IsInput).ToList();
         public List<Variable> Variables { get; private set; } = new List<Variable>();
-        public List<Rule> Rules { get; private set;  } = new List<Rule>();
+        public List<Rule> Rules { get; private set; } = new List<Rule>();
         public static KnowledgeBaseManager GetInstance()
         {
             return _instance ??= new KnowledgeBaseManager();
@@ -18,9 +18,9 @@ namespace FuzzyLogic.KnowledgeBase
 
         public void Restore(ISnapshot snapshot)
         {
-           var baseSnapshot = (KnowledgeBaseSnapshot)snapshot;
-           Variables = baseSnapshot.Variables;
-           Rules = baseSnapshot.Rules;
+            var baseSnapshot = (KnowledgeBaseSnapshot)snapshot;
+            Variables = baseSnapshot.Variables;
+            Rules = baseSnapshot.Rules;
         }
 
         public ISnapshot MakeSnapshot()
@@ -32,11 +32,10 @@ namespace FuzzyLogic.KnowledgeBase
 
         public Variable AddVariable(string name, bool isInput)
         {
-            var variable = Variables.FirstOrDefault(x => x.Name == name);
-            if (variable != null)
+            if (Variables.Exists(v => v.Name == name))
                 throw new InvalidOperationException($"Переменная {name} уже существует!");
 
-            variable = new Variable(name, isInput);
+            var variable = new Variable(name, isInput);
             Variables.Add(variable);
             Console.WriteLine($"Добавлена {variable}");
             return variable;
@@ -45,8 +44,6 @@ namespace FuzzyLogic.KnowledgeBase
         public Term AddTermToVariable(string varName, string termName, IFunction termFunction)
         {
             var variable = GetVariable(varName);
-            if (variable == null)
-                throw new InvalidOperationException($"Переменной {varName} не существует!");
             var term = variable.AddTerm(termName, termFunction);
             Console.WriteLine($"К \"{variable}\" добавлен \"{term}\"");
             return term;
@@ -54,10 +51,11 @@ namespace FuzzyLogic.KnowledgeBase
 
         public void RemoveVariable(string name)
         {
-            Variables.RemoveAll(x => x.Name.Equals(name));
+            var variable = GetVariable(name);
+            Variables.Remove(variable);
             Console.WriteLine($"Удалена переменная \"{name}\"");
         }
-        public void RemoveTermFromVariable(string varName,string termName)
+        public void RemoveTermFromVariable(string varName, string termName)
         {
             var variable = GetVariable(varName);
             variable.RemoveTerm(termName);
@@ -74,7 +72,13 @@ namespace FuzzyLogic.KnowledgeBase
             return AddVariable(name, false);
         }
 
-        public Variable GetVariable(string name) => Variables.FirstOrDefault(v => v.Name.Equals(name));
+        public Variable GetVariable(string name)
+        {
+            var variable = Variables.FirstOrDefault(v => v.Name.Equals(name));
+            if (variable == null)
+                throw new InvalidOperationException($"Переменной {name} не существует!");
+            return variable;
+        }
 
 
         private static KnowledgeBaseManager _instance;

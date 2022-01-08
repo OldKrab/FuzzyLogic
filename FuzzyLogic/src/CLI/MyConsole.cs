@@ -25,7 +25,7 @@ namespace FuzzyLogic.CLI
                         Console.Write("\b \b");
                     }
                 }
-                else
+                else if (ch.KeyChar != '\0')
                 {
                     sb.Append(ch.KeyChar);
                     Console.Write(ch.KeyChar);

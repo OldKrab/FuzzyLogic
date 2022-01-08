@@ -17,21 +17,24 @@ namespace FuzzyLogic.KnowledgeBase
 
         public Term AddTerm(string termName, IFunction func)
         {
-            var term = Terms.FirstOrDefault(x => x.Name == termName);
-            if (term != null)
+            if (Terms.Exists(t => t.Name == termName))
                 throw new InvalidOperationException($"Терм {termName} у переменной {Name} уже существует!");
-            term = new Term(termName, func);
+            var term = new Term(termName, func);
             Terms.Add(term);
             return term;
         }
 
-        public void RemoveTerm(string term)
+        public void RemoveTerm(string termName)
         {
-            Terms.RemoveAll(x => x.Name.Equals(term));
+            var term = GetTerm(termName);
+            Terms.Remove(term);
         }
-        public Term GetTerm(string term)
+        public Term GetTerm(string termName)
         {
-            return Terms.First(t => t.Name == term);
+            var term = Terms.FirstOrDefault(t => t.Name == termName);
+            if (term == null)
+                throw new InvalidOperationException($"У переменной {Name} нет терма {termName}!");
+            return term;
         }
 
         public override string ToString()

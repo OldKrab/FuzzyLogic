@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FuzzyLogic.CLI.Commands;
 
 namespace FuzzyLogic.CLI
@@ -30,7 +29,7 @@ namespace FuzzyLogic.CLI
                 {
                     Console.WriteLine(@"Ошибка! " + e.Message);
                 }
-                catch (OperationCanceledException e)
+                catch (OperationCanceledException)
                 {
                     Console.WriteLine("\nОперация прервана.");
                 }
@@ -42,7 +41,7 @@ namespace FuzzyLogic.CLI
             _commands.Add(command.GetName(), command);
         }
 
-        public string WaitForCommand(out Dictionary<string, string> parameters)
+        private string WaitForCommand(out Dictionary<string, string> parameters)
         {
             parameters = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             var line = ReadCommandLine();
@@ -62,11 +61,12 @@ namespace FuzzyLogic.CLI
             return command;
         }
 
-        public string ReadCommandLine()
+        private string ReadCommandLine()
         {
             Console.Write(_welcomeString);
             TabAutocomplete autocomplete = new TabAutocomplete(GetCommandsNames());
             MyConsole console = new MyConsole();
+
             console.AddKeyHandler(ConsoleKey.Tab, () =>
             {
                 var matchingCommands = autocomplete.GetMatchingCommands(console.GetCurrentLine());
@@ -83,13 +83,35 @@ namespace FuzzyLogic.CLI
                     Console.Write(_welcomeString + console.GetCurrentLine());
                 }
             });
-            return console.ReadLine();
+
+            var curCommandFromHistory = _commandHistory.Count - 1;
+            if (curCommandFromHistory >= 0)
+            {
+                console.AddKeyHandler(ConsoleKey.UpArrow, () =>
+                {
+                    console.SetCurrentLine(_commandHistory[curCommandFromHistory]);
+                    if (curCommandFromHistory > 0) curCommandFromHistory--;
+                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
+                });
+
+                console.AddKeyHandler(ConsoleKey.DownArrow, () =>
+                {
+                    console.SetCurrentLine(_commandHistory[curCommandFromHistory]);
+                    if (curCommandFromHistory < _commandHistory.Count - 1) curCommandFromHistory++;
+                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
+                });
+            }
+
+            string command = console.ReadLine();
+            _commandHistory.Add(command);
+            return command;
         }
 
         public List<ConsoleCommand> GetCommands() => _commands.Values.ToList();
         public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
         private Dictionary<string, ConsoleCommand> _commands = new Dictionary<string, ConsoleCommand>(StringComparer.InvariantCultureIgnoreCase);
+        private List<string> _commandHistory = new List<string>();
         private string _welcomeString = "> ";
         private string _exitCommand = "exit";
     }

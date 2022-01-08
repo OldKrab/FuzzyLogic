@@ -62,6 +62,7 @@ namespace FuzzyLogic.CLI.Commands
             foreach (var param in Params.Where(param => !parameters.ContainsKey(param.Name.ToLower())))
             {
                 Console.Write($@"[{param.Name}] {param.AskForInput}: ");
+
                 MyConsole console = new MyConsole();
                 console.AddKeyHandler(ConsoleKey.Escape, () => throw new OperationCanceledException());
                 string value = console.ReadLine();

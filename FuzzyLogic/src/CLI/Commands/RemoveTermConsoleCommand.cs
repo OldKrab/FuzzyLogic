@@ -4,16 +4,25 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public abstract class AddTermConsoleCommand:ConsoleCommand
+    public class RemoveTermConsoleCommand:ConsoleCommand
     {
+        public override string GetName()
+        {
+            return "RemoveTerm";
+        }
+
+        public override string GetDescription()
+        {
+            return "Удаляет указанный терм из переменной";
+        }
+
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
             var varName = parameters[VarNameParam];
             var termName = parameters[TermNameParam];
-            var function = GetMembershipFunction(parameters);
 
             KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            db.AddTermToVariable(varName, termName, function);
+            db.RemoveTermFromVariable(varName, termName);
         }
 
         protected override List<ConsoleCommandParam> CreateParams()
@@ -23,7 +32,7 @@ namespace FuzzyLogic.CLI.Commands
             {
                 Name = VarNameParam,
                 AskForInput = "Введите имя переменной",
-                Description = "Имя переменной, к которой добавляется терм"
+                Description = "Имя переменной, у которой удаляется терм"
             };
             varName.AddValidator(s => s != "", "Имя переменной пустое!");
             parameters.Add(varName);
@@ -32,15 +41,13 @@ namespace FuzzyLogic.CLI.Commands
             {
                 Name = TermNameParam,
                 AskForInput = "Введите имя терма",
-                Description = "Имя добавляемого терма"
+                Description = "Имя удаляемого терма"
             };
             termName.AddValidator(s => s != "", "Имя терма пустое!");
             parameters.Add(termName);
 
             return parameters;
         }
-
-        protected abstract IFunction GetMembershipFunction(Dictionary<string, string> parameters);
 
         protected string VarNameParam = "-varname";
         protected string TermNameParam = "-termname";
