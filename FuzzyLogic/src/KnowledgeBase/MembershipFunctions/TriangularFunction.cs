@@ -3,10 +3,12 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class TriangularFunction : IFunction
+    public class TriangularFunction : IFunction
     {
         public TriangularFunction(double left, double center, double right)
         {
+            if (left > center || center > right)
+                throw new InvalidOperationException("Координаты треугольной функции не должны убывать!");
             Left = left;
             Center = center;
             Right = right;
@@ -14,7 +16,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return $"Triangular function with left={Left}, center={Center}, right={Right}";
+            return $"Треугольная функция с параметрами left={Left}, center={Center}, right={Right}";
         }
 
         public void Accept(IKnowledgeVisitor visitor)

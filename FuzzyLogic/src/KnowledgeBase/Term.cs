@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Term
+    public class Term
     {
         public Term(string name, IFunction function)
         {
@@ -13,7 +13,7 @@ namespace FuzzyLogic.KnowledgeBase
 
         public override string ToString()
         {
-            return $"Term \"{Name}\" with function \"{Function}\"";
+            return $"Терм \"{Name}\" с функцией принадлежности \"{Function}\"";
         }
 
         public string Name { get; }

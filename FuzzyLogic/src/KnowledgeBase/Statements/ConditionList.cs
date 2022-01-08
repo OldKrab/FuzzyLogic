@@ -8,7 +8,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
-    class ConditionList : ICondition
+    public class ConditionList : ICondition
     {
         public ConditionList(List<ICondition> conditions, List<IOperation> operations)
         {

@@ -41,7 +41,6 @@ namespace FuzzyLogic.KnowledgeBase
             }
         }
 
-        private IRuleBuilder builder;
         private KnowledgeBaseManager _db;
     }
 

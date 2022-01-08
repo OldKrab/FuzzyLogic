@@ -34,32 +34,34 @@ namespace FuzzyLogic.KnowledgeBase
         {
             var variable = Variables.FirstOrDefault(x => x.Name == name);
             if (variable != null)
-                throw new ArgumentException("This var is already exists!");
+                throw new InvalidOperationException($"Переменная {name} уже существует!");
 
             variable = new Variable(name, isInput);
             Variables.Add(variable);
-            Console.WriteLine($"Added {variable}");
+            Console.WriteLine($"Добавлена {variable}");
             return variable;
         }
 
         public Term AddTermToVariable(string varName, string termName, IFunction termFunction)
         {
             var variable = GetVariable(varName);
+            if (variable == null)
+                throw new InvalidOperationException($"Переменной {varName} не существует!");
             var term = variable.AddTerm(termName, termFunction);
-            Console.WriteLine($"To \"{variable}\" added \"{term}\"");
+            Console.WriteLine($"К \"{variable}\" добавлен \"{term}\"");
             return term;
         }
 
         public void RemoveVariable(string name)
         {
             Variables.RemoveAll(x => x.Name.Equals(name));
-            Console.WriteLine($"Removed var \"{name}\"");
+            Console.WriteLine($"Удалена переменная \"{name}\"");
         }
         public void RemoveTermFromVariable(string varName,string termName)
         {
             var variable = GetVariable(varName);
             variable.RemoveTerm(termName);
-            Console.WriteLine($"From \"{variable}\" removed \"{termName}\"");
+            Console.WriteLine($"Из \"{variable}\" удален \"{termName}\"");
         }
 
         public Variable AddInputVariable(string name)
@@ -72,7 +74,7 @@ namespace FuzzyLogic.KnowledgeBase
             return AddVariable(name, false);
         }
 
-        public Variable GetVariable(string name) => Variables.First(v => v.Name.Equals(name));
+        public Variable GetVariable(string name) => Variables.FirstOrDefault(v => v.Name.Equals(name));
 
 
         private static KnowledgeBaseManager _instance;

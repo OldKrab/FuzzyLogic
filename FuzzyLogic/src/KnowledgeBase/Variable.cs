@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using FuzzyLogic.KnowledgeBase.Helpers;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Variable:IPrototype
+    public class Variable:IPrototype
     {
         public Variable(string name, bool isInput)
         {
@@ -20,7 +19,7 @@ namespace FuzzyLogic.KnowledgeBase
         {
             var term = Terms.FirstOrDefault(x => x.Name == termName);
             if (term != null)
-                throw new ArgumentException("This term is already exists!");
+                throw new InvalidOperationException($"Терм {termName} у переменной {Name} уже существует!");
             term = new Term(termName, func);
             Terms.Add(term);
             return term;
@@ -37,7 +36,7 @@ namespace FuzzyLogic.KnowledgeBase
 
         public override string ToString()
         {
-            return (IsInput ? "Input" : "Output") + $" variable \"{Name}\"";
+            return (IsInput ? "Входная" : "Выходная") + $" переменная \"{Name}\"";
         }
 
         public IPrototype Clone()

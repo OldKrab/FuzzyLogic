@@ -3,10 +3,12 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class TrapezoidFunction : IFunction
+    public class TrapezoidFunction : IFunction
     {
         public TrapezoidFunction(double left, double leftCenter, double rightCenter, double right)
         {
+            if (left > leftCenter || leftCenter > rightCenter || rightCenter > right)
+                throw new InvalidOperationException("Координаты трапециевидной функции не должны убывать!");
             Left = left;
             LeftCenter = leftCenter;
             RightCenter = rightCenter;
@@ -15,7 +17,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return $"Trapezoid function with left={Left}, leftCenter={LeftCenter}, rightCenter={RightCenter}, right={Right}";
+            return $"Трапециевидная функция с параметрами left={Left}, leftCenter={LeftCenter}, rightCenter={RightCenter}, right={Right}";
         }
 
         public void Accept(IKnowledgeVisitor visitor)

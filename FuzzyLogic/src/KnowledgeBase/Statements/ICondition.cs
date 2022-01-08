@@ -4,7 +4,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
-    interface ICondition:IPrototype,IVisitableElement
+    public interface ICondition:IPrototype,IVisitableElement
     {
         double Fuzzify(Dictionary<Variable, double> inputValues);
     }

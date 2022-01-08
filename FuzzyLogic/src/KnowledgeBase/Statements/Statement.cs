@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
-     class Statement : IPrototype
+    public  class Statement : IPrototype
     {
         public Statement(Variable variable, Term term)
         {

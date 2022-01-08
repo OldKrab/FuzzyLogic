@@ -4,7 +4,7 @@ using FuzzyLogic.KnowledgeBase.Statements;
 
 namespace FuzzyLogic.KnowledgeBase.Visitor
 {
-    interface IKnowledgeVisitor
+    public interface IKnowledgeVisitor
     {
         void Visit(SingleCondition condition);
         void Visit(ConditionList conditionList);

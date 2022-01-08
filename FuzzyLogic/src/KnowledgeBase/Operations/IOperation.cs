@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    interface IOperation
+    public interface IOperation
     {
         double Evaluate(double x, double y);
     }

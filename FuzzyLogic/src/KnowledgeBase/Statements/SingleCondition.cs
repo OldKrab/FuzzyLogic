@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {
-    class SingleCondition : Statement, ICondition
+   public class SingleCondition : Statement, ICondition
     {
         public SingleCondition(Variable variable, Term term)
             : base(variable, term) { }

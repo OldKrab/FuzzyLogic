@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    interface IFunction: IVisitableElement
+    public interface IFunction: IVisitableElement
     {
         double GetValue(double x);
 

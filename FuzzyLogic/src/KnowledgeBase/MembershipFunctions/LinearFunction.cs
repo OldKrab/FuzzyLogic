@@ -3,9 +3,9 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class LinearFunction : IFunction
+    public class LinearFunction : IFunction
     {
-        public LinearFunction(float a, float b, bool isIncrease)
+        public LinearFunction(double a, double b, bool isIncrease)
         {
             this.Left = a;
             this.Right = b;
@@ -33,7 +33,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return $"Linear function with left={Left}, right={Right}, " + (IsIncrease ? "increase" : "decrease");
+            return (IsIncrease ? "Возрастающая" : "Убывающая") + "линейная функция с параметрами left={Left}, right={Right}";
         }
 
         public double GetMinValue()
@@ -46,8 +46,8 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             return Right;
         }
 
-        public float Left { get; }
-        public float Right { get; }
+        public double Left { get; }
+        public double Right { get; }
         public bool IsIncrease { get; }
 
 

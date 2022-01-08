@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Statements;
 
 namespace FuzzyLogic.KnowledgeBase.Builder

@@ -1,7 +1,10 @@
 ﻿using System;
+using FuzzyLogic.CLI;
+using FuzzyLogic.CLI.Commands;
 using FuzzyLogic.KnowledgeBase;
+using FuzzyLogic.KnowledgeBase.Builder;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
-using FuzzyLogic.KnowledgeBase.RuleBuilder;
+using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic
@@ -11,20 +14,17 @@ namespace FuzzyLogic
         private static void Main()
         {
             var db = KnowledgeBaseManager.GetInstance();
-            db.AddInputVariable("speed");
-            db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
-            db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
-            db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
+            var speed = db.AddInputVariable("speed");
+            var speedSlow = db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
+            var speedMedium = db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
+            var speedFast = db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
 
-            RuleBuilder ruleBuilder = new RuleBuilder();
-
-            RuleParser ruleParser = new RuleParser(db);
-            ruleParser.Parse(ruleBuilder, "IF ( speed slow ) AND speed fast OR ( speed medium ) THEN speed fast");
-
-            var rule = ruleBuilder.GetResult();
-            XmlExportVisitor visitor = new XmlExportVisitor();
-            visitor.Parse(rule);
-            Console.WriteLine(visitor.Xml);
+            var consoleInterface = new ConsoleInterface();
+            consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddTrapezoidTermConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddTriangularTermConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddLinearTermConsoleCommand());
+            consoleInterface.Run();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Visitor
 {
-     interface IVisitableElement
+    public interface IVisitableElement
     {
         void Accept(IKnowledgeVisitor visitor);
     }
