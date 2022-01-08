@@ -40,7 +40,7 @@ namespace FuzzyLogic.CLI.Commands
             var termName = new ConsoleCommandParam
             {
                 Name = TermNameParam,
-                AskForInput = "Введите имя терма",
+                AskForInput = "Введите имя удаляемого терма",
                 Description = "Имя удаляемого терма"
             };
             termName.AddValidator(s => s != "", "Имя терма пустое!");

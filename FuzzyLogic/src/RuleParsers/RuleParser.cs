@@ -30,7 +30,11 @@ namespace FuzzyLogic.RuleParsers
                 else
                 {
                     Variable var = _db.GetVariable(words[i++]);
-                    Term term = var.GetTerm(words[i]);
+                    Term term;
+                    if (i == words.Length)
+                        term = var.GetTerm("");
+                    else
+                        term = var.GetTerm(words[i]);
                     builder.AddCondition(var, term);
                 }
                 i++;

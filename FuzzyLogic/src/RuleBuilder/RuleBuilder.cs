@@ -10,6 +10,8 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
     {
         public IRuleBuilder AddCondition(Variable var, Term term)
         {
+            if (!var.IsInput)
+                throw new InvalidOperationException($"Переменная {var.Name} не является входной!");
             var cond = new SingleCondition(var, term);
             return AddCondition(cond);
         }
@@ -21,7 +23,8 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
             else
             {
                 if (_curOperation == null)
-                    throw new InvalidOperationException("Not specialized operation");
+                    throw new InvalidOperationException($"Не определена операция перед условием!");
+               
                 _curList.AddCondition(cond, _curOperation);
                 _curOperation = null;
             }
@@ -32,7 +35,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
         public IRuleBuilder AddOperation(IOperation operation)
         {
             if (_curList == null || _curOperation != null)
-                throw new InvalidOperationException("Not added condition");
+                throw new InvalidOperationException($"Не определено условие перед операцией!");
             _curOperation = operation;
             return this;
         }
@@ -48,9 +51,9 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
         public IRuleBuilder EndConditionList()
         {
             if (_stack.Count == 0)
-                throw new InvalidOperationException("ConditionList not started");
+                throw new InvalidOperationException("Перед закрывающей скобкой нет открывающей!");
             if (_curList == null)
-                throw new InvalidOperationException("Empty ConditionList");
+                throw new InvalidOperationException("В скобках нет условий!");
 
             var addedList = _curList;
             (_curOperation, _curList) = _stack.Peek();
@@ -61,6 +64,8 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
 
         public IRuleBuilder AddConclusion(Variable var, Term term)
         {
+            if (var.IsInput)
+                throw new InvalidOperationException($"Переменная {var.Name} не является выходной!");
             _conclusions.Add(new Statement(var, term));
             return this;
         }
@@ -77,7 +82,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
         public Rule GetResult()
         {
             if (_stack.Count > 0)
-                throw new InvalidOperationException("ConditionList not ended");
+                throw new InvalidOperationException("После открывающей скобки нет закрывающей!");
             return new Rule(_curList, _conclusions);
         }
 

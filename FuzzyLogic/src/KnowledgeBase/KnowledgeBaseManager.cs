@@ -42,7 +42,7 @@ namespace FuzzyLogic.KnowledgeBase
 
             var variable = new Variable(name, isInput);
             Variables.Add(variable);
-            Console.WriteLine($"Добавлена {variable}");
+            Console.WriteLine($"Добавлена \"{variable}\"");
             return variable;
         }
 

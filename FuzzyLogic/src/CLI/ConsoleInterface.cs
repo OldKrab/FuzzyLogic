@@ -65,9 +65,9 @@ namespace FuzzyLogic.CLI
         private static string[] SplitWithQuotas(string line)
         {
             return line.Split('"')
-                .Select((element, index) => index % 2 == 0  
-                    ? element.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) 
-                    : new string[] { element }) 
+                .Select((element, index) => index % 2 == 0
+                    ? element.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    : new string[] { element })
                 .SelectMany(element => element).ToArray();
         }
 
@@ -95,23 +95,26 @@ namespace FuzzyLogic.CLI
                 }
             });
 
-            var curCommandFromHistory = _commandHistory.Count - 1;
-            if (curCommandFromHistory >= 0)
+            var curCommandFromHistory = _commandHistory.Count;
+            console.AddKeyHandler(ConsoleKey.UpArrow, () =>
             {
-                console.AddKeyHandler(ConsoleKey.UpArrow, () =>
+                if (curCommandFromHistory > 0)
                 {
-                    console.SetCurrentLine(_commandHistory[curCommandFromHistory]);
-                    if (curCommandFromHistory > 0) curCommandFromHistory--;
-                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
-                });
+                    console.SetCurrentLine(_commandHistory[curCommandFromHistory - 1]);
+                    curCommandFromHistory--;
+                }
+                console.RefreshLine();
+            });
 
-                console.AddKeyHandler(ConsoleKey.DownArrow, () =>
+            console.AddKeyHandler(ConsoleKey.DownArrow, () =>
+            {
+                if (curCommandFromHistory < _commandHistory.Count - 1)
                 {
-                    console.SetCurrentLine(_commandHistory[curCommandFromHistory]);
-                    if (curCommandFromHistory < _commandHistory.Count - 1) curCommandFromHistory++;
-                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
-                });
-            }
+                    console.SetCurrentLine(_commandHistory[curCommandFromHistory + 1]);
+                    curCommandFromHistory++;
+                }
+                console.RefreshLine();
+            });
 
             string command = console.ReadLine();
             _commandHistory.Add(command);
