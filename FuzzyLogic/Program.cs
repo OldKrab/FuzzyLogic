@@ -24,6 +24,8 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new RemoveVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new RemoveTermConsoleCommand());
             consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
+            consoleInterface.AddCommandHandler(new GetVariablesConsoleCommand());
+            consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
             consoleInterface.Run();
         }
     }

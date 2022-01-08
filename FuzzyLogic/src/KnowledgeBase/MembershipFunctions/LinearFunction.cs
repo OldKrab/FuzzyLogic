@@ -33,7 +33,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return (IsIncrease ? "Возрастающая" : "Убывающая") + "линейная функция с параметрами left={Left}, right={Right}";
+            return (IsIncrease ? "Возрастающая" : "Убывающая") + $" линейная функция с параметрами left={Left}, right={Right}";
         }
 
         public double GetMinValue()
