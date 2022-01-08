@@ -2,10 +2,7 @@
 using FuzzyLogic.CLI;
 using FuzzyLogic.CLI.Commands;
 using FuzzyLogic.KnowledgeBase;
-using FuzzyLogic.KnowledgeBase.Builder;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
-using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic
 {
@@ -21,11 +18,12 @@ namespace FuzzyLogic
 
             var consoleInterface = new ConsoleInterface();
             consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddTrapezoidTermConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddTriangularTermConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddLinearTermConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddTermTriangularConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddTermLinearConsoleCommand());
             consoleInterface.AddCommandHandler(new RemoveVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new RemoveTermConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
             consoleInterface.Run();
         }
     }

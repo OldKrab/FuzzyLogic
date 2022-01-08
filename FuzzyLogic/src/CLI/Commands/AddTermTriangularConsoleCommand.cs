@@ -4,11 +4,11 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public class AddTriangularTermConsoleCommand : AddTermConsoleCommand
+    public class AddTermTriangularConsoleCommand : AddTermConsoleCommand
     {
         public override string GetName()
         {
-            return "AddTriangularTerm";
+            return "AddTermTriangular";
         }
 
         public override string GetDescription()

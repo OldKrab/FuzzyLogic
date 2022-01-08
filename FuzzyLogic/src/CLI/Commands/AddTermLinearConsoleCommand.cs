@@ -4,11 +4,11 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public class AddLinearTermConsoleCommand : AddTermConsoleCommand
+    public class AddTermLinearConsoleCommand : AddTermConsoleCommand
     {
         public override string GetName()
         {
-            return "AddLinearTerm";
+            return "AddTermLinear";
         }
 
         public override string GetDescription()

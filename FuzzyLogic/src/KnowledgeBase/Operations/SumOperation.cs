@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class SumOperation : IOperation
+    class SumOperation : OrOperation
     {
         public double Evaluate(double x, double y)
         {

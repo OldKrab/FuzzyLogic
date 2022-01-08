@@ -88,6 +88,7 @@ namespace FuzzyLogic.CLI
                 else if (matchingCommands.Count > 1)
                 {
                     Console.WriteLine();
+                    matchingCommands.Sort();
                     foreach (var command in matchingCommands)
                         Console.WriteLine(@$"{command}");
                     Console.Write(_welcomeString + console.GetCurrentLine());

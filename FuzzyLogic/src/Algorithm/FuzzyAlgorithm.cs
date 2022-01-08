@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {
@@ -27,6 +28,7 @@ namespace FuzzyLogic.Algorithm
         protected abstract void Activate();
         protected abstract void Combine();
         protected abstract void Defuzzify();
+        public abstract IRuleParser CreateRuleParser();
 
         protected Dictionary<Variable, double> InputValues;
         protected List<Rule> Rules;

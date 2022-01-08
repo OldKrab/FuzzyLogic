@@ -4,7 +4,7 @@ using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Statements;
 
-namespace FuzzyLogic.KnowledgeBase.Builder
+namespace FuzzyLogic.KnowledgeBase.RuleBuilder
 {
     class RuleBuilder : IRuleBuilder
     {

@@ -2,7 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class MinOperation : IOperation
+    class MinOperation : AndOperation
     {
         public double Evaluate(double x, double y)
         {

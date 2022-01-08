@@ -30,6 +30,11 @@ namespace FuzzyLogic.KnowledgeBase
                 Rules.Select(r => (Rule)r.Clone()).ToList());
         }
 
+        public void AddRule(Rule rule)
+        {
+            Rules.Add(rule);
+        }
+
         public Variable AddVariable(string name, bool isInput)
         {
             if (Variables.Exists(v => v.Name == name))
