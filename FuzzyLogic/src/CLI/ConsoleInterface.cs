@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using FuzzyLogic.CLI.Commands;
 
 namespace FuzzyLogic.CLI
@@ -8,10 +9,6 @@ namespace FuzzyLogic.CLI
 
     public class ConsoleInterface
     {
-        public ConsoleInterface()
-        {
-            AddCommandHandler(new HelpCommand(this));
-        }
         public void Run()
         {
             while (true)
@@ -33,6 +30,10 @@ namespace FuzzyLogic.CLI
                 {
                     Console.WriteLine(@"Ошибка! " + e.Message);
                 }
+                catch (OperationCanceledException e)
+                {
+                    Console.WriteLine("\nОперация прервана.");
+                }
             }
         }
 
@@ -44,8 +45,7 @@ namespace FuzzyLogic.CLI
         public string WaitForCommand(out Dictionary<string, string> parameters)
         {
             parameters = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
-            Console.Write(_welcomeString);
-            var line = Console.ReadLine() ?? "";
+            var line = ReadCommandLine();
             var words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             if (words.Length == 0) return "";
@@ -62,7 +62,32 @@ namespace FuzzyLogic.CLI
             return command;
         }
 
+        public string ReadCommandLine()
+        {
+            Console.Write(_welcomeString);
+            TabAutocomplete autocomplete = new TabAutocomplete(GetCommandsNames());
+            MyConsole console = new MyConsole();
+            console.AddKeyHandler(ConsoleKey.Tab, () =>
+            {
+                var matchingCommands = autocomplete.GetMatchingCommands(console.GetCurrentLine());
+                if (matchingCommands.Count == 1)
+                {
+                    console.SetCurrentLine(matchingCommands[0]);
+                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
+                }
+                else if (matchingCommands.Count > 1)
+                {
+                    Console.WriteLine();
+                    foreach (var command in matchingCommands)
+                        Console.WriteLine(@$"{command}");
+                    Console.Write(_welcomeString + console.GetCurrentLine());
+                }
+            });
+            return console.ReadLine();
+        }
+
         public List<ConsoleCommand> GetCommands() => _commands.Values.ToList();
+        public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
         private Dictionary<string, ConsoleCommand> _commands = new Dictionary<string, ConsoleCommand>(StringComparer.InvariantCultureIgnoreCase);
         private string _welcomeString = "> ";
