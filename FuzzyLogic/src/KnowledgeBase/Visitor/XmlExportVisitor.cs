@@ -16,6 +16,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         public void Visit(KnowledgeBaseManager db)
         {
+            AppendString("<KnowledgeBase>");
             AppendString("<Variables>");
             Tab();
             foreach (var variable in db.Variables)
@@ -32,6 +33,8 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             }
             UnTab();
             AppendString("</Rules>");
+            AppendString("</KnowledgeBase>");
+
         }
         public void Visit(Variable variable)
         {
@@ -61,7 +64,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             Tab();
             term.Function.Accept(this);
             UnTab();
-            AppendString("<Function>");
+            AppendString("</Function>");
             UnTab();
             AppendString("</Term>");
         }
@@ -169,7 +172,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         public void Visit(Statement statement)
         {
-            AppendString($"<Name>{statement.Variable.Name}</Name>");
+            AppendString($"<Var>{statement.Variable.Name}</Var>");
             AppendString($"<Term>{statement.Term.Name}</Term>");
         }
 

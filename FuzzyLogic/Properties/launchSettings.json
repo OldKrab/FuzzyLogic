@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FuzzyLogic": {
+      "commandName": "Project",
+      "workingDirectory": "."
+    }
+  }
+}
