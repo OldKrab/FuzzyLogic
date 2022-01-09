@@ -2,7 +2,7 @@
 {
     interface IOperationFactory
     {
-        AndOperation CreateAndOperation();
-        OrOperation CreateOrOperation();
+        IAndOperation CreateAndOperation();
+        IOrOperation CreateOrOperation();
     }
 }

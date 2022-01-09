@@ -114,6 +114,26 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
                 "}");
         }
 
+        public void Visit(MinOperation op)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Visit(MaxOperation op)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Visit(ProdOperation op)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Visit(SumOperation op)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Parse(Statement statement)
         {
             _json.Append($@"{{""variable"":""{statement.Variable.Name}"", ""function"":");

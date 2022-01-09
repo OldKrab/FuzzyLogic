@@ -11,5 +11,9 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         void Visit(TrapezoidFunction trapezoidFunc);
         void Visit(TriangularFunction triangularFunc);
         void Visit(LinearFunction triangularFunction);
+        void Visit(MinOperation op);
+        void Visit(MaxOperation op);
+        void Visit(ProdOperation op);
+        void Visit(SumOperation op);
     }
 }

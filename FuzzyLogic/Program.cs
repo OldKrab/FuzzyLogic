@@ -3,6 +3,9 @@ using FuzzyLogic.CLI;
 using FuzzyLogic.CLI.Commands;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
+using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.KnowledgeBase.RuleBuilder;
+using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic
 {
@@ -11,11 +14,22 @@ namespace FuzzyLogic
         private static void Main()
         {
             var db = KnowledgeBaseManager.GetInstance();
-            var speed = db.AddInputVariable("speed");
-            var speedSlow = db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
-            var speedMedium = db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
-            var speedFast = db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
+            db.AddInputVariable("speed");
+            db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
+            db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
+            db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
 
+            db.AddOutputVariable("control");
+            db.AddTermToVariable("control", "negative", new LinearFunction(-6, -1, false));
+            db.AddTermToVariable("control", "zero", new TriangularFunction(-3, 0, 3));
+            db.AddTermToVariable("control", "positive", new LinearFunction(1, 6, true));
+
+            RuleParser parser = new RuleParser();
+            parser.OperationFactory = new MaxMinOperationFactory();
+            var builder = new RuleBuilder();
+            parser.Parse(builder,"if ( speed fast and ( speed medium ) ) then control negative control positive");
+            db.AddRule(builder.GetResult());
+            
             var consoleInterface = new ConsoleInterface();
             consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
@@ -26,6 +40,7 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
             consoleInterface.AddCommandHandler(new GetVariablesConsoleCommand());
             consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
+            consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());
             consoleInterface.Run();
         }
     }

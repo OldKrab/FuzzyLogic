@@ -1,8 +1,9 @@
 ﻿using System;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class MaxOperation : OrOperation
+   public  class MaxOperation : IOrOperation
     {
         public double Evaluate(double x, double y)
         {
@@ -11,6 +12,11 @@ namespace FuzzyLogic.KnowledgeBase.Operations
         public override string ToString()
         {
             return "Max";
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

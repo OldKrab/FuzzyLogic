@@ -1,6 +1,8 @@
-﻿namespace FuzzyLogic.KnowledgeBase.Operations
+﻿using FuzzyLogic.KnowledgeBase.Visitor;
+
+namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class ProdOperation : AndOperation
+    public class ProdOperation : IAndOperation
     {
         public double Evaluate(double x, double y)
         {
@@ -9,6 +11,11 @@
         public override string ToString()
         {
             return "Prod";
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

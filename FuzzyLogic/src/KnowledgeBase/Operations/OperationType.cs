@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-     enum OperationType
+    enum OperationType
     {
         Or, And
     }

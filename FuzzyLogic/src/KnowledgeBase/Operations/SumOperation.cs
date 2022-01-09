@@ -1,6 +1,8 @@
-﻿namespace FuzzyLogic.KnowledgeBase.Operations
+﻿using FuzzyLogic.KnowledgeBase.Visitor;
+
+namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    class SumOperation : OrOperation
+   public class SumOperation : IOrOperation
     {
         public double Evaluate(double x, double y)
         {
@@ -10,6 +12,11 @@
         public override string ToString()
         {
             return "Sum";
+        }
+
+        public void Accept(IKnowledgeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

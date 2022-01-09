@@ -2,12 +2,12 @@
 {
     class MaxMinOperationFactory : IOperationFactory
     {
-        public AndOperation CreateAndOperation()
+        public IAndOperation CreateAndOperation()
         {
             return new MinOperation();
         }
 
-        public OrOperation CreateOrOperation()
+        public IOrOperation CreateOrOperation()
         {
             return new MaxOperation();
         }

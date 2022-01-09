@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FuzzyLogic.CLI.Commands;
+using FuzzyLogic.Exceptions;
 
 namespace FuzzyLogic.CLI
 {
@@ -15,15 +16,7 @@ namespace FuzzyLogic.CLI
                 try
                 {
                     var command = WaitForCommand(out var parameters);
-                    if (command == "")
-                        continue;
-                    if (command.Equals(_exitCommand, StringComparison.OrdinalIgnoreCase))
-                        return;
-
-                    if (!_commands.ContainsKey(command))
-                        throw new InvalidOperationException($"Неизвестная команда {command}!");
-
-                    _commands[command].Execute(parameters);
+                    ExecuteCommand(command, parameters);
                 }
                 catch (InvalidOperationException e)
                 {
@@ -33,12 +26,28 @@ namespace FuzzyLogic.CLI
                 {
                     Console.WriteLine("\nОперация прервана.");
                 }
+                catch (ConsoleExitException)
+                {
+                    return;
+                }
             }
         }
 
         public void AddCommandHandler(ConsoleCommand command)
         {
             _commands.Add(command.GetName(), command);
+        }
+
+        private void ExecuteCommand(string command, Dictionary<string, string> parameters)
+        {
+            if (command == "")
+                return;
+            if (command.Equals(_exitCommand, StringComparison.OrdinalIgnoreCase))
+                throw new ConsoleExitException();
+            if (!_commands.ContainsKey(command))
+                throw new InvalidOperationException($"Неизвестная команда {command}!");
+
+            _commands[command].Execute(parameters);
         }
 
         private string WaitForCommand(out Dictionary<string, string> parameters)

@@ -2,12 +2,12 @@
 {
     class SumProdOperationFactory : IOperationFactory
     {
-        public AndOperation CreateAndOperation()
+        public IAndOperation CreateAndOperation()
         {
             return new ProdOperation();
         }
 
-        public OrOperation CreateOrOperation()
+        public IOrOperation CreateOrOperation()
         {
             return new SumOperation();
         }

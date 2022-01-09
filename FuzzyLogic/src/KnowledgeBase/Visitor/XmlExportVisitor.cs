@@ -106,7 +106,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             conditionList.Conditions[0].Accept(this);
             for (int i = 1; i < conditionList.Conditions.Count; i++)
             {
-                AppendString($"<Operation>{conditionList.Operations[i - 1]}</Operation>");
+                conditionList.Operations[i-1].Accept(this);
                 conditionList.Conditions[i].Accept(this);
             }
             UnTab();
@@ -145,6 +145,26 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             AppendString($"<IsIncrease>{linearFunc.IsIncrease}</IsIncrease>");
             UnTab();
             AppendString("</LinearFunction>");
+        }
+
+        public void Visit(MinOperation op)
+        {
+            AppendString($"<Operation>Min</Operation>");
+        }
+
+        public void Visit(MaxOperation op)
+        {
+            AppendString($"<Operation>Max</Operation>");
+        }
+
+        public void Visit(ProdOperation op)
+        {
+            AppendString($"<Operation>Prod</Operation>");
+        }
+
+        public void Visit(SumOperation op)
+        {
+            AppendString($"<Operation>Sum</Operation>");
         }
 
         public void Parse(Statement statement)
