@@ -73,7 +73,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
         public IRuleBuilder Clear()
         {
             _stack.Clear();
-            _conclusions.Clear();
+            _conclusions = new List<Statement>();
             _curList = null;
             _curOperation = null;
             return this;

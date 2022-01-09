@@ -32,7 +32,7 @@ namespace FuzzyLogic.CLI.Commands
             db.AddRule(builder.GetResult());
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             var parameters = new List<ConsoleCommandParam>();
             var varName = new ConsoleCommandParam

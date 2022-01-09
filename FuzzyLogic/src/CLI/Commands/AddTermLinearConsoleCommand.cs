@@ -24,9 +24,9 @@ namespace FuzzyLogic.CLI.Commands
             return new LinearFunction(left, right, isIncrease);
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
-            var parameters = base.CreateParams();
+            var parameters = base.GetParams();
 
             Func<string, bool> numberValidator = x => double.TryParse(x, out _);
             string errorMsg = "Не число!";

@@ -27,7 +27,7 @@ namespace FuzzyLogic.CLI.Commands
             }
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             var parameters = new List<ConsoleCommandParam>();
             var varName = new ConsoleCommandParam

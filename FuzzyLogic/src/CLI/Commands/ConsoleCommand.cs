@@ -7,11 +7,6 @@ namespace FuzzyLogic.CLI.Commands
 {
     public abstract class ConsoleCommand
     {
-        protected ConsoleCommand()
-        {
-            Params = CreateParams();
-        }
-
         public void Execute(Dictionary<string, string> parameters)
         {
             if (CheckForHelpParams(parameters))
@@ -31,13 +26,12 @@ namespace FuzzyLogic.CLI.Commands
         public abstract string GetName();
         public abstract string GetDescription();
 
-        public List<ConsoleCommandParam> Params { get; private set; }
 
         protected virtual void AdditionallyCheckParams() { }
 
         protected abstract void ExecuteWithValidParams(Dictionary<string, string> parameters);
 
-        protected abstract List<ConsoleCommandParam> CreateParams();
+        protected abstract List<ConsoleCommandParam> GetParams();
 
         private bool CheckForHelpParams(Dictionary<string, string> parameters)
         {
@@ -50,16 +44,18 @@ namespace FuzzyLogic.CLI.Commands
             Console.WriteLine(@"Описание:");
             Console.WriteLine($@"{GetDescription()}");
             Console.WriteLine(@"Параметры:");
-            if (Params.Count == 0)
+            var parameters = GetParams();
+            if (parameters.Count == 0)
                 Console.WriteLine("Нет параметров.");
             else
-                foreach (var param in Params)
+                foreach (var param in parameters)
                     Console.WriteLine(@$"[{param.Name}] - {param.Description}");
         }
 
         private void CheckForNotEnteredParams(Dictionary<string, string> parameters)
         {
-            foreach (var param in Params.Where(param => !parameters.ContainsKey(param.Name.ToLower())))
+            var @params = GetParams();
+            foreach (var param in @params.Where(param => !parameters.ContainsKey(param.Name.ToLower())))
             {
                 Console.Write($@"[{param.Name}] {param.AskForInput}: ");
 
@@ -73,15 +69,17 @@ namespace FuzzyLogic.CLI.Commands
 
         private void CheckForValidParams(Dictionary<string, string> parameters)
         {
-            foreach (var param in Params)
+            var @params = GetParams();
+            foreach (var param in @params)
                 if (!param.IsValueValid(parameters[param.Name], out var errorMessage))
                     throw new InvalidOperationException(errorMessage);
         }
 
         private void CheckForUnknownEnteredParams(Dictionary<string, string> parameters)
         {
+            var @params = GetParams();
             foreach (var enteredParam in parameters.Keys)
-                if (!Params.Exists(p => p.Name.Equals(enteredParam, StringComparison.InvariantCultureIgnoreCase)))
+                if (!@params.Exists(p => p.Name.Equals(enteredParam, StringComparison.InvariantCultureIgnoreCase)))
                     throw new InvalidOperationException($"Неизвестный параметр {enteredParam}");
         }
 

@@ -25,10 +25,11 @@ namespace FuzzyLogic.CLI.Commands
            {
                printer.Visit(rule);
                Console.WriteLine(printer.Text);
+               printer.Clear();
            }
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             return new List<ConsoleCommandParam>();
         }

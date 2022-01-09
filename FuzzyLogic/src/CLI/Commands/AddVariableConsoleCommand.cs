@@ -22,7 +22,7 @@ namespace FuzzyLogic.CLI.Commands
             db.AddVariable(parameters[_nameParam], isInput);
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             List<ConsoleCommandParam> parameters = new List<ConsoleCommandParam>();
            

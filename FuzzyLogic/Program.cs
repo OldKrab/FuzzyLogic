@@ -15,9 +15,9 @@ namespace FuzzyLogic
         {
             var db = KnowledgeBaseManager.GetInstance();
             db.AddInputVariable("speed");
-            db.AddTermToVariable("speed", "slow", new LinearFunction(10, 30, false));
+            db.AddTermToVariable("speed", "slow", new LinearFunction(0, 30, false));
             db.AddTermToVariable("speed", "medium", new TriangularFunction(20, 30, 40));
-            db.AddTermToVariable("speed", "fast", new LinearFunction(40, 60, true));
+            db.AddTermToVariable("speed", "fast", new LinearFunction(30, 60, true));
 
             db.AddOutputVariable("control");
             db.AddTermToVariable("control", "negative", new LinearFunction(-6, -1, false));
@@ -27,7 +27,11 @@ namespace FuzzyLogic
             RuleParser parser = new RuleParser();
             parser.OperationFactory = new MaxMinOperationFactory();
             var builder = new RuleBuilder();
-            parser.Parse(builder,"IF (speed fast AND (speed medium)) THEN control negative control positive");
+            parser.Parse(builder,"IF speed fast THEN control negative");
+            db.AddRule(builder.GetResult());
+            parser.Parse(builder.Clear(),"IF speed medium THEN control zero");
+            db.AddRule(builder.GetResult());
+            parser.Parse(builder.Clear(),"IF speed slow THEN control positive");
             db.AddRule(builder.GetResult());
             
             var consoleInterface = new ConsoleInterface();
@@ -41,6 +45,7 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new GetVariablesConsoleCommand());
             consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
             consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());
+            consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
             consoleInterface.Run();
         }
     }

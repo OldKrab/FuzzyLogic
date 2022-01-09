@@ -117,9 +117,11 @@ namespace FuzzyLogic.CLI
 
             console.AddKeyHandler(ConsoleKey.DownArrow, () =>
             {
-                if (curCommandFromHistory < _commandHistory.Count - 1)
+                if (curCommandFromHistory <= _commandHistory.Count - 1)
                 {
-                    console.SetCurrentLine(_commandHistory[curCommandFromHistory + 1]);
+                    console.SetCurrentLine(curCommandFromHistory == _commandHistory.Count - 1
+                        ? ""
+                        : _commandHistory[curCommandFromHistory + 1]);
                     curCommandFromHistory++;
                 }
                 console.RefreshLine();

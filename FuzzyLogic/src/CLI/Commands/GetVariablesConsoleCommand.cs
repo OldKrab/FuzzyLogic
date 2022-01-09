@@ -35,7 +35,7 @@ namespace FuzzyLogic.CLI.Commands
             }
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             return new List<ConsoleCommandParam>();
         }

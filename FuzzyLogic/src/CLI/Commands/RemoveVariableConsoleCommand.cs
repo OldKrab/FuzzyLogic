@@ -21,7 +21,7 @@ namespace FuzzyLogic.CLI.Commands
             db.RemoveVariable(parameters[_nameParam]);
         }
 
-        protected override List<ConsoleCommandParam> CreateParams()
+        protected override List<ConsoleCommandParam> GetParams()
         {
             List<ConsoleCommandParam> parameters = new List<ConsoleCommandParam>();
            
