@@ -14,13 +14,13 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         public void Clear() => _xml.Clear();
 
 
-        public void Parse(KnowledgeBaseManager db)
+        public void Visit(KnowledgeBaseManager db)
         {
             AppendString("<Variables>");
             Tab();
             foreach (var variable in db.Variables)
             {
-                Parse(variable);
+                Visit(variable);
             }
             UnTab();
             AppendString("</Variables>");
@@ -28,12 +28,12 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             Tab();
             foreach (var rule in db.Rules)
             {
-                Parse(rule);
+                Visit(rule);
             }
             UnTab();
             AppendString("</Rules>");
         }
-        public void Parse(Variable variable)
+        public void Visit(Variable variable)
         {
             AppendString("<Variable>"); 
             Tab();
@@ -44,14 +44,14 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             Tab();
             foreach (var term in variable.Terms)
             {
-                Parse(term);
+                Visit(term);
             }
             UnTab();
             AppendString("</Terms>");
             UnTab(); 
             AppendString("</Variable>");
         }
-        public void Parse(Term term)
+        public void Visit(Term term)
         {
             AppendString("<Term>");
             Tab();
@@ -66,7 +66,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             AppendString("</Term>");
         }
 
-        public void Parse(Rule rule)
+        public void Visit(Rule rule)
         {
             AppendString("<Rule>");
             Tab();
@@ -81,7 +81,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             foreach (var conclusion in rule.Conclusions)
             {
                 AppendString("<Conclusion>");
-                Parse(conclusion);
+                Visit(conclusion);
                 AppendString("</Conclusion>");
             }
             UnTab();
@@ -94,7 +94,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         {
             AppendString("<SingleCondition>");
             Tab();
-            Parse(condition);
+            Visit((Statement) condition);
             UnTab();
             AppendString("</SingleCondition>");
         }
@@ -167,7 +167,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             AppendString($"<Operation>Sum</Operation>");
         }
 
-        public void Parse(Statement statement)
+        public void Visit(Statement statement)
         {
             AppendString($"<Name>{statement.Variable.Name}</Name>");
             AppendString($"<Term>{statement.Term.Name}</Term>");

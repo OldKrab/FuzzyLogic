@@ -27,7 +27,7 @@ namespace FuzzyLogic
             RuleParser parser = new RuleParser();
             parser.OperationFactory = new MaxMinOperationFactory();
             var builder = new RuleBuilder();
-            parser.Parse(builder,"if ( speed fast and ( speed medium ) ) then control negative control positive");
+            parser.Parse(builder,"IF (speed fast AND (speed medium)) THEN control negative control positive");
             db.AddRule(builder.GetResult());
             
             var consoleInterface = new ConsoleInterface();

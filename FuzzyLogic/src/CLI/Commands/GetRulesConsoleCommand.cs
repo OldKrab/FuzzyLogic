@@ -23,7 +23,7 @@ namespace FuzzyLogic.CLI.Commands
            var printer = new ConsoleRuleExportVisitor();
            foreach (var rule in db.Rules)
            {
-               printer.Parse(rule);
+               printer.Visit(rule);
                Console.WriteLine(printer.Text);
            }
         }

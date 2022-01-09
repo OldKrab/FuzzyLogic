@@ -10,33 +10,33 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
     {
         public String Json => _json.ToString();
 
-        public void Parse(KnowledgeBaseManager db)
+        public void Visit(KnowledgeBaseManager db)
         {
             _json.Append("[");
             if (db.Rules.Count > 0)
-                Parse(db.Rules[0]);
+                Visit(db.Rules[0]);
             for (var i = 1; i < db.Rules.Count; i++)
             {
                 _json.Append(", ");
                 var rule = db.Rules[i];
-               Parse(rule);
+               Visit(rule);
             }
 
             _json.Append("]");
         }
 
-        public void Parse(Rule rule)
+        public void Visit(Rule rule)
         {
             _json.Append("{\"condition\":");
             rule.Condition.Accept(this);
             _json.Append(", \"conclusions\":[");
             if (rule.Conclusions.Count > 0)
-                Parse( rule.Conclusions[0]);
+                Visit( rule.Conclusions[0]);
             for (var i = 1; i < rule.Conclusions.Count; i++)
             {
                 _json.Append(",");
                 var conclusion = rule.Conclusions[i];
-                Parse(conclusion);
+                Visit(conclusion);
             }
 
             _json.Append("]}");
@@ -49,7 +49,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
                 "{" +
                     "\"type\":\"SingleCondition\", " +
                     "\"value\":");
-            Parse((Statement)condition);
+            Visit((Statement)condition);
             _json.Append(
                 "}");
         }
@@ -134,7 +134,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             throw new NotImplementedException();
         }
 
-        public void Parse(Statement statement)
+        public void Visit(Statement statement)
         {
             _json.Append($@"{{""variable"":""{statement.Variable.Name}"", ""function"":");
             statement.Term.Function.Accept(this);

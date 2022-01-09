@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.RuleBuilder;
@@ -15,7 +17,7 @@ namespace FuzzyLogic.RuleParsers
 
         public void Parse(IRuleBuilder builder, string rule)
         {
-            var words = rule.Split();
+            var words = SplitRule(rule);
             int i = 1;
             while (i < words.Length && words[i].ToLower() != "then")
             {
@@ -49,6 +51,18 @@ namespace FuzzyLogic.RuleParsers
         }
 
         public IOperationFactory OperationFactory { get; set; }
+
+
+        private string[] SplitRule(string rule)
+        {
+            var words = rule.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            return words
+                .Select(word => word.Split('('))
+                .SelectMany(splitWords => splitWords.Select(w => w == "" ? "(" : w))
+                .Select(word => word.Split(')'))
+                .SelectMany(splitWords => splitWords.Select(w => w == "" ? ")" : w))
+                .ToArray();
+        }
 
         private KnowledgeBaseManager _db;
     }

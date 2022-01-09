@@ -13,7 +13,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         public void Clear() => _text.Clear();
 
 
-        public void Parse(Rule rule)
+        public void Visit(Rule rule)
         {
             AppendString("IF ");
             Visit(rule.Condition, false);
@@ -21,12 +21,12 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
             foreach (var conclusion in rule.Conclusions)
             {
-                Parse(conclusion);
+                Visit(conclusion);
                 AppendString(" ");
             }
         }
 
-        public void Visit(SingleCondition condition) => Parse(condition);
+        public void Visit(SingleCondition condition) => Visit((Statement) condition);
         public void Visit(ConditionList conditionList)
         {
             Visit(conditionList, true);
@@ -50,19 +50,19 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         public void Visit(LinearFunction linearFunc) { }
 
-        public void Visit(MinOperation op) => Parse(op);
+        public void Visit(MinOperation op) => Visit((IAndOperation) op);
 
-        public void Visit(MaxOperation op) => Parse(op);
+        public void Visit(MaxOperation op) => Visit((IOrOperation) op);
 
-        public void Visit(ProdOperation op) => Parse(op);
+        public void Visit(ProdOperation op) => Visit((IAndOperation) op);
 
-        public void Visit(SumOperation op) => Parse(op);
+        public void Visit(SumOperation op) => Visit((IOrOperation) op);
 
-        public void Parse(Statement statement) => AppendString($"{statement.Variable.Name} {statement.Term.Name}");
+        public void Visit(Statement statement) => AppendString($"{statement.Variable.Name} {statement.Term.Name}");
 
-        public void Parse(IOrOperation op) => AppendString($" OR ");
+        public void Visit(IOrOperation op) => AppendString($" OR ");
 
-        public void Parse(IAndOperation op) => AppendString($" AND ");
+        public void Visit(IAndOperation op) => AppendString($" AND ");
 
         private void AppendString(string str) => _text.Append(str);
 
