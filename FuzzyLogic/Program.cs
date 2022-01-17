@@ -35,16 +35,17 @@ namespace FuzzyLogic
             //File.WriteAllText(file, export.Xml);
 
             KnowledgeBaseXmlReader reader = new KnowledgeBaseXmlReader();
-            reader.Read("KnowledgeBaseFiles/test.kb");
+            FuzzySystem.GetInstance().KnowledgeBase = reader.Read("KnowledgeBaseFiles/test.kb");
 
             var consoleInterface = new ConsoleInterface();
             consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermTriangularConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermLinearConsoleCommand());
+            consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
             consoleInterface.AddCommandHandler(new RemoveVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new RemoveTermConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
+            consoleInterface.AddCommandHandler(new RemoveRuleConsoleCommand());
             consoleInterface.AddCommandHandler(new GetVariablesConsoleCommand());
             consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
             consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());

@@ -10,9 +10,9 @@ namespace FuzzyLogic.KnowledgeBase.Reader
 {
     public class KnowledgeBaseXmlReader
     {
-        public void Read(string name)
+        public KnowledgeBaseManager Read(string name)
         {
-            var db = FuzzySystem.GetInstance().KnowledgeBase;
+            var db = new KnowledgeBaseManager();
             var file = new FileStream(name, FileMode.Open);
             var settings = new XmlReaderSettings
             {
@@ -21,6 +21,7 @@ namespace FuzzyLogic.KnowledgeBase.Reader
             var reader = XmlReader.Create(file, settings);
             ReadVariables(reader, db);
             ReadRules(reader, db);
+            return db;
         }
 
         private void ReadRules(XmlReader reader, KnowledgeBaseManager db)

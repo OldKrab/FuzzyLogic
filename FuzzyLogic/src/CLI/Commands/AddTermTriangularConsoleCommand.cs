@@ -18,9 +18,9 @@ namespace FuzzyLogic.CLI.Commands
         protected override IFunction GetMembershipFunction(Dictionary<string, string> parameters)
         {
             var left = double.Parse(parameters[leftParam]);
-            var сenter = double.Parse(parameters[centerParam]);
+            var center = double.Parse(parameters[centerParam]);
             var right = double.Parse(parameters[rightParam]);
-            return new TriangularFunction(left, сenter, right);
+            return new TriangularFunction(left, center, right);
         }
 
         protected override List<ConsoleCommandParam> GetParams()

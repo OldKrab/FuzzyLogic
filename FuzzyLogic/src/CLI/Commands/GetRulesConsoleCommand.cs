@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.CLI.Commands
@@ -19,10 +20,10 @@ namespace FuzzyLogic.CLI.Commands
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
            var printer = new ConsoleRuleExportVisitor();
-           foreach (var rule in FuzzySystem.GetInstance().KnowledgeBase.Rules)
+           foreach (var (rule, i) in FuzzySystem.GetInstance().KnowledgeBase.Rules.Select((r, i) => (r,i)))
            {
                printer.Visit(rule);
-               Console.WriteLine(printer.Text);
+               Console.WriteLine($"{i+1}) {printer.Text}");
                printer.Clear();
            }
         }

@@ -32,10 +32,7 @@ namespace FuzzyLogic.KnowledgeBase
                 Rules.Select(r => (Rule)r.Clone()).ToList());
         }
 
-        public void AddRule(Rule rule)
-        {
-            Rules.Add(rule);
-        }
+        public void AddRule(Rule rule) => Rules.Add(rule);
 
         public Variable AddVariable(string name, bool isInput)
         {
@@ -47,6 +44,10 @@ namespace FuzzyLogic.KnowledgeBase
             Console.WriteLine($"Добавлена \"{variable}\"");
             return variable;
         }
+
+        public Variable AddInputVariable(string name) => AddVariable(name, true);
+
+        public Variable AddOutputVariable(string name) => AddVariable(name, false);
 
         public Term AddTermToVariable(string varName, string termName, IFunction termFunction)
         {
@@ -62,6 +63,7 @@ namespace FuzzyLogic.KnowledgeBase
             Variables.Remove(variable);
             Console.WriteLine($"Удалена переменная \"{name}\"");
         }
+       
         public void RemoveTermFromVariable(string varName, string termName)
         {
             var variable = GetVariable(varName);
@@ -69,16 +71,8 @@ namespace FuzzyLogic.KnowledgeBase
             Console.WriteLine($"У \"{variable}\" удален \"{termName}\"");
         }
 
-        public Variable AddInputVariable(string name)
-        {
-            return AddVariable(name, true);
-        }
-
-        public Variable AddOutputVariable(string name)
-        {
-            return AddVariable(name, false);
-        }
-
+        public void RemoveRule(Rule rule) => Rules.Remove(rule);
+       
         public Variable GetVariable(string name)
         {
             var variable = Variables.FirstOrDefault(v => v.Name.Equals(name));

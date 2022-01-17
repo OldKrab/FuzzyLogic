@@ -4,8 +4,8 @@ using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator;
 using FuzzyLogic.KnowledgeBase.Operations;
+using FuzzyLogic.KnowledgeBase.RuleParsers;
 using FuzzyLogic.KnowledgeBase.Statements;
-using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {
