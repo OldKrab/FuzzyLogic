@@ -45,7 +45,8 @@ namespace FuzzyLogic.CLI.Commands
             {
                 Name = _operationsParam,
                 AskForInput = "Выберите тип операций AND и OR (min/max (M) или prod/sum (P))",
-                Description = "Тип операций AND и OR (min/max (M) или prod/sum (P))"
+                Description = "Тип операций AND и OR (min/max (M) или prod/sum (P))",
+                DefaultValue = "M"
             };
             operators.AddValidator(s => s.ToLower() == "m" || s.ToLower() == "p", "Тип операций ожидался M или P!");
             parameters.Add(operators);

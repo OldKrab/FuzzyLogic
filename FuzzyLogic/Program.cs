@@ -1,6 +1,5 @@
 ﻿using FuzzyLogic.CLI;
 using FuzzyLogic.CLI.Commands;
-using FuzzyLogic.KnowledgeBase.Reader;
 
 namespace FuzzyLogic
 {
@@ -48,6 +47,7 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());
             consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
             consoleInterface.AddCommandHandler(new LoadKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommandHandler(new SaveKnowledgeBaseConsoleCommand());
             consoleInterface.Run();
         }
     }

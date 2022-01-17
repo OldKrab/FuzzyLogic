@@ -56,6 +56,12 @@ namespace FuzzyLogic.CLI.Commands
             var @params = GetParams();
             foreach (var param in @params.Where(param => !parameters.ContainsKey(param.Name.ToLower())))
             {
+                if (param.HasDefaultValue)
+                {
+                    parameters.Add(param.Name, param.DefaultValue);
+                    continue;
+                }
+
                 Console.Write($@"[{param.Name}] {param.AskForInput}: ");
 
                 MyConsole console = new MyConsole();

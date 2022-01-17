@@ -13,7 +13,7 @@
   <ItemGroup>
     <Folder Include="files\" />
     <Folder Include="src\Exceptions\" />
-    <Folder Include="src\KnowledgeBase\Reader\" />
+    <Folder Include="src\KnowledgeBase\Readers\" />
   </ItemGroup>
 
 </Project>

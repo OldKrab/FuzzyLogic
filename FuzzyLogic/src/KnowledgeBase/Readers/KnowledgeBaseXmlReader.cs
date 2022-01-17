@@ -6,7 +6,7 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Statements;
 
-namespace FuzzyLogic.KnowledgeBase.Reader
+namespace FuzzyLogic.KnowledgeBase.Readers
 {
     public class KnowledgeBaseXmlReader
     {
@@ -19,8 +19,17 @@ namespace FuzzyLogic.KnowledgeBase.Reader
                 IgnoreWhitespace = true
             };
             var reader = XmlReader.Create(file, settings);
-            ReadVariables(reader, db);
-            ReadRules(reader, db);
+            try
+            {
+                ReadVariables(reader, db);
+                ReadRules(reader, db);
+            }
+            catch (XmlException ex)
+            {
+                throw new InvalidOperationException(
+                    $"Произошла ошибка во время чтения XML в файле {name}:\n {ex.Message}");
+            }
+
             return db;
         }
 

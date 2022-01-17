@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using FuzzyLogic.KnowledgeBase;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -12,6 +14,13 @@ namespace FuzzyLogic.CLI.Commands
         public override string GetDescription()
         {
             return "Удаляет переменную с заданным именем";
+        }
+
+        protected override void CheckRequirementsBeforeExecute()
+        {
+            KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
+            if (db.Variables.Count == 0)
+                throw new InvalidOperationException("Нет переменных.");
         }
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)

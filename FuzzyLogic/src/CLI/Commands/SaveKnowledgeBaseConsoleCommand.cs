@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using FuzzyLogic.KnowledgeBase.Readers;
+using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public class LoadKnowledgeBaseConsoleCommand : ConsoleCommand
+    public class SaveKnowledgeBaseConsoleCommand : ConsoleCommand
     {
         public override string GetName()
         {
-            return "LoadKnowledgeBase";
+            return "SaveKnowledgeBase";
         }
 
         public override string GetDescription()
         {
-            return "Загружает базу знаний из файла";
+            return "Сохраняет базу знаний в файл";
         }
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            var reader = new KnowledgeBaseXmlReader();
-            FuzzySystem.GetInstance().KnowledgeBase = reader.Read(parameters[_fileParam]);
+            XmlExportVisitor exportVisitor = new XmlExportVisitor();
+            exportVisitor.Visit(FuzzySystem.GetInstance().KnowledgeBase);
+            File.WriteAllText(parameters[_fileParam], exportVisitor.Xml);
         }
 
         protected override List<ConsoleCommandParam> GetParams()
@@ -30,9 +31,8 @@ namespace FuzzyLogic.CLI.Commands
             {
                 Name = _fileParam,
                 AskForInput = "Введите имя файла",
-                Description = "Имя файла, где хранится база знаний"
+                Description = "Имя файла, куда сохранится база знаний"
             };
-            param.AddValidator(File.Exists, "Файла с таким именем не существует!");
             parameters.Add(param);
             return parameters;
         }

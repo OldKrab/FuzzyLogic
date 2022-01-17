@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.CLI.Commands
@@ -16,6 +17,13 @@ namespace FuzzyLogic.CLI.Commands
         public override string GetDescription()
         {
             return "Удаляет указанное правило";
+        }
+
+        protected override void CheckRequirementsBeforeExecute()
+        {
+            KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
+            if (db.Rules.Count == 0)
+                throw new InvalidOperationException("Нет правил.");
         }
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
