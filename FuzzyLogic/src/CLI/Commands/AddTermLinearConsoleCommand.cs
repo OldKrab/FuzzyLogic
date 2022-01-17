@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
@@ -28,7 +27,8 @@ namespace FuzzyLogic.CLI.Commands
         {
             var parameters = base.GetParams();
 
-            Func<string, bool> numberValidator = x => double.TryParse(x, out _);
+            bool NumberValidator(string x) => double.TryParse(x, out _);
+
             string errorMsg = "Не число!";
 
             var left = new ConsoleCommandParam
@@ -37,7 +37,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату левой точки",
                 Description = "Координата левой точки линейной функции"
             };
-            left.AddValidator(numberValidator, errorMsg);
+            left.AddValidator(NumberValidator, errorMsg);
             parameters.Add(left);
 
             var right = new ConsoleCommandParam
@@ -46,7 +46,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату правой точки",
                 Description = "Координата правой точки линейной функции"
             };
-            right.AddValidator(numberValidator, errorMsg);
+            right.AddValidator(NumberValidator, errorMsg);
             parameters.Add(right);
 
             var monotony = new ConsoleCommandParam

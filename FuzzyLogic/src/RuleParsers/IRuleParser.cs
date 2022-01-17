@@ -1,9 +1,9 @@
 ﻿using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.KnowledgeBase.RuleBuilder;
+using FuzzyLogic.RuleBuilders;
 
 namespace FuzzyLogic.RuleParsers
 {
-    interface IRuleParser
+    public interface IRuleParser
     {
         void Parse(IRuleBuilder builder, string rule);
         IOperationFactory OperationFactory { get; set; }

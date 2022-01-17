@@ -9,7 +9,6 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
     class XmlExportVisitor : IKnowledgeVisitor
     {
         public String Xml => _xml.ToString();
-        public int _tabsCount = 0;
 
         public void Clear() => _xml.Clear();
 
@@ -152,22 +151,22 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         public void Visit(MinOperation op)
         {
-            AppendString($"<Operation>Min</Operation>");
+            AppendString("<Operation>Min</Operation>");
         }
 
         public void Visit(MaxOperation op)
         {
-            AppendString($"<Operation>Max</Operation>");
+            AppendString("<Operation>Max</Operation>");
         }
 
         public void Visit(ProdOperation op)
         {
-            AppendString($"<Operation>Prod</Operation>");
+            AppendString("<Operation>Prod</Operation>");
         }
 
         public void Visit(SumOperation op)
         {
-            AppendString($"<Operation>Sum</Operation>");
+            AppendString("<Operation>Sum</Operation>");
         }
 
         public void Visit(Statement statement)
@@ -186,6 +185,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         private void Tab() => _tabsCount++;
         private void UnTab() => _tabsCount--;
 
-        private StringBuilder _xml = new StringBuilder();
+        private int _tabsCount;
+        private readonly StringBuilder _xml = new StringBuilder();
     }
 }

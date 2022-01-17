@@ -1,5 +1,4 @@
-﻿using FuzzyLogic.KnowledgeBase.Helpers;
-using FuzzyLogic.KnowledgeBase.MembershipFunctions;
+﻿using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {

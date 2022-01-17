@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="KnowledgeBaseFiles\" />
-    <Folder Include="src\Commands\" />
     <Folder Include="src\Exceptions\" />
     <Folder Include="src\KnowledgeBase\Reader\" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
@@ -29,7 +28,8 @@ namespace FuzzyLogic.CLI.Commands
         {
             var parameters = base.GetParams();
 
-            Func<string, bool> numberValidator = x => double.TryParse(x, out _);
+            bool NumberValidator(string x) => double.TryParse(x, out _);
+
             string errorMsg = "Не число!";
 
             var left = new ConsoleCommandParam
@@ -38,7 +38,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату левой точки нижнего основания",
                 Description = "Координата левой точки нижнего основания"
             };
-            left.AddValidator(numberValidator, errorMsg);
+            left.AddValidator(NumberValidator, errorMsg);
             parameters.Add(left);
 
             var leftCenter = new ConsoleCommandParam
@@ -47,7 +47,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату левой точки верхнего основания",
                 Description = "Координата левой точки верхнего основания"
             };
-            leftCenter.AddValidator(numberValidator, errorMsg);
+            leftCenter.AddValidator(NumberValidator, errorMsg);
             parameters.Add(leftCenter);
 
             var rightCenter = new ConsoleCommandParam
@@ -56,7 +56,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату правой точки верхнего основания",
                 Description = "Координата правой точки верхнего основания"
             };
-            rightCenter.AddValidator(numberValidator, errorMsg);
+            rightCenter.AddValidator(NumberValidator, errorMsg);
             parameters.Add(rightCenter);
 
             var right = new ConsoleCommandParam
@@ -65,7 +65,7 @@ namespace FuzzyLogic.CLI.Commands
                 AskForInput = "Введите координату правой точки нижнего основания",
                 Description = "Координата правой точки нижнего основания"
             };
-            right.AddValidator(numberValidator, errorMsg);
+            right.AddValidator(NumberValidator, errorMsg);
             parameters.Add(right);
 
             return parameters;

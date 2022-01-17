@@ -7,12 +7,12 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         public ActivatedFunction(IFunction wrappedFunction, IOperation activation, double activatingValue)
             : base(wrappedFunction)
         {
-            this.activation = activation;
-            this.activatingValue = activatingValue;
+            this._activation = activation;
+            this._activatingValue = activatingValue;
         }
         public override double GetValue(double x)
         {
-            return activation.Evaluate(WrappedFunction.GetValue(x), activatingValue);
+            return _activation.Evaluate(WrappedFunction.GetValue(x), _activatingValue);
         }
 
         public override double GetMinValue()
@@ -27,10 +27,10 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public override string ToString()
         {
-            return $"Activated function with activating value = {activatingValue} by operation [{activation}] and wrapped function:\n\t[{WrappedFunction}]";
+            return $"Activated function with activating value = {_activatingValue} by operation [{_activation}] and wrapped function:\n\t[{WrappedFunction}]";
         }
 
-        private IOperation activation;
-        private double activatingValue;
+        private readonly IOperation _activation;
+        private readonly double _activatingValue;
     }
 }

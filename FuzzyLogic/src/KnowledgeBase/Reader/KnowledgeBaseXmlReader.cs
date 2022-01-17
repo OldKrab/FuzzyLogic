@@ -12,11 +12,13 @@ namespace FuzzyLogic.KnowledgeBase.Reader
     {
         public void Read(string name)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            FileStream file = new FileStream(name, FileMode.Open);
-            var settings = new XmlReaderSettings();
-            settings.IgnoreWhitespace = true;
-            XmlReader reader = XmlReader.Create(file, settings);
+            var db = KnowledgeBaseManager.GetInstance();
+            var file = new FileStream(name, FileMode.Open);
+            var settings = new XmlReaderSettings
+            {
+                IgnoreWhitespace = true
+            };
+            var reader = XmlReader.Create(file, settings);
             ReadVariables(reader, db);
             ReadRules(reader, db);
         }

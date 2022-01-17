@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.KnowledgeBase.RuleBuilder;
 using FuzzyLogic.KnowledgeBase.Statements;
 
-namespace FuzzyLogic.KnowledgeBase.RuleBuilder
+namespace FuzzyLogic.RuleBuilders
 {
     class RuleBuilder : IRuleBuilder
     {
@@ -23,7 +23,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
             else
             {
                 if (_curOperation == null)
-                    throw new InvalidOperationException($"Не определена операция перед условием!");
+                    throw new InvalidOperationException("Не определена операция перед условием!");
                
                 _curList.AddCondition(cond, _curOperation);
                 _curOperation = null;
@@ -35,7 +35,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
         public IRuleBuilder AddOperation(IOperation operation)
         {
             if (_curList == null || _curOperation != null)
-                throw new InvalidOperationException($"Не определено условие перед операцией!");
+                throw new InvalidOperationException("Не определено условие перед операцией!");
             _curOperation = operation;
             return this;
         }
@@ -86,7 +86,7 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilder
             return new Rule(_curList, _conclusions);
         }
 
-        private Stack<(IOperation, ConditionList)> _stack = new Stack<(IOperation, ConditionList)>();
+        private readonly Stack<(IOperation, ConditionList)> _stack = new Stack<(IOperation, ConditionList)>();
         private ConditionList _curList;
         private IOperation _curOperation;
         private List<Statement> _conclusions = new List<Statement>();

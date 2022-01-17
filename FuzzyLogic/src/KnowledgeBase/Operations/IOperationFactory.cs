@@ -1,6 +1,6 @@
 ﻿namespace FuzzyLogic.KnowledgeBase.Operations
 {
-    interface IOperationFactory
+    public interface IOperationFactory
     {
         IAndOperation CreateAndOperation();
         IOrOperation CreateOrOperation();

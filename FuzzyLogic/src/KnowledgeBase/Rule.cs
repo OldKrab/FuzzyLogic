@@ -2,11 +2,10 @@
 using System.Linq;
 using FuzzyLogic.KnowledgeBase.Helpers;
 using FuzzyLogic.KnowledgeBase.Statements;
-using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    class Rule : IPrototype
+    public class Rule : IPrototype
     {
         public Rule(ConditionList condition, List<Statement> conclusions)
         {

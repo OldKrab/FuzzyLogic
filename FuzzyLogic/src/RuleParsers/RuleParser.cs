@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.KnowledgeBase.RuleBuilder;
+using FuzzyLogic.RuleBuilders;
 
 namespace FuzzyLogic.RuleParsers
 {
@@ -31,12 +30,8 @@ namespace FuzzyLogic.RuleParsers
                     builder.AddOperation(OperationFactory.CreateOrOperation());
                 else
                 {
-                    Variable var = _db.GetVariable(words[i++]);
-                    Term term;
-                    if (i == words.Length)
-                        term = var.GetTerm("");
-                    else
-                        term = var.GetTerm(words[i]);
+                    var var = _db.GetVariable(words[i++]);
+                    var term = var.GetTerm(i == words.Length ? "" : words[i]);
                     builder.AddCondition(var, term);
                 }
                 i++;
@@ -64,7 +59,7 @@ namespace FuzzyLogic.RuleParsers
                 .ToArray();
         }
 
-        private KnowledgeBaseManager _db;
+        private readonly KnowledgeBaseManager _db;
     }
 
 }

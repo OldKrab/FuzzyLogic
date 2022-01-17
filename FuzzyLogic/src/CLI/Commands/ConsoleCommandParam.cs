@@ -15,7 +15,7 @@ namespace FuzzyLogic.CLI.Commands
 
         public ConsoleCommandParam()
         {
-            AskForInput = $"Введите значение";
+            AskForInput = "Введите значение";
         }
 
         public void AddValidator(Func<string, bool> function, string errorMessage)
@@ -34,7 +34,7 @@ namespace FuzzyLogic.CLI.Commands
         public string AskForInput { get; set; }
         public string Description { get; set; }
 
-        private List<Validator> _validators = new List<Validator>();
+        private readonly List<Validator> _validators = new List<Validator>();
 
        
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
@@ -12,6 +11,8 @@ namespace FuzzyLogic.Algorithm
 {
     class MamdaniAlgorithm : FuzzyAlgorithm
     {
+        private IFunctionIntegrator Integrator { get; set; } = new RombergIntegrator();
+
         protected override void Fuzzify()
         {
             _fuzzifiedValues = Rules.Select(rule => new { rule, value = rule.Condition.Fuzzify(InputValues) })
@@ -60,16 +61,16 @@ namespace FuzzyLogic.Algorithm
 
                 var numeratorFunc = new CombinedFunction(new ProdOperation(),
                     new List<IFunction> { function, new Function(x => x, function.GetMinValue(), function.GetMaxValue()) });
-                var integrator = new RombergIntegrator();
-                var numerator = integrator.Integrate(numeratorFunc, numeratorFunc.GetMinValue(), numeratorFunc.GetMaxValue());
-                var denominator = integrator.Integrate(function, function.GetMinValue(), function.GetMaxValue());
+
+                var numerator = Integrator.Integrate(numeratorFunc, numeratorFunc.GetMinValue(), numeratorFunc.GetMaxValue());
+                var denominator = Integrator.Integrate(function, function.GetMinValue(), function.GetMaxValue());
                 OutputValues.Add(variable, numerator / denominator);
             }
         }
 
         public override IRuleParser CreateRuleParser()
         {
-            return new RuleParsers.RuleParser();
+            return new RuleParser();
         }
 
         private Dictionary<Rule, double> _fuzzifiedValues;

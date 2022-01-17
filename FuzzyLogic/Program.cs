@@ -1,15 +1,6 @@
-﻿using System;
-using System.IO;
-using CenterSpace.NMath.Core;
-using FuzzyLogic.CLI;
+﻿using FuzzyLogic.CLI;
 using FuzzyLogic.CLI.Commands;
-using FuzzyLogic.KnowledgeBase;
-using FuzzyLogic.KnowledgeBase.MembershipFunctions;
-using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Reader;
-using FuzzyLogic.KnowledgeBase.RuleBuilder;
-using FuzzyLogic.KnowledgeBase.Visitor;
-using FuzzyLogic.RuleParsers;
 
 namespace FuzzyLogic
 {

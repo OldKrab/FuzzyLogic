@@ -1,5 +1,4 @@
 ﻿using FuzzyLogic.KnowledgeBase.Helpers;
-using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.Statements
 {

@@ -76,7 +76,7 @@ namespace FuzzyLogic.CLI
             return line.Split('"')
                 .Select((element, index) => index % 2 == 0
                     ? element.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                    : new string[] { element })
+                    : new[] { element })
                 .SelectMany(element => element).ToArray();
         }
 
@@ -135,8 +135,8 @@ namespace FuzzyLogic.CLI
         public List<ConsoleCommand> GetCommands() => _commands.Values.ToList();
         public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
-        private Dictionary<string, ConsoleCommand> _commands = new Dictionary<string, ConsoleCommand>(StringComparer.InvariantCultureIgnoreCase);
-        private List<string> _commandHistory = new List<string>();
+        private readonly Dictionary<string, ConsoleCommand> _commands = new Dictionary<string, ConsoleCommand>(StringComparer.InvariantCultureIgnoreCase);
+        private readonly List<string> _commandHistory = new List<string>();
         private string _welcomeString = "> ";
         private string _exitCommand = "exit";
     }

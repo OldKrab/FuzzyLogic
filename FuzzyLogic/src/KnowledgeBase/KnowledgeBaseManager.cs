@@ -5,12 +5,13 @@ using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    partial class KnowledgeBaseManager
+    public partial class KnowledgeBaseManager
     {
         public List<Variable> InputVariables => Variables.Where(x => x.IsInput).ToList();
         public List<Variable> OutputVariables => Variables.Where(x => !x.IsInput).ToList();
         public List<Variable> Variables { get; private set; } = new List<Variable>();
         public List<Rule> Rules { get; private set; } = new List<Rule>();
+
         public static KnowledgeBaseManager GetInstance()
         {
             return _instance ??= new KnowledgeBaseManager();

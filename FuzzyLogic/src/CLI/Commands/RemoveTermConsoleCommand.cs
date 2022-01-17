@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase;
-using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
 {

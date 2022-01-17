@@ -60,12 +60,12 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         public void Visit(Statement statement) => AppendString($"{statement.Variable.Name} {statement.Term.Name}");
 
-        public void Visit(IOrOperation op) => AppendString($" OR ");
+        public void Visit(IOrOperation op) => AppendString(" OR ");
 
-        public void Visit(IAndOperation op) => AppendString($" AND ");
+        public void Visit(IAndOperation op) => AppendString(" AND ");
 
         private void AppendString(string str) => _text.Append(str);
 
-        private StringBuilder _text = new StringBuilder();
+        private readonly StringBuilder _text = new StringBuilder();
     }
 }

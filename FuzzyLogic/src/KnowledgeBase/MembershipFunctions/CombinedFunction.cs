@@ -61,7 +61,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             throw new System.NotImplementedException();
         }
 
-        private IOperation _combination;
-        private List<IFunction> _functions;
+        private readonly IOperation _combination;
+        private readonly List<IFunction> _functions;
     }
 }

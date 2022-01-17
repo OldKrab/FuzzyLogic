@@ -26,6 +26,6 @@ namespace FuzzyLogic.KnowledgeBase
             }
         }
 
-        private List<ISnapshot> _snapshots = new List<ISnapshot>();
+        private readonly List<ISnapshot> _snapshots = new List<ISnapshot>();
     }
 }

@@ -39,7 +39,7 @@ namespace FuzzyLogic.CLI.Commands
         {
             var parameters = new List<ConsoleCommandParam>();
             KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            Func<string, bool> numberValidator = x => double.TryParse(x, out _);
+            bool NumberValidator(string x) => double.TryParse(x, out _);
             string errorMsg = "Не число!";
 
             foreach (var inputVariable in db.InputVariables)
@@ -51,7 +51,7 @@ namespace FuzzyLogic.CLI.Commands
                     AskForInput = $"Введите значение для переменной {inputVariable.Name}",
                     Description = $"Входное значение для переменной {inputVariable.Name}"
                 };
-                param.AddValidator(numberValidator, errorMsg);
+                param.AddValidator(NumberValidator, errorMsg);
                 parameters.Add(param);
             }
 

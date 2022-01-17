@@ -1,8 +1,9 @@
-﻿using FuzzyLogic.KnowledgeBase.Operations;
+﻿using FuzzyLogic.KnowledgeBase;
+using FuzzyLogic.KnowledgeBase.Operations;
 
-namespace FuzzyLogic.KnowledgeBase.RuleBuilder
+namespace FuzzyLogic.RuleBuilders
 {
-    interface IRuleBuilder
+    public interface IRuleBuilder
     {
         IRuleBuilder AddCondition(Variable var, Term term);
         IRuleBuilder AddOperation(IOperation operation);
