@@ -41,6 +41,8 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             Tab();
             AppendString($"<Name>{variable.Name}</Name>");
             AppendString($"<IsInput>{variable.IsInput}</IsInput>");
+            AppendString($"<MinValue>{variable.MinValue}</MinValue>");
+            AppendString($"<MaxValue>{variable.MaxValue}</MaxValue>");
 
             AppendString("<Terms>");
             Tab();

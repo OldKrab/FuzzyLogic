@@ -141,12 +141,14 @@ namespace FuzzyLogic.KnowledgeBase.Readers
         private void ReadVariable(XmlReader reader, KnowledgeBaseManager db)
         {
             reader.ReadStartElement();
-            string name = reader.ReadElementString();
-            bool isInput = bool.Parse(reader.ReadElementString());
+            var name = reader.ReadElementString();
+            var isInput = bool.Parse(reader.ReadElementString());
+            var minValue = double.Parse(reader.ReadElementString());
+            var maxValue = double.Parse(reader.ReadElementString());
             ReadTerms(reader, out var terms);
             reader.ReadEndElement();
 
-            db.AddVariable(name, isInput);
+            db.AddVariable(name, isInput, minValue, maxValue); //todo
             foreach (var (termName, termFunc) in terms)
                 db.AddTermToVariable(name, termName, termFunc);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public class GetTermsConsoleCommand:ConsoleCommand
+    public class GetTermsConsoleCommand : ConsoleCommand
     {
         public override string GetName()
         {
@@ -19,10 +19,10 @@ namespace FuzzyLogic.CLI.Commands
         {
             var variable = FuzzySystem.GetInstance().KnowledgeBase.GetVariable(parameters[_varNameParam]);
             Console.WriteLine($"Список терм у переменной {variable.Name}:");
+            if (variable.Terms.Count == 0)
+                Console.WriteLine("Нет терм.");
             foreach (var term in variable.Terms)
-            {
                 Console.WriteLine(term);
-            }
         }
 
         protected override List<ConsoleCommandParam> GetParams()

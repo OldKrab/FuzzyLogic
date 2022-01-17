@@ -22,10 +22,7 @@ namespace FuzzyLogic.CLI.Commands
            var printer = new ConsoleRuleExportVisitor();
            var rules = FuzzySystem.GetInstance().KnowledgeBase.Rules;
            if (rules.Count == 0)
-           {
                Console.WriteLine("Нет правил.");
-               return;
-           }
            foreach (var (rule, i) in rules.Select((r, i) => (r,i)))
            {
                printer.Visit(rule);

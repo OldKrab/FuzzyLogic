@@ -51,7 +51,6 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new SaveKnowledgeBaseConsoleCommand());
 
             
-
             consoleInterface.Run();
         }
     }

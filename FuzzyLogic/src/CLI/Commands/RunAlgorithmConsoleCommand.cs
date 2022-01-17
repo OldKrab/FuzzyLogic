@@ -31,16 +31,12 @@ namespace FuzzyLogic.CLI.Commands
         {
             KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
             FuzzyAlgorithm algorithm = FuzzySystem.GetInstance().FuzzyAlgorithm;
-            algorithm.ActivationOperation =parameters[_activationOpParam].ToLower() switch
-            {
-                "m" => new MinOperation(),
-                "p" => new ProdOperation()
-            };
-            algorithm.CombinationOperation =parameters[_combinationOpParam].ToLower() switch
-            {
-                "m" => new MaxOperation(),
-                "s" => new SumOperation()
-            };
+            algorithm.ActivationOperation = parameters[_activationOpParam].ToLower() == "m"
+                ? new MinOperation()
+                : new ProdOperation();
+            algorithm.CombinationOperation = parameters[_combinationOpParam].ToLower() == "m"
+                ? new MaxOperation()
+                : new SumOperation();
 
             Dictionary<Variable, double> inputValues = new Dictionary<Variable, double>();
             foreach (var inputVariable in db.InputVariables)
@@ -73,6 +69,10 @@ namespace FuzzyLogic.CLI.Commands
                     Description = $"Входное значение для переменной {inputVariable.Name}"
                 };
                 param.AddValidator(NumberValidator, errorMsg);
+                param.AddValidator(s => double.Parse(s) >= inputVariable.MinValue,
+                    $"Значение меньше минимального ({inputVariable.MinValue})!");
+                param.AddValidator(s => double.Parse(s) <= inputVariable.MaxValue,
+                    $"Значение больше максимального ({inputVariable.MaxValue})!");
                 parameters.Add(param);
             }
 

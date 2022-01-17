@@ -62,8 +62,8 @@ namespace FuzzyLogic.Algorithm
                 var numeratorFunc = new CombinedFunction(new ProdOperation(),
                     new List<IFunction> { function, new Function(x => x, function.GetMinValue(), function.GetMaxValue()) });
 
-                var numerator = Integrator.Integrate(numeratorFunc, numeratorFunc.GetMinValue(), numeratorFunc.GetMaxValue());
-                var denominator = Integrator.Integrate(function, function.GetMinValue(), function.GetMaxValue());
+                var numerator = Integrator.Integrate(numeratorFunc, variable.MinValue, variable.MaxValue);
+                var denominator = Integrator.Integrate(function, variable.MinValue, variable.MaxValue);
                 OutputValues.Add(variable, numerator / denominator);
             }
         }

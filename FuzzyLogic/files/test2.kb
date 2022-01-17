@@ -3,6 +3,8 @@
 	<Variable>
 		<Name>speed</Name>
 		<IsInput>True</IsInput>
+		<MinValue>0</MinValue>
+		<MaxValue>120</MaxValue>
 		<Terms>
 			<Term>
 				<Name>slow</Name>
@@ -39,6 +41,8 @@
 	<Variable>
 		<Name>control</Name>
 		<IsInput>False</IsInput>
+		<MinValue>-6</MinValue>
+		<MaxValue>6</MaxValue>
 		<Terms>
 			<Term>
 				<Name>negative</Name>

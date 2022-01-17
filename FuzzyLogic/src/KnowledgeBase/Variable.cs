@@ -7,9 +7,11 @@ namespace FuzzyLogic.KnowledgeBase
 {
     public class Variable
     {
-        public Variable(string name, bool isInput)
+        public Variable(string name, bool isInput, double minValue, double maxValue)
         {
             IsInput = isInput;
+            MinValue = minValue;
+            MaxValue = maxValue;
             Name = name;
             Terms = new List<Term>();
         }
@@ -43,6 +45,8 @@ namespace FuzzyLogic.KnowledgeBase
 
         public string Name { get; }
         public bool IsInput { get; }
+        public double MinValue { get; }
+        public double MaxValue { get; }
         public List<Term> Terms { get; }
     }
 }

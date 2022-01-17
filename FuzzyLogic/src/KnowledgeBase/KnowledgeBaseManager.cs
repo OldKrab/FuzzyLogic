@@ -21,19 +21,15 @@ namespace FuzzyLogic.KnowledgeBase
 
         public void AddRule(Rule rule) => Rules.Add(rule);
 
-        public Variable AddVariable(string name, bool isInput)
+        public Variable AddVariable(string name, bool isInput, double minValue, double maxValue)
         {
             if (Variables.Exists(v => v.Name == name))
                 throw new InvalidOperationException($"Переменная {name} уже существует!");
 
-            var variable = new Variable(name, isInput);
+            var variable = new Variable(name, isInput, minValue, maxValue);
             Variables.Add(variable);
             return variable;
         }
-
-        public Variable AddInputVariable(string name) => AddVariable(name, true);
-
-        public Variable AddOutputVariable(string name) => AddVariable(name, false);
 
         public void AddTermToVariable(string varName, string termName, IFunction termFunction) => GetVariable(varName).AddTerm(termName, termFunction);
 

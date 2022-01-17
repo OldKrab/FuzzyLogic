@@ -17,13 +17,18 @@ namespace FuzzyLogic.CLI.Commands
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
             bool isInput = parameters[_typeParam] == "input";
-            FuzzySystem.GetInstance().KnowledgeBase.AddVariable(parameters[_nameParam], isInput);
+            FuzzySystem.GetInstance().KnowledgeBase.AddVariable(
+                parameters[_nameParam], isInput,
+                double.Parse(parameters[_minValueParam]), double.Parse(parameters[_maxValueParam]));
         }
 
         protected override List<ConsoleCommandParam> GetParams()
         {
             List<ConsoleCommandParam> parameters = new List<ConsoleCommandParam>();
-           
+
+            bool NumberValidator(string x) => double.TryParse(x, out _);
+            string errorMsg = "Не число!";
+ 
             var name = new ConsoleCommandParam
             {
                 Name = _nameParam, 
@@ -44,10 +49,30 @@ namespace FuzzyLogic.CLI.Commands
             type.AddValidator( s => s.ToLower() == "input" || s.ToLower() == "output", "Ожидалось input или output!");
             parameters.Add(type);
 
+            var minValue = new ConsoleCommandParam
+            {
+                Name = _minValueParam,
+                AskForInput = "Введите минимальное значение переменной",
+                Description = "Минимальное значение переменной"
+            };
+            minValue.AddValidator(NumberValidator, errorMsg);
+            parameters.Add(minValue);
+
+            var maxValue = new ConsoleCommandParam
+            {
+                Name = _maxValueParam,
+                AskForInput = "Введите максимальное значение переменной",
+                Description = "Максимальное значение переменной"
+            };
+            maxValue.AddValidator(NumberValidator, errorMsg);
+            parameters.Add(maxValue);
+
             return parameters;
         }
 
         private string _nameParam = "-name";
         private string _typeParam = "-type";
+        private string _minValueParam = "-minval";
+        private string _maxValueParam = "-maxval";
     }
 }

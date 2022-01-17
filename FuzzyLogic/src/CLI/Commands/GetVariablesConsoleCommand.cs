@@ -23,16 +23,13 @@ namespace FuzzyLogic.CLI.Commands
             if (db.InputVariables.Count == 0)
                 Console.WriteLine("Нет входных переменных.");
             foreach (var variable in db.InputVariables)
-            {
-                Console.WriteLine(variable.Name);
-            }
+                Console.WriteLine($"{variable.Name}, интервал [{variable.MinValue}, {variable.MaxValue}]");
+            
             Console.WriteLine("Выходные переменные:");
             if (db.OutputVariables.Count == 0)
                 Console.WriteLine("Нет выходных переменных.");
             foreach (var variable in db.OutputVariables)
-            {
-                Console.WriteLine(variable.Name);
-            }
+                Console.WriteLine($"{variable.Name}, интервал [{variable.MinValue}, {variable.MaxValue}]");
         }
 
         protected override List<ConsoleCommandParam> GetParams()
