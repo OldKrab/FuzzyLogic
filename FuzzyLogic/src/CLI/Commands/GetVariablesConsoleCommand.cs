@@ -18,7 +18,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
+            KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
             Console.WriteLine("Входные переменные:");
             if (db.InputVariables.Count == 0)
                 Console.WriteLine("Нет входных переменных.");

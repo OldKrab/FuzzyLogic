@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.RuleParsers;
+using FuzzyLogic.KnowledgeBase.RuleParsers;
 
 namespace FuzzyLogic.Algorithm
 {
-    abstract class FuzzyAlgorithm
+    public abstract class FuzzyAlgorithm
     {
         protected FuzzyAlgorithm()
         {

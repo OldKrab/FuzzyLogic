@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
-using FuzzyLogic.RuleBuilders;
-using FuzzyLogic.RuleParsers;
+using FuzzyLogic.KnowledgeBase.RuleBuilders;
+using FuzzyLogic.KnowledgeBase.RuleParsers;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -20,7 +19,6 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
             IRuleParser parser = new RuleParser();
             if (parameters[_operationsParam].ToLower() == "m")
                 parser.OperationFactory = new MaxMinOperationFactory();
@@ -28,7 +26,7 @@ namespace FuzzyLogic.CLI.Commands
                 parser.OperationFactory = new SumProdOperationFactory();
             var builder = new RuleBuilder();
             parser.Parse(builder, parameters[_ruleParam]);
-            db.AddRule(builder.GetResult());
+            FuzzySystem.GetInstance().KnowledgeBase.AddRule(builder.GetResult());
         }
 
         protected override List<ConsoleCommandParam> GetParams()

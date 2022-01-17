@@ -19,7 +19,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
+            KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
             MamdaniAlgorithm algorithm = new MamdaniAlgorithm();
             Dictionary<Variable, double> inputValues = new Dictionary<Variable, double>();
             foreach (var inputVariable in db.InputVariables)
@@ -38,11 +38,10 @@ namespace FuzzyLogic.CLI.Commands
         protected override List<ConsoleCommandParam> GetParams()
         {
             var parameters = new List<ConsoleCommandParam>();
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
             bool NumberValidator(string x) => double.TryParse(x, out _);
-            string errorMsg = "Не число!";
+            var errorMsg = "Не число!";
 
-            foreach (var inputVariable in db.InputVariables)
+            foreach (var inputVariable in  FuzzySystem.GetInstance().KnowledgeBase.InputVariables)
             {
                 var paramName = "-" + inputVariable.Name;
                 var param = new ConsoleCommandParam

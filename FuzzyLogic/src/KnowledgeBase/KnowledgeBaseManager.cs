@@ -9,12 +9,13 @@ namespace FuzzyLogic.KnowledgeBase
     {
         public List<Variable> InputVariables => Variables.Where(x => x.IsInput).ToList();
         public List<Variable> OutputVariables => Variables.Where(x => !x.IsInput).ToList();
-        public List<Variable> Variables { get; private set; } = new List<Variable>();
-        public List<Rule> Rules { get; private set; } = new List<Rule>();
+        public List<Variable> Variables { get; private set; }
+        public List<Rule> Rules { get; private set; }
 
-        public static KnowledgeBaseManager GetInstance()
+        public KnowledgeBaseManager()
         {
-            return _instance ??= new KnowledgeBaseManager();
+            Rules = new List<Rule>();
+            Variables = new List<Variable>();
         }
 
         public void Restore(ISnapshot snapshot)
@@ -85,8 +86,5 @@ namespace FuzzyLogic.KnowledgeBase
                 throw new InvalidOperationException($"Переменной {name} не существует!");
             return variable;
         }
-
-
-        private static KnowledgeBaseManager _instance;
     }
 }

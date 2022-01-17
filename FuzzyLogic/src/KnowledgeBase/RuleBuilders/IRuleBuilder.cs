@@ -1,7 +1,6 @@
-﻿using FuzzyLogic.KnowledgeBase;
-using FuzzyLogic.KnowledgeBase.Operations;
+﻿using FuzzyLogic.KnowledgeBase.Operations;
 
-namespace FuzzyLogic.RuleBuilders
+namespace FuzzyLogic.KnowledgeBase.RuleBuilders
 {
     public interface IRuleBuilder
     {

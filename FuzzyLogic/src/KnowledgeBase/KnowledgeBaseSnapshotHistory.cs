@@ -8,11 +8,10 @@ namespace FuzzyLogic.KnowledgeBase
     {
         public void MakeSnapshot(string name)
         {
-            var db = KnowledgeBaseManager.GetInstance();
-            var snapshot = db.MakeSnapshot();
+            var snapshot = FuzzySystem.GetInstance().KnowledgeBase.MakeSnapshot();
             snapshot.Name = name;
             _snapshots.Add(snapshot);
-            Console.WriteLine($"Maked snapshot \"{name}\"");
+            Console.WriteLine($"Make snapshot \"{name}\"");
         }
 
         public void RestoreSnapshot(string name)
@@ -20,9 +19,8 @@ namespace FuzzyLogic.KnowledgeBase
             var snapshot = _snapshots.FirstOrDefault(x => x.Name == name);
             if (snapshot != null)
             {
-                var db = KnowledgeBaseManager.GetInstance();
-                db.Restore(snapshot);
-                Console.WriteLine($"Restored snapshot \"{name}\"");
+                FuzzySystem.GetInstance().KnowledgeBase.Restore(snapshot);
+                Console.WriteLine($"Restore snapshot \"{name}\"");
             }
         }
 

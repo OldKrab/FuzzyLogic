@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.CLI.Commands
@@ -12,8 +11,7 @@ namespace FuzzyLogic.CLI.Commands
             var termName = parameters[TermNameParam];
             var function = GetMembershipFunction(parameters);
 
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            db.AddTermToVariable(varName, termName, function);
+            FuzzySystem.GetInstance().KnowledgeBase.AddTermToVariable(varName, termName, function);
         }
 
         protected override List<ConsoleCommandParam> GetParams()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -18,8 +17,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            var variable = db.GetVariable(parameters[_varNameParam]);
+            var variable = FuzzySystem.GetInstance().KnowledgeBase.GetVariable(parameters[_varNameParam]);
             Console.WriteLine($"Список терм у переменной {variable.Name}:");
             foreach (var term in variable.Terms)
             {

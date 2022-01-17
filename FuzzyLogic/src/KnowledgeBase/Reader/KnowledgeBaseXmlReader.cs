@@ -12,7 +12,7 @@ namespace FuzzyLogic.KnowledgeBase.Reader
     {
         public void Read(string name)
         {
-            var db = KnowledgeBaseManager.GetInstance();
+            var db = FuzzySystem.GetInstance().KnowledgeBase;
             var file = new FileStream(name, FileMode.Open);
             var settings = new XmlReaderSettings
             {

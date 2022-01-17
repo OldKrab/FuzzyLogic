@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Statements;
 
-namespace FuzzyLogic.RuleBuilders
+namespace FuzzyLogic.KnowledgeBase.RuleBuilders
 {
     class RuleBuilder : IRuleBuilder
     {

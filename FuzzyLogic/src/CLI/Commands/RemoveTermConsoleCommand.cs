@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -20,8 +19,7 @@ namespace FuzzyLogic.CLI.Commands
             var varName = parameters[VarNameParam];
             var termName = parameters[TermNameParam];
 
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
-            db.RemoveTermFromVariable(varName, termName);
+            FuzzySystem.GetInstance().KnowledgeBase.RemoveTermFromVariable(varName, termName);
         }
 
         protected override List<ConsoleCommandParam> GetParams()

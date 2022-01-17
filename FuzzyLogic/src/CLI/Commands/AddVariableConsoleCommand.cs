@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FuzzyLogic.KnowledgeBase;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -17,9 +16,8 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            KnowledgeBaseManager db = KnowledgeBaseManager.GetInstance();
             bool isInput = parameters[_typeParam] == "input";
-            db.AddVariable(parameters[_nameParam], isInput);
+            FuzzySystem.GetInstance().KnowledgeBase.AddVariable(parameters[_nameParam], isInput);
         }
 
         protected override List<ConsoleCommandParam> GetParams()
