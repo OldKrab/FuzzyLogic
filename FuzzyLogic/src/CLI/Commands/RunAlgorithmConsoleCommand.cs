@@ -17,6 +17,15 @@ namespace FuzzyLogic.CLI.Commands
             return "Запускает нечеткий алгоритм";
         }
 
+        protected override void CheckRequirementsBeforeExecute()
+        {
+            KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
+            if (db.InputVariables.Count == 0)
+                throw new InvalidOperationException("Нет входных переменных.");
+            if (db.Rules.Count == 0)
+                throw new InvalidOperationException("Нет правил.");
+        }
+
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
             KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
@@ -41,7 +50,7 @@ namespace FuzzyLogic.CLI.Commands
             bool NumberValidator(string x) => double.TryParse(x, out _);
             var errorMsg = "Не число!";
 
-            foreach (var inputVariable in  FuzzySystem.GetInstance().KnowledgeBase.InputVariables)
+            foreach (var inputVariable in FuzzySystem.GetInstance().KnowledgeBase.InputVariables)
             {
                 var paramName = "-" + inputVariable.Name;
                 var param = new ConsoleCommandParam

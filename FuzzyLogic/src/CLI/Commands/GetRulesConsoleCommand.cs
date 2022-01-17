@@ -20,7 +20,13 @@ namespace FuzzyLogic.CLI.Commands
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
            var printer = new ConsoleRuleExportVisitor();
-           foreach (var (rule, i) in FuzzySystem.GetInstance().KnowledgeBase.Rules.Select((r, i) => (r,i)))
+           var rules = FuzzySystem.GetInstance().KnowledgeBase.Rules;
+           if (rules.Count == 0)
+           {
+               Console.WriteLine("Нет правил.");
+               return;
+           }
+           foreach (var (rule, i) in rules.Select((r, i) => (r,i)))
            {
                printer.Visit(rule);
                Console.WriteLine($"{i+1}) {printer.Text}");

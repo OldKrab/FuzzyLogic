@@ -46,7 +46,6 @@ namespace FuzzyLogic.CLI
                 throw new ConsoleExitException();
             if (!_commands.ContainsKey(command))
                 throw new InvalidOperationException($"Неизвестная команда {command}!");
-
             _commands[command].Execute(parameters);
         }
 
@@ -135,8 +134,8 @@ namespace FuzzyLogic.CLI
         public List<ConsoleCommand> GetCommands() => _commands.Values.ToList();
         public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
-        private readonly Dictionary<string, ConsoleCommand> _commands = new Dictionary<string, ConsoleCommand>(StringComparer.InvariantCultureIgnoreCase);
-        private readonly List<string> _commandHistory = new List<string>();
+        private readonly Dictionary<string, ConsoleCommand> _commands = new(StringComparer.InvariantCultureIgnoreCase);
+        private readonly List<string> _commandHistory = new();
         private string _welcomeString = "> ";
         private string _exitCommand = "exit";
     }

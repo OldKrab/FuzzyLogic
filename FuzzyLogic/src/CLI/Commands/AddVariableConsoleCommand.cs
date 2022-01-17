@@ -31,6 +31,8 @@ namespace FuzzyLogic.CLI.Commands
                 Description = "Имя переменной"
             };
             name.AddValidator(s => s != "", "Имя переменной пустое!");
+            name.AddValidator(s => FuzzySystem.GetInstance().KnowledgeBase.TryGetVariable(s) == null,
+                "Переменная уже существует!");
             parameters.Add(name);
            
             var type = new ConsoleCommandParam

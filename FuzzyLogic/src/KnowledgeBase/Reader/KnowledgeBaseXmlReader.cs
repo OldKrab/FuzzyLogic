@@ -13,7 +13,7 @@ namespace FuzzyLogic.KnowledgeBase.Reader
         public KnowledgeBaseManager Read(string name)
         {
             var db = new KnowledgeBaseManager();
-            var file = new FileStream(name, FileMode.Open);
+            using var file = new FileStream(name, FileMode.Open);
             var settings = new XmlReaderSettings
             {
                 IgnoreWhitespace = true

@@ -8,6 +8,7 @@ namespace FuzzyLogic.CLI.Commands
     {
         public void Execute(Dictionary<string, string> parameters)
         {
+            CheckRequirementsBeforeExecute();
             if (CheckForHelpParams(parameters))
             {
                 WriteHelp();
@@ -16,8 +17,8 @@ namespace FuzzyLogic.CLI.Commands
 
             CheckForUnknownEnteredParams(parameters);
             CheckForNotEnteredParams(parameters);
-            CheckForValidParams(parameters);
-            AdditionallyCheckParams();
+            CheckParamsIsValid(parameters);
+            AdditionallyCheckParams(parameters);
 
             ExecuteWithValidParams(parameters);
         }
@@ -25,12 +26,11 @@ namespace FuzzyLogic.CLI.Commands
         public abstract string GetName();
         public abstract string GetDescription();
 
-
-        protected virtual void AdditionallyCheckParams() { }
-
         protected abstract void ExecuteWithValidParams(Dictionary<string, string> parameters);
-
         protected abstract List<ConsoleCommandParam> GetParams();
+
+        protected virtual void AdditionallyCheckParams(Dictionary<string, string> parameters) { }
+        protected virtual void CheckRequirementsBeforeExecute(){}
 
         private bool CheckForHelpParams(Dictionary<string, string> parameters)
         {
@@ -62,16 +62,22 @@ namespace FuzzyLogic.CLI.Commands
                 console.AddKeyHandler(ConsoleKey.Escape, () => throw new OperationCanceledException());
                 string value = console.ReadLine();
 
+                CheckParamIsValid(param, value);
                 parameters.Add(param.Name, value);
             }
         }
 
-        private void CheckForValidParams(Dictionary<string, string> parameters)
+        private void CheckParamsIsValid(Dictionary<string, string> parameters)
         {
             var @params = GetParams();
             foreach (var param in @params)
-                if (!param.IsValueValid(parameters[param.Name], out var errorMessage))
-                    throw new InvalidOperationException(errorMessage);
+                CheckParamIsValid(param, parameters[param.Name]);
+        }
+
+        private void CheckParamIsValid(ConsoleCommandParam param, string value)
+        {
+            if (!param.IsValueValid(value, out var errorMessage))
+                throw new InvalidOperationException(errorMessage);
         }
 
         private void CheckForUnknownEnteredParams(Dictionary<string, string> parameters)

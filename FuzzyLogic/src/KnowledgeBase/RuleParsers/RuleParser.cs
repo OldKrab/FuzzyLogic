@@ -16,6 +16,8 @@ namespace FuzzyLogic.KnowledgeBase.RuleParsers
         public void Parse(IRuleBuilder builder, string rule)
         {
             var words = SplitRule(rule);
+            if (words[0].ToLower() != "if")
+                throw new InvalidOperationException("В начале ожидалось IF!");
             int i = 1;
             while (i < words.Length && words[i].ToLower() != "then")
             {
@@ -35,6 +37,8 @@ namespace FuzzyLogic.KnowledgeBase.RuleParsers
                 }
                 i++;
             }
+            if (i == words.Length || words[i].ToLower() != "then")
+                throw new InvalidOperationException("Отсутствует THEN!");
             i++;
             while (i < words.Length)
             {

@@ -41,7 +41,6 @@ namespace FuzzyLogic.KnowledgeBase
 
             var variable = new Variable(name, isInput);
             Variables.Add(variable);
-            Console.WriteLine($"Добавлена \"{variable}\"");
             return variable;
         }
 
@@ -49,35 +48,25 @@ namespace FuzzyLogic.KnowledgeBase
 
         public Variable AddOutputVariable(string name) => AddVariable(name, false);
 
-        public Term AddTermToVariable(string varName, string termName, IFunction termFunction)
-        {
-            var variable = GetVariable(varName);
-            var term = variable.AddTerm(termName, termFunction);
-            Console.WriteLine($"К \"{variable}\" добавлен \"{term}\"");
-            return term;
-        }
+        public void AddTermToVariable(string varName, string termName, IFunction termFunction) => GetVariable(varName).AddTerm(termName, termFunction);
 
-        public void RemoveVariable(string name)
-        {
-            var variable = GetVariable(name);
-            Variables.Remove(variable);
-            Console.WriteLine($"Удалена переменная \"{name}\"");
-        }
-       
-        public void RemoveTermFromVariable(string varName, string termName)
-        {
-            var variable = GetVariable(varName);
-            variable.RemoveTerm(termName);
-            Console.WriteLine($"У \"{variable}\" удален \"{termName}\"");
-        }
+        public void RemoveVariable(string name) => Variables.Remove(GetVariable(name));
+
+        public void RemoveTermFromVariable(string varName, string termName) => GetVariable(varName).RemoveTerm(termName);
 
         public void RemoveRule(Rule rule) => Rules.Remove(rule);
        
         public Variable GetVariable(string name)
         {
-            var variable = Variables.FirstOrDefault(v => v.Name.Equals(name));
+            var variable = TryGetVariable(name);
             if (variable == null)
                 throw new InvalidOperationException($"Переменной {name} не существует!");
+            return variable;
+        }
+
+        public Variable TryGetVariable(string name)
+        {
+            var variable = Variables.FirstOrDefault(v => v.Name.Equals(name));
             return variable;
         }
     }

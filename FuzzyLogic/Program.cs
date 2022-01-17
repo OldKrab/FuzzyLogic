@@ -34,9 +34,6 @@ namespace FuzzyLogic
             //export.Visit(db);
             //File.WriteAllText(file, export.Xml);
 
-            KnowledgeBaseXmlReader reader = new KnowledgeBaseXmlReader();
-            FuzzySystem.GetInstance().KnowledgeBase = reader.Read("KnowledgeBaseFiles/test.kb");
-
             var consoleInterface = new ConsoleInterface();
             consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
@@ -50,6 +47,7 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
             consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());
             consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
+            consoleInterface.AddCommandHandler(new LoadKnowledgeBaseConsoleCommand());
             consoleInterface.Run();
         }
     }

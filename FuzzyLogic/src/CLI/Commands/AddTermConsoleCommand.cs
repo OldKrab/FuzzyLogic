@@ -24,6 +24,8 @@ namespace FuzzyLogic.CLI.Commands
                 Description = "Имя переменной, к которой добавляется терм"
             };
             varName.AddValidator(s => s != "", "Имя переменной пустое!");
+            varName.AddValidator(s => FuzzySystem.GetInstance().KnowledgeBase.TryGetVariable(s) != null,
+                "Переменной не существует!");
             parameters.Add(varName);
 
             var termName = new ConsoleCommandParam

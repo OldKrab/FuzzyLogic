@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="KnowledgeBaseFiles\" />
+    <Folder Include="files\" />
     <Folder Include="src\Exceptions\" />
     <Folder Include="src\KnowledgeBase\Reader\" />
   </ItemGroup>
