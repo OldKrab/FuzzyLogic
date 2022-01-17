@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using FuzzyLogic.KnowledgeBase.Helpers;
 using FuzzyLogic.KnowledgeBase.Statements;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    public class Rule : IPrototype
+    public class Rule 
     {
         public Rule(ConditionList condition, List<Statement> conclusions)
         {
@@ -13,15 +11,9 @@ namespace FuzzyLogic.KnowledgeBase
             Conclusions = conclusions;
         }
 
-        public ConditionList Condition { get; private set; }
-        public List<Statement> Conclusions { get; private set; }
+        public ConditionList Condition { get; }
+        public List<Statement> Conclusions { get; }
 
-        public IPrototype Clone()
-        {
-            var clone = (Rule)MemberwiseClone();
-            clone.Condition = (ConditionList)Condition.Clone();
-            clone.Conclusions = Conclusions.Select(c => (Statement)c.Clone()).ToList();
-            return clone;
-        }
+       
     }
 }

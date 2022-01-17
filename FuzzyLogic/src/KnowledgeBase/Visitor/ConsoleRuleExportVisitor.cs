@@ -66,6 +66,6 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
 
         private void AppendString(string str) => _text.Append(str);
 
-        private readonly StringBuilder _text = new StringBuilder();
+        private readonly StringBuilder _text = new();
     }
 }

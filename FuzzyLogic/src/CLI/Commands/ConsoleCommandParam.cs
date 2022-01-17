@@ -46,6 +46,6 @@ namespace FuzzyLogic.CLI.Commands
             }
         }
 
-        private readonly List<Validator> _validators = new List<Validator>();
+        private readonly List<Validator> _validators = new();
     }
 }

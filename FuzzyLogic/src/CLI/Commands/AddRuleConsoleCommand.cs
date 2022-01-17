@@ -19,7 +19,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            IRuleParser parser = new RuleParser();
+            IRuleParser parser = FuzzySystem.GetInstance().FuzzyAlgorithm.CreateRuleParser();
             if (parameters[_operationsParam].ToLower() == "m")
                 parser.OperationFactory = new MaxMinOperationFactory();
             else if (parameters[_operationsParam].ToLower() == "p")

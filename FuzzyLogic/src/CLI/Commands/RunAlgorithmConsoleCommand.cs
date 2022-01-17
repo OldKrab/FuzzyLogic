@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FuzzyLogic.Algorithm;
 using FuzzyLogic.KnowledgeBase;
+using FuzzyLogic.KnowledgeBase.Operations;
 
 namespace FuzzyLogic.CLI.Commands
 {
@@ -29,13 +30,25 @@ namespace FuzzyLogic.CLI.Commands
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
             KnowledgeBaseManager db = FuzzySystem.GetInstance().KnowledgeBase;
-            MamdaniAlgorithm algorithm = new MamdaniAlgorithm();
+            FuzzyAlgorithm algorithm = FuzzySystem.GetInstance().FuzzyAlgorithm;
+            algorithm.ActivationOperation =parameters[_activationOpParam].ToLower() switch
+            {
+                "m" => new MinOperation(),
+                "p" => new ProdOperation()
+            };
+            algorithm.CombinationOperation =parameters[_combinationOpParam].ToLower() switch
+            {
+                "m" => new MaxOperation(),
+                "s" => new SumOperation()
+            };
+
             Dictionary<Variable, double> inputValues = new Dictionary<Variable, double>();
             foreach (var inputVariable in db.InputVariables)
             {
                 var paramName = "-" + inputVariable.Name;
                 inputValues[inputVariable] = double.Parse(parameters[paramName]);
             }
+
             var outputValues = algorithm.Execute(inputValues, db.Rules);
             Console.WriteLine(@"Значения выходных переменных:");
             foreach (var (outputVar, value) in outputValues)
@@ -63,7 +76,30 @@ namespace FuzzyLogic.CLI.Commands
                 parameters.Add(param);
             }
 
+            var activationOp = new ConsoleCommandParam
+            {
+                Name = _activationOpParam,
+                AskForInput = "Выберите тип операции активации (min (M) или prod (P))",
+                Description = "Тип операции активации (min (M) или prod (P))",
+                DefaultValue = "M"
+            };
+            activationOp.AddValidator(s => s.ToLower() == "m" || s.ToLower() == "p", "Тип операций ожидался M или P!");
+            parameters.Add(activationOp);
+
+            var combinationOp = new ConsoleCommandParam
+            {
+                Name = _combinationOpParam,
+                AskForInput = "Выберите тип операции комбинирования (max (M) или sum (S))",
+                Description = "Тип операции комбинирования (max (M) или sum (S))",
+                DefaultValue = "M"
+            };
+            combinationOp.AddValidator(s => s.ToLower() == "m" || s.ToLower() == "s", "Тип операций ожидался M или S!");
+            parameters.Add(combinationOp);
+
             return parameters;
         }
+
+        private const string _activationOpParam = "-activationOp";
+        private const string _combinationOpParam = "-combinationOp";
     }
 }

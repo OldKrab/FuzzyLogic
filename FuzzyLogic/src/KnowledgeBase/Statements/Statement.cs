@@ -1,8 +1,6 @@
-﻿using FuzzyLogic.KnowledgeBase.Helpers;
-
-namespace FuzzyLogic.KnowledgeBase.Statements
+﻿namespace FuzzyLogic.KnowledgeBase.Statements
 {
-    public  class Statement : IPrototype
+    public  class Statement
     {
         public Statement(Variable variable, Term term)
         {
@@ -18,9 +16,6 @@ namespace FuzzyLogic.KnowledgeBase.Statements
             return $"{Variable} is {Term}";
         }
 
-        public IPrototype Clone()
-        {
-            return new Statement((Variable)Variable.Clone(), Term);
-        }
+      
     }
 }

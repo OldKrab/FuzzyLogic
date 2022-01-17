@@ -1,4 +1,5 @@
-﻿using FuzzyLogic.CLI;
+﻿using System.Collections.Generic;
+using FuzzyLogic.CLI;
 using FuzzyLogic.CLI.Commands;
 
 namespace FuzzyLogic
@@ -32,7 +33,7 @@ namespace FuzzyLogic
             //XmlExportVisitor export = new XmlExportVisitor();
             //export.Visit(db);
             //File.WriteAllText(file, export.Xml);
-
+            new LoadKnowledgeBaseConsoleCommand().Execute(new Dictionary<string, string>{{"-file","files/test2.kb"}});
             var consoleInterface = new ConsoleInterface();
             consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
             consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
@@ -48,6 +49,9 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
             consoleInterface.AddCommandHandler(new LoadKnowledgeBaseConsoleCommand());
             consoleInterface.AddCommandHandler(new SaveKnowledgeBaseConsoleCommand());
+
+            
+
             consoleInterface.Run();
         }
     }

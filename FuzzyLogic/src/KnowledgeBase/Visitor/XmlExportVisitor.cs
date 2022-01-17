@@ -186,6 +186,6 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         private void UnTab() => _tabsCount--;
 
         private int _tabsCount;
-        private readonly StringBuilder _xml = new StringBuilder();
+        private readonly StringBuilder _xml = new();
     }
 }

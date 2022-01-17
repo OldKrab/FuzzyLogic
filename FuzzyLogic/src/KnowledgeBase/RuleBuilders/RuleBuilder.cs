@@ -85,9 +85,9 @@ namespace FuzzyLogic.KnowledgeBase.RuleBuilders
             return new Rule(_curList, _conclusions);
         }
 
-        private readonly Stack<(IOperation, ConditionList)> _stack = new Stack<(IOperation, ConditionList)>();
+        private readonly Stack<(IOperation, ConditionList)> _stack = new();
         private ConditionList _curList;
         private IOperation _curOperation;
-        private List<Statement> _conclusions = new List<Statement>();
+        private List<Statement> _conclusions = new();
     }
 }

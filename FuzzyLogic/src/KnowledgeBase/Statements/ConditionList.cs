@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using FuzzyLogic.KnowledgeBase.Helpers;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Visitor;
 
@@ -11,8 +9,8 @@ namespace FuzzyLogic.KnowledgeBase.Statements
     {
         public ConditionList(List<ICondition> conditions, List<IOperation> operations)
         {
-            this.Conditions = conditions;
-            this.Operations = operations;
+            Conditions = conditions;
+            Operations = operations;
         }
 
         public ConditionList(ICondition condition)
@@ -55,15 +53,9 @@ namespace FuzzyLogic.KnowledgeBase.Statements
             visitor.Visit(this);
         }
 
-        public IPrototype Clone()
-        {
-            var clone = (ConditionList)MemberwiseClone();
-            clone.Conditions = Conditions.Select(c => (ICondition)c.Clone()).ToList();
-            clone.Operations = new List<IOperation>(Operations);
-            return clone;
-        }
+       
 
-        public List<ICondition> Conditions { get; private set; }
-        public List<IOperation> Operations { get; private set; }
+        public List<ICondition> Conditions { get; }
+        public List<IOperation> Operations { get; }
     }
 }

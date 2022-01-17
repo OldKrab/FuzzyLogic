@@ -91,7 +91,7 @@ namespace FuzzyLogic.CLI
         private int _leftPos;
         private int _topPos;
         private int _curIndex;
-        private readonly StringBuilder _sb = new StringBuilder();
-        private readonly Dictionary<ConsoleKey, Action> _keysHandlers = new Dictionary<ConsoleKey, Action>();
+        private readonly StringBuilder _sb = new();
+        private readonly Dictionary<ConsoleKey, Action> _keysHandlers = new();
     }
 }

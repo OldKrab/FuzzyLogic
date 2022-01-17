@@ -141,6 +141,6 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
             _json.Append("}");
         }
 
-        private readonly StringBuilder _json = new StringBuilder();
+        private readonly StringBuilder _json = new();
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FuzzyLogic.KnowledgeBase.Helpers;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 
 namespace FuzzyLogic.KnowledgeBase
 {
-    public class Variable:IPrototype
+    public class Variable
     {
         public Variable(string name, bool isInput)
         {
@@ -40,13 +39,6 @@ namespace FuzzyLogic.KnowledgeBase
         public override string ToString()
         {
             return (IsInput ? "Входная" : "Выходная") + $" переменная \"{Name}\"";
-        }
-
-        public IPrototype Clone()
-        {
-            var clone = new Variable(Name, IsInput);
-            clone.Terms.AddRange(Terms);
-            return clone;
         }
 
         public string Name { get; }
