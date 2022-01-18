@@ -34,6 +34,8 @@ namespace FuzzyLogic.CLI.Commands
                 Description = "Имя файла, куда сохранится база знаний"
             };
             parameters.Add(param);
+
+           
             return parameters;
         }
 

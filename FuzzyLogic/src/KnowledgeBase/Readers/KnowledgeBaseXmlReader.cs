@@ -10,10 +10,10 @@ namespace FuzzyLogic.KnowledgeBase.Readers
 {
     public class KnowledgeBaseXmlReader
     {
-        public KnowledgeBaseManager Read(string name)
+        public KnowledgeBaseManager Read(string filename)
         {
             var db = new KnowledgeBaseManager();
-            using var file = new FileStream(name, FileMode.Open);
+            using var file = new FileStream(filename, FileMode.Open);
             var settings = new XmlReaderSettings
             {
                 IgnoreWhitespace = true
@@ -21,13 +21,14 @@ namespace FuzzyLogic.KnowledgeBase.Readers
             var reader = XmlReader.Create(file, settings);
             try
             {
+                db.Name = reader.ReadElementString();
                 ReadVariables(reader, db);
                 ReadRules(reader, db);
             }
             catch (XmlException ex)
             {
                 throw new InvalidOperationException(
-                    $"Произошла ошибка во время чтения XML в файле {name}:\n {ex.Message}");
+                    $"Произошла ошибка во время чтения XML в файле {filename}:\n {ex.Message}");
             }
 
             return db;

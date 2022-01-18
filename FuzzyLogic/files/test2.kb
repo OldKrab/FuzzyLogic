@@ -1,5 +1,6 @@
 <KnowledgeBase>
-<Variables>
+	<Name>Cruise Control</Name>
+	<Variables>
 	<Variable>
 		<Name>speed</Name>
 		<IsInput>True</IsInput>

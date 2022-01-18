@@ -16,6 +16,7 @@ namespace FuzzyLogic.KnowledgeBase.Visitor
         public void Visit(KnowledgeBaseManager db)
         {
             AppendString("<KnowledgeBase>");
+            AppendString($"<Name>{db.Name}</Name>");
             AppendString("<Variables>");
             Tab();
             foreach (var variable in db.Variables)

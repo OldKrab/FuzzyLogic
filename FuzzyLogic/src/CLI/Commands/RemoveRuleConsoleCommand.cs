@@ -28,8 +28,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            var rules = FuzzySystem.GetInstance().KnowledgeBase.Rules;
-            rules.RemoveAt(int.Parse(parameters[_indexParam]) - 1);
+            FuzzySystem.GetInstance().KnowledgeBase.RemoveRule(int.Parse(parameters[_indexParam]) - 1);
         }
 
         protected override List<ConsoleCommandParam> GetParams()

@@ -49,6 +49,7 @@ namespace FuzzyLogic
             consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
             consoleInterface.AddCommandHandler(new LoadKnowledgeBaseConsoleCommand());
             consoleInterface.AddCommandHandler(new SaveKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommandHandler(new NewKnowledgeBaseConsoleCommand());
 
             
             consoleInterface.Run();

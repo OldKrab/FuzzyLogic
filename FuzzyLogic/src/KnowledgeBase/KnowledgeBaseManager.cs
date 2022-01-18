@@ -11,15 +11,17 @@ namespace FuzzyLogic.KnowledgeBase
         public List<Variable> OutputVariables => Variables.Where(x => !x.IsInput).ToList();
         public List<Variable> Variables { get; }
         public List<Rule> Rules { get; }
+        public string Name { get; set; }
 
         public KnowledgeBaseManager()
         {
             Rules = new List<Rule>();
             Variables = new List<Variable>();
+            Name = "unnamed";
         }
 
-
-        public void AddRule(Rule rule) => Rules.Add(rule);
+        public void AddRule(Rule rule)
+            => Rules.Add(rule);
 
         public Variable AddVariable(string name, bool isInput, double minValue, double maxValue)
         {
@@ -31,13 +33,20 @@ namespace FuzzyLogic.KnowledgeBase
             return variable;
         }
 
-        public void AddTermToVariable(string varName, string termName, IFunction termFunction) => GetVariable(varName).AddTerm(termName, termFunction);
+        public void AddTermToVariable(string varName, string termName, IFunction termFunction) 
+            => GetVariable(varName).AddTerm(termName, termFunction);
 
-        public void RemoveVariable(string name) => Variables.Remove(GetVariable(name));
+        public void RemoveVariable(string name)
+            => Variables.Remove(GetVariable(name));
 
-        public void RemoveTermFromVariable(string varName, string termName) => GetVariable(varName).RemoveTerm(termName);
+        public void RemoveTermFromVariable(string varName, string termName)
+            => GetVariable(varName).RemoveTerm(termName);
 
-        public void RemoveRule(Rule rule) => Rules.Remove(rule);
+        public void RemoveRule(Rule rule)
+            => Rules.Remove(rule);
+
+        public void RemoveRule(int index)
+            => Rules.RemoveAt(index);
        
         public Variable GetVariable(string name)
         {

@@ -81,7 +81,7 @@ namespace FuzzyLogic.CLI
 
         private string ReadCommandLine()
         {
-            Console.Write(_welcomeString);
+            Console.Write(WelcomeString);
             TabAutocomplete autocomplete = new TabAutocomplete(GetCommandsNames());
             MyConsole console = new MyConsole();
 
@@ -91,7 +91,7 @@ namespace FuzzyLogic.CLI
                 if (matchingCommands.Count == 1)
                 {
                     console.SetCurrentLine(matchingCommands[0]);
-                    Console.Write('\r' + _welcomeString + console.GetCurrentLine());
+                    Console.Write('\r' + WelcomeString + console.GetCurrentLine());
                 }
                 else if (matchingCommands.Count > 1)
                 {
@@ -99,7 +99,7 @@ namespace FuzzyLogic.CLI
                     matchingCommands.Sort();
                     foreach (var command in matchingCommands)
                         Console.WriteLine(@$"{command}");
-                    Console.Write(_welcomeString + console.GetCurrentLine());
+                    Console.Write(WelcomeString + console.GetCurrentLine());
                 }
             });
 
@@ -131,12 +131,12 @@ namespace FuzzyLogic.CLI
             return command;
         }
 
-        public List<ConsoleCommand> GetCommands() => _commands.Values.ToList();
         public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
         private readonly Dictionary<string, ConsoleCommand> _commands = new(StringComparer.InvariantCultureIgnoreCase);
         private readonly List<string> _commandHistory = new();
         private string _welcomeString = "> ";
+        private string WelcomeString => FuzzySystem.GetInstance().KnowledgeBase.Name + _welcomeString;
         private string _exitCommand = "exit";
     }
 }

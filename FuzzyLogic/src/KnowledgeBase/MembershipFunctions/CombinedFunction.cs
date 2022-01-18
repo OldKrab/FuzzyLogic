@@ -6,24 +6,12 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    class CombinedFunction : IFunction
+    public class CombinedFunction : IFunction
     {
         public CombinedFunction(IOperation combination, List<IFunction> functions)
         {
-            this._combination = combination;
-            this._functions = functions;
-        }
-
-        public CombinedFunction(IOperation combination, IFunction function)
-        {
-            this._combination = combination;
-            this._functions = new List<IFunction>();
-            AddFunction(function);
-        }
-
-        public void AddFunction(IFunction function)
-        {
-            _functions.Add(function);
+            _combination = combination;
+            _functions = functions;
         }
 
         public double GetValue(double x)
@@ -52,14 +40,11 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             str.Append($"Combined function with operation [{_combination}] and functions:\n[\n");
             for (int i = 0; i < _functions.Count; i++)
                 str.Append($"{i + 1}) {_functions[i]}\n");
-            str.Append("]");
+            str.Append(']');
             return str.ToString();
         }
 
-        public void Accept(IKnowledgeVisitor visitor)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Accept(IKnowledgeVisitor visitor) { }
 
         private readonly IOperation _combination;
         private readonly List<IFunction> _functions;
