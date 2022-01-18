@@ -3,9 +3,9 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-   abstract class BaseDecoratorFunction : IMembershipFunction
+   abstract class BaseDecoratorFunction : IFunction
     {
-        protected BaseDecoratorFunction(IMembershipFunction wrappedFunction)
+        protected BaseDecoratorFunction(IFunction wrappedFunction)
         {
             this.WrappedFunction = wrappedFunction;
         }
@@ -14,8 +14,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         public abstract double GetMaxValue();
 
-        protected IMembershipFunction WrappedFunction;
+        protected IFunction WrappedFunction;
 
-        public void Accept(IKnowledgeVisitor visitor) { }
     }
 }

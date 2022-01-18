@@ -8,12 +8,12 @@ namespace FuzzyLogic.CLI.Commands
     {
         public void Execute(Dictionary<string, string> parameters)
         {
-            CheckRequirementsBeforeExecute();
             if (CheckForHelpParam(parameters))
             {
                 WriteHelp();
                 return;
             }
+            CheckRequirementsBeforeExecute();
 
             CheckForEnteredUnknownParams(parameters);
             CheckForNotEnteredParams(parameters);
@@ -28,7 +28,7 @@ namespace FuzzyLogic.CLI.Commands
         protected abstract void ExecuteWithValidParams(Dictionary<string, string> parameters);
         protected abstract List<ConsoleCommandParam> GetParams();
 
-        protected virtual void CheckRequirementsBeforeExecute(){}
+        protected virtual void CheckRequirementsBeforeExecute() { }
 
         private bool CheckForHelpParam(Dictionary<string, string> parameters)
         {
@@ -46,7 +46,8 @@ namespace FuzzyLogic.CLI.Commands
                 Console.WriteLine("Нет параметров.");
             else
                 foreach (var param in parameters)
-                    Console.WriteLine(@$"[{param.Name}] - {param.Description}");
+                    Console.WriteLine(@$"[{param.Name}] - {param.Description}"
+                                      + (param.HasDefaultValue ? $" Значение по умолчанию: {param.DefaultValue}" : ""));
         }
 
         private void CheckForNotEnteredParams(Dictionary<string, string> parameters)

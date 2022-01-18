@@ -4,7 +4,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions.Integrator
 {
     class RombergIntegrator : IFunctionIntegrator
     {
-        public double Integrate(IMembershipFunction func, double lowerLimit, double upperLimit)
+        public double Integrate(IFunction func, double lowerLimit, double upperLimit)
         {
             _serviceFunction = new OneVariableFunction(func.GetValue)
             {

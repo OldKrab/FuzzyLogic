@@ -2,12 +2,7 @@
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public interface IFunction: IVisitableElement
+    public interface IMembershipFunction: IVisitableElement, IFunction
     {
-        double GetValue(double x);
-
-        double GetMinValue();
-        double GetMaxValue();
-
     }
 }

@@ -33,7 +33,7 @@ namespace FuzzyLogic.KnowledgeBase
             return variable;
         }
 
-        public void AddTermToVariable(string varName, string termName, IFunction termFunction) 
+        public void AddTermToVariable(string varName, string termName, IMembershipFunction termFunction) 
             => GetVariable(varName).AddTerm(termName, termFunction);
 
         public void RemoveVariable(string name)

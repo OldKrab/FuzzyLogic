@@ -18,7 +18,7 @@ namespace FuzzyLogic.CLI
                     var command = WaitForCommand(out var parameters);
                     ExecuteCommand(command, parameters);
                 }
-                catch (InvalidOperationException e)
+                catch (InvalidOperationException e) 
                 {
                     Console.WriteLine(@"Ошибка! " + e.Message);
                 }

@@ -6,9 +6,9 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public class CombinedFunction : IMembershipFunction
+    public class CombinedFunction : IFunction
     {
-        public CombinedFunction(IOperation combination, List<IMembershipFunction> functions)
+        public CombinedFunction(IOperation combination, List<IFunction> functions)
         {
             _combination = combination;
             _functions = functions;
@@ -24,29 +24,11 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
             return result;
         }
 
-        public double GetMinValue()
-        {
-            return _functions.Min(f => f.GetMinValue());
-        }
+        public double GetMinValue() => _functions.Min(f => f.GetMinValue());
 
-        public double GetMaxValue()
-        {
-            return _functions.Max(f => f.GetMaxValue());
-        }
-
-        public override string ToString()
-        {
-            var str = new StringBuilder();
-            str.Append($"Combined function with operation [{_combination}] and functions:\n[\n");
-            for (int i = 0; i < _functions.Count; i++)
-                str.Append($"{i + 1}) {_functions[i]}\n");
-            str.Append(']');
-            return str.ToString();
-        }
-
-        public void Accept(IKnowledgeVisitor visitor) { }
+        public double GetMaxValue() => _functions.Max(f => f.GetMaxValue());
 
         private readonly IOperation _combination;
-        private readonly List<IMembershipFunction> _functions;
+        private readonly List<IFunction> _functions;
     }
 }

@@ -4,7 +4,7 @@ namespace FuzzyLogic.KnowledgeBase
 {
     public class Term
     {
-        public Term(string name, IFunction function)
+        public Term(string name, IMembershipFunction function)
         {
             Name = name;
             Function = function;  
@@ -16,6 +16,6 @@ namespace FuzzyLogic.KnowledgeBase
         }
 
         public string Name { get; }
-        public IFunction Function { get; }
+        public IMembershipFunction Function { get; }
     }
 }

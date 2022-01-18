@@ -19,7 +19,7 @@ namespace FuzzyLogic.CLI.Commands
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-           var printer = new ConsoleRuleExportVisitor();
+           var printer = new RuleExportToStringVisitor();
            var rules = FuzzySystem.GetInstance().KnowledgeBase.Rules;
            if (rules.Count == 0)
                Console.WriteLine("Нет правил.");

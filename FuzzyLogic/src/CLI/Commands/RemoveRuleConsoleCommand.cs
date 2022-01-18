@@ -38,7 +38,7 @@ namespace FuzzyLogic.CLI.Commands
 
             var sb = new StringBuilder("Текущие правила:\n");
             var rules = FuzzySystem.GetInstance().KnowledgeBase.Rules;
-            var printer = new ConsoleRuleExportVisitor();
+            var printer = new RuleExportToStringVisitor();
             foreach (var (rule, i) in rules.Select((x, i) => (x, i)))
             {
                 printer.Visit(rule);

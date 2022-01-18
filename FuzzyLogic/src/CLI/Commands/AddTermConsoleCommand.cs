@@ -40,7 +40,7 @@ namespace FuzzyLogic.CLI.Commands
             return parameters;
         }
 
-        protected abstract IFunction GetMembershipFunction(Dictionary<string, string> parameters);
+        protected abstract IMembershipFunction GetMembershipFunction(Dictionary<string, string> parameters);
 
         protected string VarNameParam = "-varname";
         protected string TermNameParam = "-termname";

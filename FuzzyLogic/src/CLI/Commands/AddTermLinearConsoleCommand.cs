@@ -15,7 +15,7 @@ namespace FuzzyLogic.CLI.Commands
             return "Добавляет к переменной новый терм c линейной (возрастающей или убывающей) функцией принадлежности";
         }
 
-        protected override IFunction GetMembershipFunction(Dictionary<string, string> parameters)
+        protected override IMembershipFunction GetMembershipFunction(Dictionary<string, string> parameters)
         {
             var left = double.Parse(parameters[leftParam]);
             var right = double.Parse(parameters[rightParam]);

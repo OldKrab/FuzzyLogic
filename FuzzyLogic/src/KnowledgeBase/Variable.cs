@@ -16,7 +16,7 @@ namespace FuzzyLogic.KnowledgeBase
             Terms = new List<Term>();
         }
 
-        public Term AddTerm(string termName, IFunction func)
+        public Term AddTerm(string termName, IMembershipFunction func)
         {
             if (Terms.Exists(t => t.Name == termName))
                 throw new InvalidOperationException($"Терм {termName} у переменной {Name} уже существует!");

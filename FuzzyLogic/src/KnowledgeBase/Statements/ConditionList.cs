@@ -39,21 +39,10 @@ namespace FuzzyLogic.KnowledgeBase.Statements
             return res;
         }
 
-        public override string ToString()
-        {
-            var str = new StringBuilder($"({Conditions[0]})");
-            for (var i = 1; i < Conditions.Count; i++)
-                str.Append($" {Operations[i - 1]} ({Conditions[i]})");
-            str.Append(")");
-            return str.ToString();
-        }
-
         public void Accept(IKnowledgeVisitor visitor)
         {
             visitor.Visit(this);
         }
-
-       
 
         public List<ICondition> Conditions { get; }
         public List<IOperation> Operations { get; }

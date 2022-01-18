@@ -1,14 +1,13 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using FuzzyLogic.KnowledgeBase.MembershipFunctions;
 using FuzzyLogic.KnowledgeBase.Operations;
 using FuzzyLogic.KnowledgeBase.Statements;
 
 namespace FuzzyLogic.KnowledgeBase.Visitor
 {
-    class ConsoleRuleExportVisitor : IKnowledgeVisitor
+    class RuleExportToStringVisitor : IKnowledgeVisitor
     {
-        public String Text => _text.ToString();
+        public string Text => _text.ToString();
 
         public void Clear() => _text.Clear();
 

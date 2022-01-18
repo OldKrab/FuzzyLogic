@@ -154,10 +154,10 @@ namespace FuzzyLogic.KnowledgeBase.Readers
                 db.AddTermToVariable(name, termName, termFunc);
         }
 
-        private void ReadTerms(XmlReader reader, out List<(string, IFunction)> terms)
+        private void ReadTerms(XmlReader reader, out List<(string, IMembershipFunction)> terms)
         {
             reader.ReadStartElement();
-            terms = new List<(string, IFunction)>();
+            terms = new List<(string, IMembershipFunction)>();
             while (!(reader.Name == "Terms" && !reader.IsStartElement()))
             {
                 ReadTerm(reader, out var termName, out var termFunc);
@@ -166,7 +166,7 @@ namespace FuzzyLogic.KnowledgeBase.Readers
             reader.ReadEndElement();
         }
 
-        private void ReadTerm(XmlReader reader, out string termName, out IFunction function)
+        private void ReadTerm(XmlReader reader, out string termName, out IMembershipFunction function)
         {
             reader.ReadStartElement();
             termName = reader.ReadElementString();
@@ -174,14 +174,14 @@ namespace FuzzyLogic.KnowledgeBase.Readers
             reader.ReadEndElement();
         }
 
-        private IFunction ReadFunction(XmlReader reader)
+        private IMembershipFunction ReadFunction(XmlReader reader)
         {
             reader.ReadStartElement();
             var name = reader.Name;
             reader.ReadStartElement();
             var parameters = ReadParams(reader, name);
 
-            IFunction func = name switch
+            IMembershipFunction func = name switch
             {
                 "LinearFunction" => new LinearFunction(
                     double.Parse(parameters["Left"]),
