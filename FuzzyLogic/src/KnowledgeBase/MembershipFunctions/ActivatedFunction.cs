@@ -4,7 +4,7 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
     class ActivatedFunction : BaseDecoratorFunction
     {
-        public ActivatedFunction(IFunction wrappedFunction, IOperation activation, double activatingValue)
+        public ActivatedFunction(IMembershipFunction wrappedFunction, IOperation activation, double activatingValue)
             : base(wrappedFunction)
         {
             this._activation = activation;

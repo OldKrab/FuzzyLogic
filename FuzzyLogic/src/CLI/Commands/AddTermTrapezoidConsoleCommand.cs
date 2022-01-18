@@ -15,7 +15,7 @@ namespace FuzzyLogic.CLI.Commands
             return "Добавляет к переменной новый терм c трапециевидной функцией принадлежности";
         }
 
-        protected override IFunction GetMembershipFunction(Dictionary<string, string> parameters)
+        protected override IMembershipFunction GetMembershipFunction(Dictionary<string, string> parameters)
         {
             var left = double.Parse(parameters[leftParam]);
             var leftCenter = double.Parse(parameters[leftCenterParam]);

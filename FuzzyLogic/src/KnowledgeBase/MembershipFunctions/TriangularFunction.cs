@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public class TriangularFunction : IFunction
+    public class TriangularFunction : IMembershipFunction
     {
         public TriangularFunction(double left, double center, double right)
         {

@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-     class Function : IFunction
+     class Function : IMembershipFunction
     {
         public Function(Func<double, double> func, double min, double max)
         {

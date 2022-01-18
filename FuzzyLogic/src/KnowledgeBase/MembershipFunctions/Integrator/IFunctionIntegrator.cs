@@ -2,6 +2,6 @@
 {
     interface IFunctionIntegrator
     {
-        double Integrate(IFunction func, double lowerLimit, double upperLimit);
+        double Integrate(IMembershipFunction func, double lowerLimit, double upperLimit);
     }
 }

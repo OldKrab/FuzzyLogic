@@ -6,9 +6,9 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public class CombinedFunction : IFunction
+    public class CombinedFunction : IMembershipFunction
     {
-        public CombinedFunction(IOperation combination, List<IFunction> functions)
+        public CombinedFunction(IOperation combination, List<IMembershipFunction> functions)
         {
             _combination = combination;
             _functions = functions;
@@ -47,6 +47,6 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         public void Accept(IKnowledgeVisitor visitor) { }
 
         private readonly IOperation _combination;
-        private readonly List<IFunction> _functions;
+        private readonly List<IMembershipFunction> _functions;
     }
 }

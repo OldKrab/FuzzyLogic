@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public class TrapezoidFunction : IFunction
+    public class TrapezoidFunction : IMembershipFunction
     {
         public TrapezoidFunction(double left, double leftCenter, double rightCenter, double right)
         {

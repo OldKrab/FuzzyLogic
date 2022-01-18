@@ -3,7 +3,7 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 {
-    public class LinearFunction : IFunction
+    public class LinearFunction : IMembershipFunction
     {
         public LinearFunction(double a, double b, bool isIncrease)
         {
