@@ -32,9 +32,6 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
         private readonly double _max;
 
 
-        public void Accept(IKnowledgeVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
+        public void Accept(IKnowledgeVisitor visitor) { }
     }
 }

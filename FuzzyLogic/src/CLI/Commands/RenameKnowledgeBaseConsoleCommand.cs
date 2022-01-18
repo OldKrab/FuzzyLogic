@@ -4,23 +4,21 @@ using FuzzyLogic.KnowledgeBase.Visitor;
 
 namespace FuzzyLogic.CLI.Commands
 {
-    public class SaveKnowledgeBaseConsoleCommand : ConsoleCommand
+    public class RenameKnowledgeBaseConsoleCommand : ConsoleCommand
     {
         public override string GetName()
         {
-            return "SaveKnowledgeBase";
+            return "RenameKnowledgeBase";
         }
 
         public override string GetDescription()
         {
-            return "Сохраняет базу знаний в файл";
+            return "Изменяет имя текущей базы знаний";
         }
 
         protected override void ExecuteWithValidParams(Dictionary<string, string> parameters)
         {
-            XmlExportVisitor exportVisitor = new XmlExportVisitor();
-            exportVisitor.Visit(FuzzySystem.GetInstance().KnowledgeBase);
-            File.WriteAllText(parameters[_fileParam], exportVisitor.Xml);
+            FuzzySystem.GetInstance().KnowledgeBase.Name = parameters[_nameParam];
         }
 
         protected override List<ConsoleCommandParam> GetParams()
@@ -29,16 +27,15 @@ namespace FuzzyLogic.CLI.Commands
 
             var param = new ConsoleCommandParam
             {
-                Name = _fileParam,
-                AskForInput = "Введите имя файла",
-                Description = "Имя файла, куда сохранится база знаний"
+                Name = _nameParam,
+                AskForInput = "Введите новое имя базы знаний",
+                Description = "Новое имя текущей базы знаний"
             };
             parameters.Add(param);
-
 
             return parameters;
         }
 
-        private const string _fileParam = "-file";
+        private const string _nameParam = "-name";
     }
 }

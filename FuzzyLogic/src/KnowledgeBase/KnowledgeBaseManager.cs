@@ -17,7 +17,7 @@ namespace FuzzyLogic.KnowledgeBase
         {
             Rules = new List<Rule>();
             Variables = new List<Variable>();
-            Name = "unnamed";
+            Name = "";
         }
 
         public void AddRule(Rule rule)

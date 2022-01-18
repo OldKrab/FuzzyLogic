@@ -33,10 +33,12 @@ namespace FuzzyLogic.CLI
             }
         }
 
-        public void AddCommandHandler(ConsoleCommand command)
+        public void AddCommand(ConsoleCommand command)
         {
             _commands.Add(command.GetName(), command);
         }
+        
+        public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
         private void ExecuteCommand(string command, Dictionary<string, string> parameters)
         {
@@ -52,6 +54,7 @@ namespace FuzzyLogic.CLI
         private string WaitForCommand(out Dictionary<string, string> parameters)
         {
             parameters = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            Console.WriteLine();
             var line = ReadCommandLine();
 
             var words = SplitWithQuotas(line);
@@ -130,8 +133,6 @@ namespace FuzzyLogic.CLI
             _commandHistory.Add(command);
             return command;
         }
-
-        public List<string> GetCommandsNames() => _commands.Values.Select(c => c.GetName()).ToList();
 
         private readonly Dictionary<string, ConsoleCommand> _commands = new(StringComparer.InvariantCultureIgnoreCase);
         private readonly List<string> _commandHistory = new();

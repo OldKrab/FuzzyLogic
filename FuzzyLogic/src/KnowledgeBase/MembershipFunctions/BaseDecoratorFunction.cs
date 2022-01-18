@@ -16,9 +16,6 @@ namespace FuzzyLogic.KnowledgeBase.MembershipFunctions
 
         protected IFunction WrappedFunction;
 
-        public void Accept(IKnowledgeVisitor visitor)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Accept(IKnowledgeVisitor visitor) { }
     }
 }

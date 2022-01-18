@@ -35,21 +35,22 @@ namespace FuzzyLogic
             //File.WriteAllText(file, export.Xml);
             new LoadKnowledgeBaseConsoleCommand().Execute(new Dictionary<string, string>{{"-file","files/test2.kb"}});
             var consoleInterface = new ConsoleInterface();
-            consoleInterface.AddCommandHandler(new AddVariableConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddTermTrapezoidConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddTermTriangularConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddTermLinearConsoleCommand());
-            consoleInterface.AddCommandHandler(new AddRuleConsoleCommand());
-            consoleInterface.AddCommandHandler(new RemoveVariableConsoleCommand());
-            consoleInterface.AddCommandHandler(new RemoveTermConsoleCommand());
-            consoleInterface.AddCommandHandler(new RemoveRuleConsoleCommand());
-            consoleInterface.AddCommandHandler(new GetVariablesConsoleCommand());
-            consoleInterface.AddCommandHandler(new GetTermsConsoleCommand());
-            consoleInterface.AddCommandHandler(new GetRulesConsoleCommand());
-            consoleInterface.AddCommandHandler(new RunAlgorithmConsoleCommand());
-            consoleInterface.AddCommandHandler(new LoadKnowledgeBaseConsoleCommand());
-            consoleInterface.AddCommandHandler(new SaveKnowledgeBaseConsoleCommand());
-            consoleInterface.AddCommandHandler(new NewKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommand(new AddVariableConsoleCommand());
+            consoleInterface.AddCommand(new AddTermTrapezoidConsoleCommand());
+            consoleInterface.AddCommand(new AddTermTriangularConsoleCommand());
+            consoleInterface.AddCommand(new AddTermLinearConsoleCommand());
+            consoleInterface.AddCommand(new AddRuleConsoleCommand());
+            consoleInterface.AddCommand(new RemoveVariableConsoleCommand());
+            consoleInterface.AddCommand(new RemoveTermConsoleCommand());
+            consoleInterface.AddCommand(new RemoveRuleConsoleCommand());
+            consoleInterface.AddCommand(new GetVariablesConsoleCommand());
+            consoleInterface.AddCommand(new GetTermsConsoleCommand());
+            consoleInterface.AddCommand(new GetRulesConsoleCommand());
+            consoleInterface.AddCommand(new RunAlgorithmConsoleCommand());
+            consoleInterface.AddCommand(new LoadKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommand(new SaveKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommand(new NewKnowledgeBaseConsoleCommand());
+            consoleInterface.AddCommand(new RenameKnowledgeBaseConsoleCommand());
 
             
             consoleInterface.Run();

@@ -9,16 +9,15 @@ namespace FuzzyLogic.CLI.Commands
         public void Execute(Dictionary<string, string> parameters)
         {
             CheckRequirementsBeforeExecute();
-            if (CheckForHelpParams(parameters))
+            if (CheckForHelpParam(parameters))
             {
                 WriteHelp();
                 return;
             }
 
-            CheckForUnknownEnteredParams(parameters);
+            CheckForEnteredUnknownParams(parameters);
             CheckForNotEnteredParams(parameters);
             CheckParamsIsValid(parameters);
-            AdditionallyCheckParams(parameters);
 
             ExecuteWithValidParams(parameters);
         }
@@ -29,10 +28,9 @@ namespace FuzzyLogic.CLI.Commands
         protected abstract void ExecuteWithValidParams(Dictionary<string, string> parameters);
         protected abstract List<ConsoleCommandParam> GetParams();
 
-        protected virtual void AdditionallyCheckParams(Dictionary<string, string> parameters) { }
         protected virtual void CheckRequirementsBeforeExecute(){}
 
-        private bool CheckForHelpParams(Dictionary<string, string> parameters)
+        private bool CheckForHelpParam(Dictionary<string, string> parameters)
         {
             return parameters.ContainsKey(_helpParam) && parameters.Count == 1;
         }
@@ -86,7 +84,7 @@ namespace FuzzyLogic.CLI.Commands
                 throw new InvalidOperationException(errorMessage);
         }
 
-        private void CheckForUnknownEnteredParams(Dictionary<string, string> parameters)
+        private void CheckForEnteredUnknownParams(Dictionary<string, string> parameters)
         {
             var @params = GetParams();
             foreach (var enteredParam in parameters.Keys)
